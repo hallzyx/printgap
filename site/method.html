@@ -24,6 +24,8 @@
   </ol>
   <p>A figure that fails any step is discarded and listed separately, with the reason. Company guidance has no XBRL equivalent, so it only gets the first two checks and is labeled that way.</p>
 
+  <p>Models that produced the extractions on this page: <span id="models">checking...</span>. The same prompt runs on Anthropic, OpenAI, DeepSeek or any OpenAI-compatible endpoint, and each stored extraction records which one made it.</p>
+
   <h2>How well that worked</h2>
   <div id="acc"><p>Loading...</p></div>
 
@@ -80,6 +82,8 @@
       if (a.xbrl_checked) acc.appendChild(h("p", { text: "Of the figures that could be checked against XBRL, " + Math.round(100 * a.xbrl_match / a.xbrl_checked) + "% matched before any filtering (" + a.xbrl_match + " of " + a.xbrl_checked + ")." }));
     }
     var notes = (d.fetch && d.fetch.notes) || [], m = notes.filter(function (n) { return /^mcp/.test(n); })[0];
+    var mm = d.extraction_models || [];
+    document.getElementById("models").textContent = mm.length ? mm.join(", ") : "none yet";
     document.getElementById("mcp").textContent = m ? m.replace(/^mcp:\s*/, "") + "." : "not attempted in this build.";
     var s = document.getElementById("src"); s.textContent = "";
     var ul = h("ul");

@@ -60,8 +60,21 @@
       <form id="ask-form" class="ask-form">
         <label for="q">Your question</label>
         <input id="q" type="text" autocomplete="off" placeholder="What would have to be true for the move to be an overreaction?">
-        <label for="key">Anthropic API key (stays in this tab, never saved or sent anywhere else)</label>
-        <input id="key" type="password" autocomplete="off" placeholder="sk-ant-...">
+        <label for="prov">Model provider</label>
+        <select id="prov">
+          <option value="anthropic">Anthropic</option>
+          <option value="openai">OpenAI</option>
+          <option value="deepseek">DeepSeek</option>
+          <option value="custom">Other OpenAI-compatible endpoint</option>
+        </select>
+        <label for="model">Model</label>
+        <input id="model" type="text" autocomplete="off">
+        <div id="base-row" hidden>
+          <label for="base">Endpoint (must start with https://)</label>
+          <input id="base" type="text" autocomplete="off" placeholder="https://your-endpoint.example/v1">
+        </div>
+        <label for="key">API key. It stays in this tab and is sent only to the provider you picked.</label>
+        <input id="key" type="password" autocomplete="off" placeholder="paste your key">
         <button type="submit">Ask</button>
       </form>
       <div id="answer" class="answer" aria-live="polite"></div>

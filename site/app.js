@@ -245,30 +245,46 @@
     });
   }
 
+  var modelEdited = false;
+  function syncProvider() {
+    var pv = PG.PROVIDERS[$("prov").value];
+    $("base-row").hidden = !pv.custom;
+    if (!modelEdited) $("model").value = pv.model;
+    $("model").placeholder = pv.custom ? "the model name your endpoint expects" : pv.model;
+  }
+  $("prov").addEventListener("change", function () { modelEdited = false; syncProvider(); });
+  $("model").addEventListener("input", function () { modelEdited = true; });
   $("key").addEventListener("input", function (e) { KEY_IN_MEMORY = e.target.value.trim(); });
+  syncProvider();
+
   $("ask-form").addEventListener("submit", function (e) {
     e.preventDefault();
     var q = $("q").value.trim(), out = $("answer");
     if (!q) { out.textContent = "Type a question first."; return; }
-    if (!KEY_IN_MEMORY) { out.textContent = "Add an Anthropic API key to ask questions. The memo above works without one."; return; }
-    var E = PG.evidence(CUR, DATA.analogs), btn = e.target.querySelector("button");
+    var provider = $("prov").value, E = PG.evidence(CUR, DATA.analogs), req;
+    try {
+      req = PG.chatRequest(provider, $("model").value.trim(), KEY_IN_MEMORY, $("base").value.trim(), PG.chatSystem(E), q);
+    } catch (err) { out.textContent = err.message + " The memo below works without a key."; return; }
+    var btn = e.target.querySelector("button");
     btn.disabled = true; out.textContent = "Reading the evidence...";
-    fetch("https://api.anthropic.com/v1/messages", {
-      method: "POST",
-      headers: { "content-type": "application/json", "x-api-key": KEY_IN_MEMORY, "anthropic-version": "2023-06-01", "anthropic-dangerous-direct-browser-access": "true" },
-      body: JSON.stringify({ model: "claude-sonnet-5-5", max_tokens: 500, temperature: 0, system: PG.chatSystem(E), messages: [{ role: "user", content: q }] }),
-    }).then(function (r) { return r.json().then(function (j) { if (!r.ok) throw new Error((j.error && j.error.message) || ("HTTP " + r.status)); return j; }); })
+    fetch(req.url, { method: "POST", headers: req.headers, body: JSON.stringify(req.body) })
+      .then(function (r) { return r.json().then(function (j) { if (!r.ok) throw new Error(PG.chatError(j, r.status)); return j; }); })
       .then(function (j) {
-        var text = (j.content || []).map(function (b) { return b.text || ""; }).join("").trim();
+        var text = PG.chatText(provider, j);
         clear(out); out.appendChild(document.createTextNode(text));
         var cited = (text.match(/\[E\d+\]/g) || []), known = {};
         E.forEach(function (x) { known["[" + x.id + "]"] = 1; });
         var bogus = cited.filter(function (c) { return !known[c]; });
         var abstain = /evidence does not cover that/i.test(text);
-        if (bogus.length) out.appendChild(h("div", { class: "flag", text: "This answer cites evidence that does not exist (" + bogus.join(", ") + "). Do not rely on it." }));
+        if (!text) out.appendChild(h("div", { class: "flag", text: "The provider returned an empty answer." }));
+        else if (bogus.length) out.appendChild(h("div", { class: "flag", text: "This answer cites evidence that does not exist (" + bogus.join(", ") + "). Do not rely on it." }));
         else if (!cited.length && !abstain) out.appendChild(h("div", { class: "flag", text: "This answer cites no evidence. Treat it as unsupported." }));
       })
-      .catch(function (err) { out.textContent = "The question failed: " + err.message; })
+      .catch(function (err) {
+        out.textContent = err instanceof TypeError
+          ? "The request did not reach the provider. Either the network failed or this provider does not accept calls from a web page (CORS). The memo works without a key, and the Python pipeline can use this provider directly."
+          : "The question failed: " + err.message;
+      })
       .then(function () { btn.disabled = false; });
   });
 

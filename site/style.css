@@ -132,7 +132,7 @@ table.t tr.cur td { background: var(--rt-soft); font-weight: 700; }
 .evidence .etx { overflow-wrap: anywhere; }
 .ask-form { display: grid; gap: 6px; max-width: 70ch; }
 .ask-form label { font-size: 13.5px; color: var(--ink-2); margin-top: 6px; }
-input[type="text"], input[type="password"] {
+input[type="text"], input[type="password"], select {
   font: inherit; color: inherit; background: var(--bg); border: 1px solid var(--line); border-radius: 6px; padding: 9px 11px;
 }
 button {
