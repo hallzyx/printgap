@@ -22,6 +22,16 @@ python3 -m pg.build                          # data/ -> site/data/events.json (o
 cd site && python3 -m http.server 8000       # open http://localhost:8000
 ```
 
+### Refreshing the real data on your own computer
+
+```
+pip install -r requirements.txt
+cp .env.example .env     # then edit .env: EDGAR_UA and ONE model key
+python3 scripts/fetch_all.py && python3 -m pg.build
+```
+
+`.env` is git-ignored. Real environment variables override it.
+
 ### Refreshing the real data (GitHub Actions)
 
 The SEC and Bitget are fetched from GitHub Actions, which has open internet.

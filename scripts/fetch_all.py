@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Download everything PrintGap needs. Runs in GitHub Actions (open internet).
 
-Env: EDGAR_UA (required, 'Name contact@email').
+Env (or a .env file at the repo root, see .env.example): EDGAR_UA (required, 'Name contact@email').
 Model key (optional): ANTHROPIC_API_KEY, OPENAI_API_KEY, DEEPSEEK_API_KEY, or LLM_API_KEY with
 PRINTGAP_BASE_URL and PRINTGAP_MODEL. See pg/llm.py. Without a key, only cached extractions are used.
 Every file written is listed in data/manifest.json with its fetch time and sha256.
@@ -19,7 +19,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
-from pg import edgar, extract, llm, mcp  # noqa: E402
+from pg import edgar, envfile, extract, llm, mcp  # noqa: E402
+
+envfile.load(ROOT / ".env")  # local runs: optional .env at the repo root (never committed)
 
 DATA = ROOT / "data"
 SINCE = date.fromisoformat(os.environ.get("PRINTGAP_SINCE", "2026-03-01"))  # includes the PRIOR quarter's release (for guidance)
