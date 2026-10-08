@@ -29,6 +29,13 @@ t("deepseek request", () => {
   assert.strictEqual(r.body.temperature, 0);
 });
 
+t("qwen request goes to the hackathon endpoint", () => {
+  const r = L.chatRequest("qwen", "qwen3.8-max", "KEY", "", SYS, Q);
+  assert.strictEqual(r.url, "https://hackathon.bitgetops.com/v1/chat/completions");
+  assert.strictEqual(r.headers.authorization, "Bearer KEY");
+  assert.ok(!JSON.stringify(r.body).includes("KEY"));
+});
+
 t("custom endpoint: trailing slash trimmed, https enforced", () => {
   const r = L.chatRequest("custom", "qwen-x", "KEY", "https://example.test/v1///", SYS, Q);
   assert.strictEqual(r.url, "https://example.test/v1/chat/completions");
@@ -59,7 +66,8 @@ t("response parsing", () => {
 
 t("default models are filled for the three named providers", () => {
   ["anthropic", "openai", "deepseek"].forEach(p => assert.ok(L.PROVIDERS[p].model));
-  assert.strictEqual(L.PROVIDERS.openai.model, "gpt-6.1-sol");
+  assert.strictEqual(L.PROVIDERS.openai.model, "gpt-6-luna");
+  assert.strictEqual(L.PROVIDERS.qwen.model, "qwen3.8-max");
   assert.strictEqual(L.PROVIDERS.deepseek.model, "deepseek-flash");
   assert.strictEqual(L.PROVIDERS.custom.model, "");
 });

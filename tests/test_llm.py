@@ -34,6 +34,28 @@ class Resolve(unittest.TestCase):
         self.assertEqual((p.name, p.base_url, p.model), ("compatible", "https://example.test/v1", "qwen-x"))
 
 
+class Qwen(unittest.TestCase):
+    def test_qwen_defaults_to_the_hackathon_endpoint(self):
+        p = llm.resolve({"QWEN_API_KEY": "q"})
+        self.assertEqual((p.name, p.model, p.base_url), ("qwen", "qwen3.8-max", "https://hackathon.bitgetops.com/v1"))
+
+    def test_qwen_endpoint_and_model_can_be_overridden(self):
+        p = llm.resolve({"QWEN_API_KEY": "q", "PRINTGAP_BASE_URL": "https://other.test/v1/", "PRINTGAP_MODEL": "qwen-x"})
+        self.assertEqual((p.base_url, p.model), ("https://other.test/v1", "qwen-x"))
+
+    def test_qwen_sits_after_deepseek_and_before_compatible(self):
+        self.assertEqual(llm.resolve({"QWEN_API_KEY": "q", "LLM_API_KEY": "k", "PRINTGAP_BASE_URL": "https://x.test", "PRINTGAP_MODEL": "m"}).name, "qwen")
+        self.assertEqual(llm.resolve({"QWEN_API_KEY": "q", "DEEPSEEK_API_KEY": "d"}).name, "deepseek")
+
+    def test_qwen_request_is_chat_completions_with_bearer(self):
+        p = llm.resolve({"QWEN_API_KEY": "KEY"})
+        url, h, b = llm.build_request(p, "SYS", "USER")
+        self.assertEqual(url, "https://hackathon.bitgetops.com/v1/chat/completions")
+        self.assertEqual(h["Authorization"], "Bearer KEY")
+        self.assertEqual((b["model"], b["temperature"], b["max_tokens"]), ("qwen3.8-max", 0, 8000))
+        self.assertNotIn("KEY", str(b))
+
+
 class Requests(unittest.TestCase):
     def test_anthropic_shape(self):
         p = llm.Provider("anthropic", "m", "KEY", "https://api.anthropic.com")
@@ -74,7 +96,7 @@ class Budgets(unittest.TestCase):
         self.assertEqual(llm.build_request(a, "s", "u")[2]["max_tokens"], 4096)
 
     def test_current_defaults(self):
-        self.assertEqual(llm.DEFAULTS["openai"][0], "gpt-6.1-sol")
+        self.assertEqual(llm.DEFAULTS["openai"][0], "gpt-6-luna")
         self.assertEqual(llm.DEFAULTS["deepseek"][0], "deepseek-flash")
 
 

@@ -2,9 +2,9 @@
 OpenAI-compatible endpoint (for example the Qwen endpoint the hackathon provides).
 
 Choice of provider (first match wins):
-  PRINTGAP_PROVIDER = anthropic | openai | deepseek | compatible   (explicit)
+  PRINTGAP_PROVIDER = anthropic | openai | deepseek | qwen | compatible   (explicit)
   otherwise whichever key exists, in this order:
-  ANTHROPIC_API_KEY, OPENAI_API_KEY, DEEPSEEK_API_KEY, LLM_API_KEY (+ PRINTGAP_BASE_URL, PRINTGAP_MODEL)
+  ANTHROPIC_API_KEY, OPENAI_API_KEY, DEEPSEEK_API_KEY, QWEN_API_KEY, LLM_API_KEY (+ PRINTGAP_BASE_URL, PRINTGAP_MODEL)
 PRINTGAP_MODEL overrides the default model of the chosen provider.
 Keys are only ever sent to the provider's own endpoint and are never written to disk or logs.
 """
@@ -16,20 +16,23 @@ from dataclasses import dataclass
 DEFAULTS = {
     # name: (default model, base url)
     "anthropic": ("claude-sonnet-5-5", "https://api.anthropic.com"),
-    "openai": ("gpt-6.1-sol", "https://api.openai.com/v1"),
+    "openai": ("gpt-6-luna", "https://api.openai.com/v1"),
     "deepseek": ("deepseek-flash", "https://api.deepseek.com"),
+    # Hackathon-provided Qwen endpoint and model, from the S2 handbook (override with PRINTGAP_BASE_URL / PRINTGAP_MODEL)
+    "qwen": ("qwen3.8-max", "https://hackathon.bitgetops.com/v1"),
     "compatible": (None, None),
 }
 # Output budget per provider. Reasoning models (OpenAI GPT-6, DeepSeek thinking mode) spend part of
 # this on hidden reasoning, so it is generous; an extraction itself is only a couple of thousand tokens.
-MAX_OUT = {"anthropic": 4096, "openai": 16000, "deepseek": 8000, "compatible": 8000}
+MAX_OUT = {"anthropic": 4096, "openai": 16000, "deepseek": 8000, "qwen": 8000, "compatible": 8000}
 KEY_ENV = {
     "anthropic": "ANTHROPIC_API_KEY",
     "openai": "OPENAI_API_KEY",
     "deepseek": "DEEPSEEK_API_KEY",
+    "qwen": "QWEN_API_KEY",
     "compatible": "LLM_API_KEY",
 }
-ORDER = ["anthropic", "openai", "deepseek", "compatible"]
+ORDER = ["anthropic", "openai", "deepseek", "qwen", "compatible"]
 
 
 @dataclass(frozen=True)
@@ -63,7 +66,7 @@ def resolve(env=None) -> Provider | None:
                 raise ValueError(f"PRINTGAP_PROVIDER={want} but {KEY_ENV[name]} is not set")
             continue
         d_model, d_base = DEFAULTS[name]
-        base = _clean(env.get("PRINTGAP_BASE_URL")) if name == "compatible" else d_base
+        base = (_clean(env.get("PRINTGAP_BASE_URL")) or d_base) if name in ("qwen", "compatible") else d_base
         m = model or d_model
         if name == "compatible" and not (base and m):
             raise ValueError("compatible provider needs PRINTGAP_BASE_URL and PRINTGAP_MODEL")

@@ -28,9 +28,10 @@ jobs:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          QWEN_API_KEY: ${{ secrets.QWEN_API_KEY }}
           LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
-          # Optional repository variables: PRINTGAP_PROVIDER (anthropic|openai|deepseek|compatible),
-          # PRINTGAP_MODEL, PRINTGAP_BASE_URL (compatible only, e.g. the hackathon's Qwen endpoint)
+          # Optional repository variables: PRINTGAP_PROVIDER (anthropic|openai|deepseek|qwen|compatible),
+          # PRINTGAP_MODEL, PRINTGAP_BASE_URL (qwen or compatible only)
           PRINTGAP_PROVIDER: ${{ vars.PRINTGAP_PROVIDER }}
           PRINTGAP_MODEL: ${{ vars.PRINTGAP_MODEL }}
           PRINTGAP_BASE_URL: ${{ vars.PRINTGAP_BASE_URL }}

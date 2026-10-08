@@ -149,8 +149,9 @@
   /* ---- chat providers (browser side). The key goes only to the endpoint of the provider picked. ---- */
   var PROVIDERS = {
     anthropic: { label: "Anthropic", model: "claude-sonnet-5-5", base: "https://api.anthropic.com", custom: false },
-    openai: { label: "OpenAI", model: "gpt-6.1-sol", base: "https://api.openai.com/v1", custom: false },
+    openai: { label: "OpenAI", model: "gpt-6-luna", base: "https://api.openai.com/v1", custom: false },
     deepseek: { label: "DeepSeek", model: "deepseek-flash", base: "https://api.deepseek.com", custom: false },
+    qwen: { label: "Qwen (hackathon endpoint)", model: "qwen3.8-max", base: "https://hackathon.bitgetops.com/v1", custom: false },
     custom: { label: "Other OpenAI-compatible", model: "", base: "", custom: true },
   };
 
