@@ -8,7 +8,7 @@ Rule: every number below is either copied from `site/method.html` / `site/data/e
 
 - Track: AI Trading Desk
 - Sub-theme: Information Extraction & Signal Generation
-- Submission materials link: [GitHub Pages URL] + [repo URL] + [video URL if any]
+- Submission materials link: [site URL] + [repo URL] + [video URL if any]
 - X promotional post link: [your post] (must include #BitgetHackathon and @Bitget_AI, and quote/retweet https://x.com/Bitget_AI/status/2100519318824055159)
 - University name (optional): [only if you are a student; it is mutually exclusive with winning a main-track prize]
 - Apply for Demo Day: Yes
@@ -30,7 +30,7 @@ Backtests and paper trading do not apply to this track; the tool does not trade.
 
 **4. Progress.** Built: EDGAR fetch, LLM extraction with strict quotes, deterministic verifier, XBRL cross-check, overnight reaction engine with no look-ahead (tested), static workbench with timeline, claims, guidance gap, history table, evidence-bound Q&A and a memo, a method page. Problems: analyst consensus was not available, so the comparison uses the company's own prior guidance; [MCP status from `data/manifest.json`]. Next: live coverage of the Q3 season, order-book cost estimates. Stack: Python, pandas, SEC EDGAR, Bitget rToken candles, and a swappable language model (extraction and Q&A).
 
-**5. Deliverables.** Demo: [Pages URL]. Code: [repo URL]. Method and accuracy: [Pages URL]/method.html. Raw data and hashes: `data/`. Tests: `python3 -m unittest discover -s tests`.
+**5. Deliverables.** Demo: [site URL]. Code: [repo URL]. Method and accuracy: [site URL]/method.html. Raw data and hashes: `data/`. Tests: `python3 -m unittest discover -s tests`.
 
 **6. Take on AI trading.** The useful work for an LLM in trading is reading and checking, not predicting. A public S2 repo reports an LLM news agent on Bitget perps with no measurable edge (verify: https://github.com/lonetravelerxyz/after-the-bell), so PrintGap spends the model on extraction that code can verify, and abstains when evidence is missing.
 

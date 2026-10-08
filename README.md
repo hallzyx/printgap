@@ -26,10 +26,10 @@ cd site && python3 -m http.server 8000       # open http://localhost:8000
 
 The SEC and Bitget are fetched from GitHub Actions, which has open internet.
 
-1. Push this repo to GitHub and enable **Pages** (Settings > Pages > Source: GitHub Actions).
+1. Push this repo to GitHub. No Pages setup is needed: the site is the static folder `site/`, served from any host (for example a VPS behind nginx or Caddy with `git pull`).
 2. Add a repository **variable** `EDGAR_UA` = `PrintGap your-name your-email@example.com` (the SEC requires real contact info).
 3. Add **one** model key as a repository **secret** (see the table below). It is only needed to run new extractions; cached ones need no key.
-4. Run the **Fetch data** workflow. It downloads filings and XBRL, extracts, tests, rebuilds, commits and deploys.
+4. Run the **Fetch data** workflow. It downloads filings and XBRL, extracts, tests, rebuilds and commits the data. Pull it on your server to update the site.
 
 Everything downloaded is stored under `data/` with a fetch time and a sha256 in `data/manifest.json`. The model output is cached by content hash in `data/extractions/`, so anyone can rebuild the exact same site without an API key.
 

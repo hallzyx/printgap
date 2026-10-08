@@ -1,12 +1,10 @@
 name: Fetch data
 # Downloads SEC filings + XBRL, runs the language-model extraction (cached by content hash),
-# rebuilds site/data/events.json offline, runs the tests, commits, and deploys.
+# rebuilds site/data/events.json offline, runs the tests and commits. Hosting is up to you (static folder `site/`).
 on:
   workflow_dispatch:
 permissions:
   contents: write
-  pages: write
-  id-token: write
 concurrency:
   group: fetch
   cancel-in-progress: false
@@ -49,10 +47,3 @@ jobs:
           git add data site/data
           git diff --cached --quiet || git commit -m "data: refresh $(date -u +%Y-%m-%dT%H:%MZ)"
           git push
-  deploy:
-    needs: fetch
-    uses: ./.github/workflows/pages.yml
-    permissions:
-      contents: read
-      pages: write
-      id-token: write
