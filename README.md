@@ -16,7 +16,8 @@ The language model never calculates, never sees prices, and never recommends tra
 ## Run it
 
 ```
-python3 -m unittest discover -s tests        # 26 tests, standard library only
+python3 -m unittest discover -s tests        # Python tests, standard library only
+node tests/test_lib.js                       # browser-side logic tests, no dependencies
 python3 -m pg.build                          # data/ -> site/data/events.json (offline)
 cd site && python3 -m http.server 8000       # open http://localhost:8000
 ```
@@ -27,10 +28,26 @@ The SEC and Bitget are fetched from GitHub Actions, which has open internet.
 
 1. Push this repo to GitHub and enable **Pages** (Settings > Pages > Source: GitHub Actions).
 2. Add a repository **variable** `EDGAR_UA` = `PrintGap your-name your-email@example.com` (the SEC requires real contact info).
-3. Add a repository **secret** `ANTHROPIC_API_KEY` (only needed to run new extractions; cached ones need no key).
+3. Add **one** model key as a repository **secret** (see the table below). It is only needed to run new extractions; cached ones need no key.
 4. Run the **Fetch data** workflow. It downloads filings and XBRL, extracts, tests, rebuilds, commits and deploys.
 
 Everything downloaded is stored under `data/` with a fetch time and a sha256 in `data/manifest.json`. The model output is cached by content hash in `data/extractions/`, so anyone can rebuild the exact same site without an API key.
+
+## Which language model
+
+The same extraction prompt runs on several providers. Pick one by setting its key (and optionally `PRINTGAP_PROVIDER`):
+
+| Provider | Key variable | Default model |
+|---|---|---|
+| Anthropic | `ANTHROPIC_API_KEY` | `claude-sonnet-5-5` |
+| OpenAI | `OPENAI_API_KEY` | `gpt-4.1` |
+| DeepSeek | `DEEPSEEK_API_KEY` | `deepseek-chat` |
+| Any OpenAI-compatible endpoint (for example the Qwen endpoint the hackathon provides) | `LLM_API_KEY` + `PRINTGAP_BASE_URL` + `PRINTGAP_MODEL` | none, you set it |
+
+- If several keys are present, the order above decides; `PRINTGAP_PROVIDER=openai` (or `anthropic`, `deepseek`, `compatible`) forces one.
+- `PRINTGAP_MODEL` overrides the default model of whichever provider is chosen. Model names change, so check the provider's current list if a default is rejected.
+- Each stored extraction records which provider and model made it, and `site/method.html` lists them. Verification is identical whichever model answered: a quote that is not in the document, or a number that contradicts SEC XBRL, is discarded.
+- The question box on the page has the same choices (Anthropic, OpenAI, DeepSeek, other endpoint). The key is typed into the page, stays in that tab and goes only to the provider you pick. Some providers do not allow calls straight from a web page (CORS); if one fails that way, the page says so, and the memo and the Python pipeline are unaffected.
 
 ## Data and attribution
 
@@ -53,8 +70,9 @@ See `site/method.html` for how well the extraction did, computed from the real d
 pg/engine.py    overnight reaction, no look-ahead
 pg/extract.py   prompt, verifier, cache
 pg/edgar.py     EDGAR + XBRL (runs in Actions)
+pg/llm.py       provider layer (Anthropic, OpenAI, DeepSeek, compatible)
 pg/mcp.py       Bitget MCP client (best effort)
 pg/build.py     offline assembly
 site/           static page, no dependencies
-tests/          26 tests
+tests/          Python and Node tests
 ```

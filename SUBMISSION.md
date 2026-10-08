@@ -28,7 +28,7 @@ Rule: every number below is either copied from `site/method.html` / `site/data/e
 - Distribution (targeted): [e.g. 50 traders in month one]; not yet observed.
 Backtests and paper trading do not apply to this track; the tool does not trade.
 
-**4. Progress.** Built: EDGAR fetch, LLM extraction with strict quotes, deterministic verifier, XBRL cross-check, overnight reaction engine with no look-ahead (tested), static workbench with timeline, claims, guidance gap, history table, evidence-bound Q&A and a memo, a method page. Problems: analyst consensus was not available, so the comparison uses the company's own prior guidance; [MCP status from `data/manifest.json`]. Next: live coverage of the Q3 season, order-book cost estimates. Stack: Python, pandas, SEC EDGAR, Bitget rToken candles, Claude (extraction and Q&A).
+**4. Progress.** Built: EDGAR fetch, LLM extraction with strict quotes, deterministic verifier, XBRL cross-check, overnight reaction engine with no look-ahead (tested), static workbench with timeline, claims, guidance gap, history table, evidence-bound Q&A and a memo, a method page. Problems: analyst consensus was not available, so the comparison uses the company's own prior guidance; [MCP status from `data/manifest.json`]. Next: live coverage of the Q3 season, order-book cost estimates. Stack: Python, pandas, SEC EDGAR, Bitget rToken candles, and a swappable language model (extraction and Q&A).
 
 **5. Deliverables.** Demo: [Pages URL]. Code: [repo URL]. Method and accuracy: [Pages URL]/method.html. Raw data and hashes: `data/`. Tests: `python3 -m unittest discover -s tests`.
 
@@ -36,7 +36,9 @@ Backtests and paper trading do not apply to this track; the tool does not trade.
 
 ## Role of the LLM in your project
 
-Claude (claude-sonnet-5-5, Anthropic API) does two things. (1) It reads each 8-K press release and extracts a short list of figures, each with a verbatim quote; code then verifies the quote, the number, and the match with SEC XBRL, and discards failures. (2) Optionally, it answers a trader's question using only numbered evidence, citing evidence ids, and says when the evidence does not cover the question; the page flags answers that cite nothing or cite ids that do not exist. It never calculates, sees prices, or recommends trades. Qwen: [not used / used for ...].
+[Name the provider and model you actually ran, from `site/method.html` ("Models that produced the extractions"). Examples: claude-sonnet-5-5, gpt-4.1, deepseek-chat, or the Qwen model on the hackathon endpoint. If you ran more than one, say which produced the figures shown.]
+
+The model does two things. (1) It reads each 8-K press release and extracts a short list of figures, each with a verbatim quote; code then verifies the quote, the number, and the match with SEC XBRL, and discards failures, so the result does not depend on trusting the model. The same prompt runs on Anthropic, OpenAI, DeepSeek or any OpenAI-compatible endpoint. (2) Optionally, it answers a trader's question using only numbered evidence, citing evidence ids, and says when the evidence does not cover the question; the page flags answers that cite nothing or cite ids that do not exist. It never calculates, sees prices, or recommends trades.
 
 ## X post draft
 
