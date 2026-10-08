@@ -1,0 +1,47 @@
+name: Fetch data
+# Downloads SEC filings + XBRL, runs the language-model extraction (cached by content hash),
+# rebuilds site/data/events.json offline, runs the tests, commits, and deploys.
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+concurrency:
+  group: fetch
+  cancel-in-progress: false
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - name: Fetch SEC data and extract
+        env:
+          # Repository variable (Settings > Secrets and variables > Actions > Variables):
+          # EDGAR_UA = "PrintGap yourname@yourmail.com"  (the SEC requires real contact info)
+          EDGAR_UA: ${{ vars.EDGAR_UA }}
+          # Repository secret. Optional: without it, only already-cached extractions are used.
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python scripts/fetch_all.py
+      - name: Test
+        run: python -m unittest discover -s tests
+      - name: Build site data (offline)
+        run: python -m pg.build
+      - name: Commit data
+        run: |
+          git config user.name "printgap-bot"
+          git config user.email "printgap-bot@users.noreply.github.com"
+          git add data site/data
+          git diff --cached --quiet || git commit -m "data: refresh $(date -u +%Y-%m-%dT%H:%MZ)"
+          git push
+  deploy:
+    needs: fetch
+    uses: ./.github/workflows/pages.yml
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
