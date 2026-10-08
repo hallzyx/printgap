@@ -1,7 +1,8 @@
 {
- "generated_at_utc": "2026-10-08T16:55:21.004553+00:00",
+ "generated_at_utc": "2026-10-08T18:22:18.059421+00:00",
  "n_events": 0,
  "events_without_extraction": 0,
+ "extraction_models": [],
  "analogs": {
   "n_events": 0,
   "n_valid": 0,
