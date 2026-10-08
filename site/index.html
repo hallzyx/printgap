@@ -5,100 +5,169 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>PrintGap</title>
 <meta name="description" content="Reads a company's earnings release, checks every figure against SEC filings, and shows how much of the surprise the tokenized stock already priced in.">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#0a0d11">
+<link rel="preload" href="fonts/IBMPlexMono-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/IBMPlexSansCondensed-600.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="top">
-  <div class="wrap top-row">
-    <h1 class="mark">PrintGap</h1>
-    <p class="tag">What the earnings release said, checked against the SEC, and how much of it your rToken already priced in while Wall Street slept.</p>
+<a class="skip" href="#main">Skip to the selected release</a>
+
+<header class="masthead">
+  <div class="mh-row">
+    <a class="brand" href="index.html" aria-label="PrintGap home">
+      <svg class="brand-glyph" viewBox="0 0 28 20" aria-hidden="true"><rect x="1" y="9" width="6" height="10"/><rect x="21" y="1" width="6" height="18"/><path d="M9 10 L19 2" /></svg>
+      <span>PRINTGAP</span>
+    </a>
+    <p class="mh-tag">The earnings release, checked against the SEC, read against the overnight rToken tape.</p>
+    <p class="stamp"><span class="stamp-dot" aria-hidden="true"></span>Information only. Places no orders. Recommends nothing.</p>
   </div>
+  <dl id="tape" class="tape" aria-label="Dataset summary"></dl>
 </header>
 
-<main class="wrap">
-  <nav id="events" class="events" aria-label="Earnings releases"></nav>
-
-  <div id="empty" class="empty" hidden></div>
-
-  <div id="view" hidden>
-    <section class="hero" aria-labelledby="hero-h">
-      <h2 id="hero-h" class="headline"></h2>
-      <p id="hero-sub" class="sub"></p>
-      <figure class="chart">
-        <svg id="timeline" viewBox="0 0 960 330" role="img" preserveAspectRatio="xMidYMid meet"></svg>
-        <figcaption id="chart-cap"></figcaption>
-      </figure>
-    </section>
-
-    <div class="cols">
-      <section id="claims" class="block" aria-labelledby="claims-h">
-        <h2 id="claims-h">What the release said</h2>
-        <p class="note">Serif text is copied from the company's release. Sans-serif numbers are computed by code, not by the language model.</p>
-        <div id="claims-list"></div>
-        <details id="rejected" class="rejected" hidden>
-          <summary></summary>
-          <div id="rejected-list"></div>
-        </details>
-      </section>
-
-      <div class="side">
-        <section id="gap" class="block" aria-labelledby="gap-h">
-          <h2 id="gap-h">Against the company's own guidance</h2>
-          <div id="gap-body"></div>
-        </section>
-        <section id="analogs" class="block" aria-labelledby="an-h">
-          <h2 id="an-h">Other releases in this dataset</h2>
-          <div id="analogs-body"></div>
-        </section>
+<div class="shell">
+  <aside class="rail" aria-labelledby="rail-h">
+    <div class="rail-head">
+      <h2 id="rail-h" class="kicker">Releases</h2>
+      <div class="seg" role="group" aria-label="Filter releases">
+        <button type="button" id="f-all" aria-pressed="true">All <span id="n-all"></span></button>
+        <button type="button" id="f-ok" aria-pressed="false">Measured <span id="n-ok"></span></button>
       </div>
     </div>
+    <nav id="events" class="events" aria-label="Earnings releases"></nav>
+    <p class="rail-legend"><span class="lg-amc">AMC</span> after the 16:00 ET close <span class="lg-sep">/</span> <span class="lg-bmo">BMO</span> before the 09:30 ET open</p>
+  </aside>
 
-    <section id="ask" class="block wide" aria-labelledby="ask-h">
-      <h2 id="ask-h">Ask about this release</h2>
-      <p class="note">Answers can only use the numbered evidence below. If the evidence does not cover a question, the answer says so.</p>
-      <ol id="evidence" class="evidence"></ol>
-      <form id="ask-form" class="ask-form">
-        <label for="q">Your question</label>
-        <input id="q" type="text" autocomplete="off" placeholder="What would have to be true for the move to be an overreaction?">
-        <label for="prov">Model provider</label>
-        <select id="prov">
-          <option value="anthropic">Anthropic</option>
-          <option value="openai">OpenAI</option>
-          <option value="deepseek">DeepSeek</option>
-          <option value="qwen">Qwen (hackathon endpoint)</option>
-          <option value="custom">Other OpenAI-compatible endpoint</option>
-        </select>
-        <label for="model">Model</label>
-        <input id="model" type="text" autocomplete="off">
-        <div id="base-row" hidden>
-          <label for="base">Endpoint (must start with https://)</label>
-          <input id="base" type="text" autocomplete="off" placeholder="https://your-endpoint.example/v1">
+  <main id="main" tabindex="-1">
+    <div id="empty" class="empty" hidden></div>
+
+    <div id="view" hidden>
+      <section class="ev-head" aria-labelledby="ev-title">
+        <div class="ev-id">
+          <h1 id="ev-title" class="ev-ticker"></h1>
+          <div class="ev-names">
+            <p id="ev-company" class="ev-company"></p>
+            <p id="ev-period" class="ev-period"></p>
+          </div>
         </div>
-        <label for="key">API key. It stays in this tab and is sent only to the provider you picked.</label>
-        <input id="key" type="password" autocomplete="off" placeholder="paste your key">
-        <button type="submit">Ask</button>
-      </form>
-      <div id="answer" class="answer" aria-live="polite"></div>
-    </section>
+        <ul id="ev-meta" class="ev-meta"></ul>
+        <p id="hero-h" class="headline"></p>
+      </section>
 
-    <section id="memo" class="block wide" aria-labelledby="memo-h">
-      <h2 id="memo-h">Research memo</h2>
-      <p class="note">Built from the same numbered evidence. No language model is involved in this step.</p>
-      <div class="actions">
-        <button id="memo-build" type="button">Build memo</button>
-        <button id="memo-copy" type="button" hidden>Copy</button>
-        <button id="memo-dl" type="button" hidden>Download .md</button>
+      <section class="night" aria-labelledby="night-h">
+        <div class="sec-head">
+          <h2 id="night-h" class="kicker">Overnight window <span class="kicker-sub">16:00 ET close &rarr; 09:30 ET open</span></h2>
+          <p id="hero-sub" class="sec-meta"></p>
+        </div>
+        <div class="night-grid">
+          <figure class="chart" id="chart-fig">
+            <svg id="timeline" role="img" aria-describedby="chart-cap"></svg>
+            <p id="scrub" class="scrub"></p>
+          </figure>
+          <div id="readout" class="readout"></div>
+        </div>
+        <p id="chart-cap" class="cap"></p>
+      </section>
+
+      <div class="two">
+        <section id="claims" class="panel ledger" aria-labelledby="claims-h">
+          <div class="sec-head">
+            <h2 id="claims-h" class="kicker">Verification ledger <span class="kicker-sub">what the release said, and whether it held</span></h2>
+          </div>
+          <p class="rule-note"><span class="voice-serif">Serif text</span> is copied from the company's release. <span class="voice-mono">Mono figures</span> are parsed and checked by code. The language model only copies; it never calculates, sees a price or recommends.</p>
+          <div id="ledger-sum" class="ledger-sum"></div>
+          <ol id="claims-list" class="claims"></ol>
+          <p id="claims-src" class="src-line"></p>
+        </section>
+
+        <div class="side">
+          <section id="gap" class="panel" aria-labelledby="gap-h">
+            <div class="sec-head">
+              <h2 id="gap-h" class="kicker">Revenue vs the company's own guide</h2>
+            </div>
+            <div id="gap-body"></div>
+          </section>
+          <section id="analogs" class="panel" aria-labelledby="an-h">
+            <div class="sec-head">
+              <h2 id="an-h" class="kicker">Every measured night</h2>
+            </div>
+            <div id="analogs-body"></div>
+          </section>
+        </div>
       </div>
-      <pre id="memo-out" class="memo" hidden></pre>
+
+      <section id="desk" class="panel desk" aria-labelledby="desk-h">
+        <div class="sec-head">
+          <h2 id="desk-h" class="kicker">Evidence desk <span class="kicker-sub">questions and memo, from numbered facts only</span></h2>
+        </div>
+        <div class="desk-grid">
+          <div>
+            <p class="rule-note">These are the only facts the chat and the memo may use. An answer must cite them by id, or say the evidence does not cover the question.</p>
+            <ol id="evidence" class="evidence"></ol>
+          </div>
+          <div class="desk-tools">
+            <form id="ask-form" class="ask-form">
+              <h3 class="mini-h">Ask about this release</h3>
+              <label for="q">Your question</label>
+              <input id="q" type="text" autocomplete="off" placeholder="What would have to be true for the move to be an overreaction?">
+              <div class="row2">
+                <div>
+                  <label for="prov">Model provider</label>
+                  <select id="prov">
+                    <option value="anthropic">Anthropic</option>
+                    <option value="openai">OpenAI</option>
+                    <option value="deepseek">DeepSeek</option>
+                    <option value="qwen">Qwen (hackathon endpoint)</option>
+                    <option value="custom">Other OpenAI-compatible endpoint</option>
+                  </select>
+                </div>
+                <div>
+                  <label for="model">Model</label>
+                  <input id="model" type="text" autocomplete="off">
+                </div>
+              </div>
+              <div id="base-row" hidden>
+                <label for="base">Endpoint (must start with https://)</label>
+                <input id="base" type="text" autocomplete="off" placeholder="https://your-endpoint.example/v1">
+              </div>
+              <label for="key">API key <span class="lbl-note">stays in this tab, sent only to the provider you picked</span></label>
+              <input id="key" type="password" autocomplete="off" placeholder="paste your key">
+              <button type="submit" class="btn">Ask</button>
+              <div id="answer" class="answer" aria-live="polite"></div>
+            </form>
+
+            <div class="memo-box">
+              <h3 class="mini-h">Research memo</h3>
+              <p class="rule-note">Assembled by code from the same evidence. No language model involved.</p>
+              <div class="actions">
+                <button id="memo-build" type="button" class="btn">Build memo</button>
+                <button id="memo-copy" type="button" class="btn ghost" hidden>Copy</button>
+                <button id="memo-dl" type="button" class="btn ghost" hidden>Download .md</button>
+              </div>
+              <pre id="memo-out" class="memo" hidden></pre>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <section class="rules" aria-labelledby="rules-h">
+      <h2 id="rules-h" class="kicker">House rules</h2>
+      <ol class="rules-list">
+        <li><span class="r-n">01</span><h3>The model reads. Code checks.</h3><p>A language model copies figures out of the release, each with its quote. It never calculates, never sees a price and never recommends.</p></li>
+        <li><span class="r-n">02</span><h3>Verified or discarded.</h3><p>A figure stays only if its quote is in the filing, its number is in the quote, and it matches SEC XBRL wherever XBRL has it. Failures are shown with the reason.</p></li>
+        <li><span class="r-n">03</span><h3>A price is not a fill.</h3><p>Overnight rToken books are thin. The moves shown are last prices on 15-minute candles, not executions anyone could count on.</p></li>
+        <li><span class="r-n">04</span><h3>Nothing is filled in.</h3><p>When data is missing the page says what is missing. There is no analyst consensus here; the benchmark is the company's own guidance.</p></li>
+      </ol>
+      <p class="rules-final">PrintGap does not place orders or recommend trades. The decision is always yours.</p>
     </section>
-  </div>
-</main>
+  </main>
+</div>
 
 <footer class="foot">
-  <div class="wrap">
-    <p>PrintGap shows information. It does not place orders or recommend trades, and the decision is always yours. Overnight rToken liquidity is thin, so a price on screen is not a fill you can count on.</p>
-    <p><a href="method.html">How the numbers are made, and what is missing</a></p>
-  </div>
+  <p><a href="method.html">How the numbers are made, and what is missing &rarr;</a></p>
+  <p id="foot-build" class="foot-build"></p>
 </footer>
 
 <script src="lib.js"></script>

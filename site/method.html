@@ -4,17 +4,23 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>PrintGap method</title>
+<meta name="color-scheme" content="dark">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="top">
-  <div class="wrap top-row">
-    <h1 class="mark"><a href="index.html" style="text-decoration:none">PrintGap</a></h1>
-    <p class="tag">How the numbers are made, and what is missing.</p>
+<header class="masthead">
+  <div class="mh-row">
+    <a class="brand" href="index.html" aria-label="PrintGap home">
+      <svg class="brand-glyph" viewBox="0 0 28 20" aria-hidden="true"><rect x="1" y="9" width="6" height="10"/><rect x="21" y="1" width="6" height="18"/><path d="M9 10 L19 2" /></svg>
+      <span>PRINTGAP</span>
+    </a>
+    <p class="mh-tag">Method: how the numbers are made, and what is missing.</p>
+    <p class="stamp"><span class="stamp-dot" aria-hidden="true"></span>Information only. Places no orders. Recommends nothing.</p>
   </div>
 </header>
 
 <main class="prose">
+  <p><a href="index.html">&larr; Back to the releases</a></p>
   <h2>What the language model does</h2>
   <p>It reads the earnings release and copies out a short list of figures, each with the exact sentence or table row it came from. It does not calculate, see prices, or suggest trades. Then code checks its work:</p>
   <ol>
@@ -58,7 +64,7 @@
   <p>Every price and filing is stored in the repository with a fetch time and a hash. The site is rebuilt offline from those files by one command, and the language model's output is cached by content hash, so a reviewer can re-run the whole pipeline without an API key and get the same page.</p>
 </main>
 
-<footer class="foot"><div class="wrap"><p>Not investment advice. PrintGap does not place orders.</p></div></footer>
+<footer class="foot"><p>Not investment advice. PrintGap does not place orders or recommend trades; the decision is always yours.</p></footer>
 
 <script>
 (function () {
