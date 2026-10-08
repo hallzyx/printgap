@@ -36,7 +36,9 @@ jobs:
           PRINTGAP_BASE_URL: ${{ vars.PRINTGAP_BASE_URL }}
         run: python scripts/fetch_all.py
       - name: Test
-        run: python -m unittest discover -s tests
+        run: |
+          python -m unittest discover -s tests
+          node tests/test_lib.js
       - name: Build site data (offline)
         run: python -m pg.build
       - name: Commit data
