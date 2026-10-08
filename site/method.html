@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PrintGap method</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <div class="wrap top-row">
+    <h1 class="mark"><a href="index.html" style="text-decoration:none">PrintGap</a></h1>
+    <p class="tag">How the numbers are made, and what is missing.</p>
+  </div>
+</header>
+
+<main class="prose">
+  <h2>What the language model does</h2>
+  <p>It reads the earnings release and copies out a short list of figures, each with the exact sentence or table row it came from. It does not calculate, see prices, or suggest trades. Then code checks its work:</p>
+  <ol>
+    <li>The quoted text must exist in the release, character for character.</li>
+    <li>The number must appear in that quote.</li>
+    <li>Reported revenue, net income, EPS, operating income and gross profit must match the SEC's XBRL company facts for the same quarter, allowing only the rounding the release itself shows.</li>
+  </ol>
+  <p>A figure that fails any step is discarded and listed separately, with the reason. Company guidance has no XBRL equivalent, so it only gets the first two checks and is labeled that way.</p>
+
+  <h2>How well that worked</h2>
+  <div id="acc"><p>Loading...</p></div>
+
+  <h2>What is measured</h2>
+  <ul>
+    <li>Publication time: the SEC's own acceptance timestamp for the 8-K.</li>
+    <li>rToken price: Bitget 15-minute candles, using only candles that had closed at the moment in question.</li>
+    <li>Cash stock gap: the next regular open versus the previous close, from daily bars.</li>
+    <li>Priced-in ratio: rToken overnight move divided by the cash gap. It is hidden when the gap is under 0.5%, because the ratio is meaningless there.</li>
+  </ul>
+
+  <h2>What is estimated or assumed</h2>
+  <ul>
+    <li>Entry costs are not modeled. Third parties report taker fees of 5 to 10 basis points per side, and they disagree with each other, so no figure is built in.</li>
+    <li>The 09:25 ET price stands in for "what the rToken said just before the open".</li>
+  </ul>
+
+  <h2>What is missing</h2>
+  <ul>
+    <li>Analyst consensus. The comparison uses the company's own guidance from its previous release instead, and the page says so each time.</li>
+    <li>Earnings call transcripts. Only the press release is read.</li>
+    <li>Statistical power. The dataset covers one earnings season for eight large companies. Averages are a log of what happened, not a forecast.</li>
+    <li>Bitget MCP data: <span id="mcp">checking...</span></li>
+  </ul>
+
+  <h2>Where the data comes from</h2>
+  <div id="src"></div>
+
+  <h2>Reproduce it</h2>
+  <p>Every price and filing is stored in the repository with a fetch time and a hash. The site is rebuilt offline from those files by one command, and the language model's output is cached by content hash, so a reviewer can re-run the whole pipeline without an API key and get the same page.</p>
+</main>
+
+<footer class="foot"><div class="wrap"><p>Not investment advice. PrintGap does not place orders.</p></div></footer>
+
+<script>
+(function () {
+  function h(t, a) { var e = document.createElement(t); if (a && a.text) e.textContent = a.text; for (var i = 2; i < arguments.length; i++) e.appendChild(arguments[i]); return e; }
+  fetch("data/events.json", { cache: "no-cache" }).then(function (r) { return r.json(); }).then(function (d) {
+    var a = d.accuracy_total, acc = document.getElementById("acc"); acc.textContent = "";
+    if (!d.n_events || !a.total_claims) {
+      acc.appendChild(h("p", { text: "No extracted figures are loaded yet, so there is no accuracy to report. This section fills in from the real data and is never filled by hand." }));
+    } else {
+      var rows = [
+        ["Releases processed", d.n_events],
+        ["Figures extracted by the model", a.total_claims],
+        ["Reported figures checked against SEC XBRL", a.xbrl_checked],
+        ["Matching XBRL", a.xbrl_match],
+        ["Contradicting XBRL (discarded)", a.xbrl_mismatch],
+        ["Rejected for a missing quote or number", a.quote_rejected],
+      ];
+      var t = h("table", { }); t.className = "t";
+      rows.forEach(function (r) { t.appendChild(h("tr", null, h("td", { text: r[0] }), h("td", { text: String(r[1]) }))); });
+      acc.appendChild(h("div", null, t)); acc.lastChild.className = "tablewrap";
+      if (a.xbrl_checked) acc.appendChild(h("p", { text: "Of the figures that could be checked against XBRL, " + Math.round(100 * a.xbrl_match / a.xbrl_checked) + "% matched before any filtering (" + a.xbrl_match + " of " + a.xbrl_checked + ")." }));
+    }
+    var notes = (d.fetch && d.fetch.notes) || [], m = notes.filter(function (n) { return /^mcp/.test(n); })[0];
+    document.getElementById("mcp").textContent = m ? m.replace(/^mcp:\s*/, "") + "." : "not attempted in this build.";
+    var s = document.getElementById("src"); s.textContent = "";
+    var ul = h("ul");
+    ul.appendChild(h("li", { text: "SEC EDGAR: 8-K item 2.02 exhibit 99.1 and XBRL company facts. Fetched " + ((d.fetch && d.fetch.fetched_at_utc) || "(not yet fetched)") + "." }));
+    ul.appendChild(h("li", { text: "Prices: " + d.price_data.source + ". Fetched " + (d.price_data.fetched_at_utc || "unknown") + "." }));
+    ul.appendChild(h("li", { text: "Build generated " + d.generated_at_utc + "." }));
+    s.appendChild(ul);
+    ((d.fetch && d.fetch.errors) || []).forEach(function (e) { s.appendChild(h("p", { text: "Fetch problem: " + e })); });
+  }).catch(function () { document.getElementById("acc").textContent = "Data file not available."; });
+})();
+</script>
+</body>
+</html>
