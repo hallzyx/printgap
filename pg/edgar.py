@@ -135,13 +135,25 @@ def html_to_text(html: str) -> str:
     return t.strip()
 
 
+def _ex99_from_index(s, base: str, accession: str, names: list[str]) -> list[str]:
+    """Exhibit file names whose declared type is EX-99.x, EX-99.1 first. Companies name the file anything."""
+    html = _get(s, f"{base}{accession}-index.html").text
+    found = []
+    for href, typ in re.findall(r'<a href="[^"]*/([^/"]+)">[^<]*</a>[^<]*(?:<span[^>]*>[^<]*</span>)?\s*</td>\s*<td[^>]*>(EX-99[^<]*)</td>', html):
+        if href in names and href.lower().endswith((".htm", ".html")):
+            found.append((typ.strip() != "EX-99.1", href))
+    return [h for _, h in sorted(found)]
+
+
 def fetch_press_release(s, cik: int, accession: str) -> dict:
     nodash = accession.replace("-", "")
     base = f"https://www.sec.gov/Archives/edgar/data/{cik}/{nodash}/"
     idx = _get(s, base + "index.json").json()
     names = [it["name"] for it in idx["directory"]["item"]]
-    cands = [n for n in names if re.search(r"ex-?99", n, re.I) and n.lower().endswith((".htm", ".html"))]
-    cands.sort(key=lambda n: (not re.search(r"99[-_.]?0?1", n), n))
+    cands = _ex99_from_index(s, base, accession, names)
+    if not cands:  # fall back to the file name
+        cands = [n for n in names if re.search(r"ex-?99", n, re.I) and n.lower().endswith((".htm", ".html"))]
+        cands.sort(key=lambda n: (not re.search(r"99[-_.]?0?1", n), n))
     if not cands:
         raise RuntimeError(f"no Ex-99 document in {base}")
     url = base + cands[0]

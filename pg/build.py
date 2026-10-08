@@ -72,10 +72,10 @@ def build(out: Path | None = None, data: Path | None = None, fx: Path | None = N
     models = set()
 
     for t, (_cik, _label) in edgar.TICKERS.items():
-        docs = [json.loads(p.read_text()) for p in sorted((DATA / "edgar" / t).glob("*.json"))] if (DATA / "edgar" / t).exists() else []
+        docs = [json.loads(p.read_text(encoding="utf-8")) for p in sorted((DATA / "edgar" / t).glob("*.json"))] if (DATA / "edgar" / t).exists() else []
         docs.sort(key=lambda d: d["acceptance_utc"])
         xp = DATA / "xbrl" / f"{t}.json"
-        trimmed = json.loads(xp.read_text()) if xp.exists() else {"facts": {}}
+        trimmed = json.loads(xp.read_text(encoding="utf-8")) if xp.exists() else {"facts": {}}
         rtp, cp = FX / "rtoken_15m" / f"R{t}USDT.csv", FX / "cash_daily" / f"{t}.csv"
         rt = engine.load_rtoken(rtp) if rtp.exists() else None
         cash = engine.load_cash(cp) if cp.exists() else None
@@ -128,8 +128,8 @@ def build(out: Path | None = None, data: Path | None = None, fx: Path | None = N
             )
             prev = {"id": ev_id, "claims": claims}
 
-    manifest = json.loads((DATA / "manifest.json").read_text()) if (DATA / "manifest.json").exists() else None
-    src_manifest = json.loads((FX / "SOURCE_MANIFEST.json").read_text()) if (FX / "SOURCE_MANIFEST.json").exists() else None
+    manifest = json.loads((DATA / "manifest.json").read_text(encoding="utf-8")) if (DATA / "manifest.json").exists() else None
+    src_manifest = json.loads((FX / "SOURCE_MANIFEST.json").read_text(encoding="utf-8")) if (FX / "SOURCE_MANIFEST.json").exists() else None
     events.sort(key=lambda e: e["pub_utc"], reverse=True)
     result = {
         "generated_at_utc": datetime.now(UTC).isoformat(),
@@ -150,7 +150,7 @@ def build(out: Path | None = None, data: Path | None = None, fx: Path | None = N
         "events": events,
     }
     out.parent.mkdir(parents=True, exist_ok=True)
-    out.write_text(json.dumps(result, ensure_ascii=False, indent=1))
+    out.write_text(json.dumps(result, ensure_ascii=False, indent=1), encoding="utf-8")
     return result
 
 

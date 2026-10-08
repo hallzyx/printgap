@@ -223,7 +223,8 @@ def cache_store(cache_dir: Path, doc_text: str, extraction: dict, label: str, us
             },
             ensure_ascii=False,
             indent=1,
-        )
+        ),
+        encoding="utf-8",
     )
     return p
 
@@ -238,7 +239,7 @@ def cache_lookup(cache_dir: Path, doc_text: str, label: str | None = None):
     found = []
     for f in files:
         if f.exists():
-            d = json.loads(f.read_text())
+            d = json.loads(f.read_text(encoding="utf-8"))
             found.append((d.get("created_at", ""), f.name, d))
     if not found:
         return None, None

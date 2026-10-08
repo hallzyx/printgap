@@ -1,0 +1,87 @@
+{
+ "label": "deepseek:deepseek-flash",
+ "prompt_version": "v1",
+ "created_at": "2026-10-08T22:35:13.070625+00:00",
+ "usage": {
+  "prompt_tokens": 8607,
+  "completion_tokens": 4872,
+  "total_tokens": 13479,
+  "prompt_tokens_details": {
+   "cached_tokens": 256
+  },
+  "completion_tokens_details": {
+   "reasoning_tokens": 4390
+  },
+  "prompt_cache_hit_tokens": 256,
+  "prompt_cache_miss_tokens": 8351
+ },
+ "extraction": {
+  "period_label": "first quarter of 2026",
+  "claims": [
+   {
+    "id": "c1",
+    "metric": "revenue",
+    "basis": "reported",
+    "value": 10253000000,
+    "unit": "USD",
+    "quote": " | Revenue ($M) | $10,253 | $7,438 | Up 38% | $10,270 | Flat"
+   },
+   {
+    "id": "c2",
+    "metric": "gross_profit",
+    "basis": "reported",
+    "value": 5416000000,
+    "unit": "USD",
+    "quote": " | Gross profit ($M) | $5,416 | $3,736 | Up 45% | $5,577 | Down 3%"
+   },
+   {
+    "id": "c3",
+    "metric": "gross_margin_pct",
+    "basis": "reported",
+    "value": 53,
+    "unit": "percent",
+    "quote": " | Gross margin | 53% | 50% | Up 3 ppts | 54% | Down 1 ppt"
+   },
+   {
+    "id": "c4",
+    "metric": "operating_income",
+    "basis": "reported",
+    "value": 1476000000,
+    "unit": "USD",
+    "quote": " | Operating income ($M) | $1,476 | $806 | Up 83% | $1,752 | Down 16%"
+   },
+   {
+    "id": "c5",
+    "metric": "net_income",
+    "basis": "reported",
+    "value": 1383000000,
+    "unit": "USD",
+    "quote": " | Net income ($M) | $1,383 | $709 | Up 95% | $1,511 | Down 8%"
+   },
+   {
+    "id": "c6",
+    "metric": "eps_diluted",
+    "basis": "reported",
+    "value": 0.84,
+    "unit": "USD_per_share",
+    "quote": " | Diluted earnings per share | $0.84 | $0.44 | Up 91% | $0.92 | Down 9%"
+   },
+   {
+    "id": "c7",
+    "metric": "guidance_revenue_mid",
+    "basis": "guidance",
+    "value": 11200000000,
+    "unit": "USD",
+    "quote": "For the second quarter of 2026, AMD expects revenue to be approximately $11.2 billion, plus or minus $300 million."
+   },
+   {
+    "id": "c8",
+    "metric": "guidance_gross_margin_pct",
+    "basis": "guidance",
+    "value": 56,
+    "unit": "percent",
+    "quote": "Non-GAAP gross margin is expected to be approximately 56%."
+   }
+  ]
+ }
+}

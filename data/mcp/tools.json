@@ -1,0 +1,99 @@
+{
+ "jsonrpc": "2.0",
+ "id": 3,
+ "result": {
+  "tools": [
+   {
+    "_meta": {
+     "fastmcp": {
+      "tags": []
+     }
+    },
+    "description": "List available data categories, or entries within a category (optionally filtered).",
+    "inputSchema": {
+     "properties": {
+      "category": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "default": null
+      },
+      "subcategory": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "default": null
+      },
+      "keyword": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "default": null
+      }
+     },
+     "type": "object",
+     "additionalProperties": false
+    },
+    "name": "guide",
+    "outputSchema": {
+     "type": "object",
+     "additionalProperties": true
+    },
+    "title": "Guide"
+   },
+   {
+    "_meta": {
+     "fastmcp": {
+      "tags": []
+     }
+    },
+    "description": "Execute a catalog entry by id, forwarding validated params to agent-data-platform.",
+    "inputSchema": {
+     "properties": {
+      "entry_id": {
+       "type": "string"
+      },
+      "params": {
+       "anyOf": [
+        {
+         "additionalProperties": true,
+         "type": "object"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "default": null
+      }
+     },
+     "required": [
+      "entry_id"
+     ],
+     "type": "object",
+     "additionalProperties": false
+    },
+    "name": "do_query",
+    "outputSchema": {
+     "type": "object",
+     "additionalProperties": true
+    },
+    "title": "Do Query"
+   }
+  ]
+ }
+}

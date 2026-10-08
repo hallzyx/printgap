@@ -1,0 +1,63 @@
+{
+ "label": "deepseek:deepseek-flash",
+ "prompt_version": "v1",
+ "created_at": "2026-10-08T22:28:38.575198+00:00",
+ "usage": {
+  "prompt_tokens": 4113,
+  "completion_tokens": 3985,
+  "total_tokens": 8098,
+  "prompt_tokens_details": {
+   "cached_tokens": 3968
+  },
+  "completion_tokens_details": {
+   "reasoning_tokens": 3693
+  },
+  "prompt_cache_hit_tokens": 3968,
+  "prompt_cache_miss_tokens": 145
+ },
+ "extraction": {
+  "period_label": "fiscal 2026 second quarter ended March 28, 2026",
+  "claims": [
+   {
+    "id": "c1",
+    "metric": "revenue",
+    "basis": "reported",
+    "value": 111184000000,
+    "unit": "USD",
+    "quote": "111,184 | 95,359 | 254,940 | 219,659"
+   },
+   {
+    "id": "c2",
+    "metric": "net_income",
+    "basis": "reported",
+    "value": 29578000000,
+    "unit": "USD",
+    "quote": "$ | 29,578 | $ | 24,780 | $ | 71,675 | $ | 61,110"
+   },
+   {
+    "id": "c3",
+    "metric": "eps_diluted",
+    "basis": "reported",
+    "value": 2.01,
+    "unit": "USD_per_share",
+    "quote": "$ | 2.01 | $ | 1.65 | $ | 4.85 | $ | 4.05"
+   },
+   {
+    "id": "c4",
+    "metric": "operating_income",
+    "basis": "reported",
+    "value": 35885000000,
+    "unit": "USD",
+    "quote": "35,885 | 29,589 | 86,737 | 72,421"
+   },
+   {
+    "id": "c5",
+    "metric": "gross_profit",
+    "basis": "reported",
+    "value": 54781000000,
+    "unit": "USD",
+    "quote": "54,781 | 44,867 | 124,012 | 103,142"
+   }
+  ]
+ }
+}

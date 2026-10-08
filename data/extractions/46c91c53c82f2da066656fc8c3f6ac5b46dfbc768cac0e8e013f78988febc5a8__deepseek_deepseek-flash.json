@@ -1,0 +1,71 @@
+{
+ "label": "deepseek:deepseek-flash",
+ "prompt_version": "v1",
+ "created_at": "2026-10-08T22:37:21.756910+00:00",
+ "usage": {
+  "prompt_tokens": 12782,
+  "completion_tokens": 2272,
+  "total_tokens": 15054,
+  "prompt_tokens_details": {
+   "cached_tokens": 384
+  },
+  "completion_tokens_details": {
+   "reasoning_tokens": 1904
+  },
+  "prompt_cache_hit_tokens": 384,
+  "prompt_cache_miss_tokens": 12398
+ },
+ "extraction": {
+  "period_label": "Q2-2026",
+  "claims": [
+   {
+    "id": "c1",
+    "metric": "revenue",
+    "basis": "reported",
+    "value": 28236000000,
+    "unit": "USD",
+    "quote": "Total revenues 22,496 28,095 24,901 22,387 28,236 26%"
+   },
+   {
+    "id": "c2",
+    "metric": "net_income",
+    "basis": "reported",
+    "value": 1114000000,
+    "unit": "USD",
+    "quote": "Net income attributable to common stockholders (GAAP) 1,172 1,373 840 477 1,114 -5%"
+   },
+   {
+    "id": "c3",
+    "metric": "eps_diluted",
+    "basis": "reported",
+    "value": 0.32,
+    "unit": "USD_per_share",
+    "quote": "EPS attributable to common stockholders, diluted (GAAP) 0.33 0.39 0.24 0.13 0.32 -3%"
+   },
+   {
+    "id": "c4",
+    "metric": "operating_income",
+    "basis": "reported",
+    "value": 398000000,
+    "unit": "USD",
+    "quote": "Income from operations 923 1,624 1,409 941 398 -57%"
+   },
+   {
+    "id": "c5",
+    "metric": "gross_profit",
+    "basis": "reported",
+    "value": 4751000000,
+    "unit": "USD",
+    "quote": "Total gross profit 3,878 5,054 5,009 4,720 4,751 23%"
+   },
+   {
+    "id": "c6",
+    "metric": "gross_margin_pct",
+    "basis": "reported",
+    "value": 16.8,
+    "unit": "percent",
+    "quote": "Total GAAP gross margin 17.2% 18.0% 20.1% 21.1% 16.8% -41 bp"
+   }
+  ]
+ }
+}

@@ -62,12 +62,12 @@ def main() -> int:
                         manifest["errors"].append(f"{t} {ev['accession']}: press release: {e}")
                         continue
                     rec = {"ticker": t, "cik": cik, "company": name, **ev, **pr, "fetched_at_utc": now()}
-                    p.write_text(json.dumps(rec, ensure_ascii=False, indent=1))
+                    p.write_text(json.dumps(rec, ensure_ascii=False, indent=1), encoding="utf-8")
                 manifest["files"][str(p.relative_to(ROOT))] = sha(p)
             # XBRL company facts (trimmed)
             xp = DATA / "xbrl" / f"{t}.json"
             xp.parent.mkdir(parents=True, exist_ok=True)
-            xp.write_text(json.dumps(edgar.fetch_companyfacts(s, cik), ensure_ascii=False))
+            xp.write_text(json.dumps(edgar.fetch_companyfacts(s, cik), ensure_ascii=False), encoding="utf-8")
             manifest["files"][str(xp.relative_to(ROOT))] = sha(xp)
         except Exception as e:  # noqa: BLE001
             manifest["errors"].append(f"{t}: {e}")
@@ -76,7 +76,7 @@ def main() -> int:
     # LLM extraction (cached by content hash)
     n_called = n_hit = n_skip = 0
     for p in sorted((DATA / "edgar").glob("*/*.json")):
-        rec = json.loads(p.read_text())
+        rec = json.loads(p.read_text(encoding="utf-8"))
         try:
             ex, meta = extract.extract_cached(rec["text"], DATA / "extractions", provider)
         except Exception as e:  # noqa: BLE001
@@ -93,9 +93,9 @@ def main() -> int:
         c.start()
         mdir = DATA / "mcp"
         mdir.mkdir(exist_ok=True)
-        (mdir / "tools.json").write_text(json.dumps(c.list_tools(), ensure_ascii=False, indent=1))
+        (mdir / "tools.json").write_text(json.dumps(c.list_tools(), ensure_ascii=False, indent=1), encoding="utf-8")
         try:
-            (mdir / "guide.json").write_text(json.dumps(c.call("guide", {}), ensure_ascii=False, indent=1))
+            (mdir / "guide.json").write_text(json.dumps(c.call("guide", {}), ensure_ascii=False, indent=1), encoding="utf-8")
         except Exception as e:  # noqa: BLE001
             manifest["errors"].append(f"mcp guide: {e}")
         manifest["notes"].append("mcp: tools/list captured")
@@ -104,7 +104,7 @@ def main() -> int:
     except Exception as e:  # noqa: BLE001
         manifest["notes"].append(f"mcp: unavailable ({e})")
 
-    (DATA / "manifest.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=1))
+    (DATA / "manifest.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=1), encoding="utf-8")
     print(json.dumps({k: manifest[k] for k in ("errors", "notes")}, indent=1))
     return 0
 

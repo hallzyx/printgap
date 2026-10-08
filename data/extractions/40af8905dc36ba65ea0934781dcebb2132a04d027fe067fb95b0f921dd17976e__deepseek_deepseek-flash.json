@@ -1,0 +1,22 @@
+{
+ "label": "deepseek:deepseek-flash",
+ "prompt_version": "v1",
+ "created_at": "2026-10-08T22:37:12.450340+00:00",
+ "usage": {
+  "prompt_tokens": 1026,
+  "completion_tokens": 235,
+  "total_tokens": 1261,
+  "prompt_tokens_details": {
+   "cached_tokens": 256
+  },
+  "completion_tokens_details": {
+   "reasoning_tokens": 218
+  },
+  "prompt_cache_hit_tokens": 256,
+  "prompt_cache_miss_tokens": 770
+ },
+ "extraction": {
+  "period_label": "Q2 2026",
+  "claims": []
+ }
+}

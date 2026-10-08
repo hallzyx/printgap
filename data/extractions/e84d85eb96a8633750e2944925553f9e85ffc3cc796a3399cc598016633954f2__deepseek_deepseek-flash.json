@@ -1,0 +1,95 @@
+{
+ "label": "deepseek:deepseek-flash",
+ "prompt_version": "v1",
+ "created_at": "2026-10-08T22:36:57.939794+00:00",
+ "usage": {
+  "prompt_tokens": 7654,
+  "completion_tokens": 6693,
+  "total_tokens": 14347,
+  "prompt_tokens_details": {
+   "cached_tokens": 256
+  },
+  "completion_tokens_details": {
+   "reasoning_tokens": 6041
+  },
+  "prompt_cache_hit_tokens": 256,
+  "prompt_cache_miss_tokens": 7398
+ },
+ "extraction": {
+  "period_label": "Second Quarter Fiscal 2027",
+  "claims": [
+   {
+    "id": "c1",
+    "metric": "revenue",
+    "basis": "reported",
+    "value": 96221000000,
+    "unit": "USD",
+    "quote": " | Revenue | $96,221 | $81,615 | $46,743 | 18 | % | 106 | %"
+   },
+   {
+    "id": "c2",
+    "metric": "net_income",
+    "basis": "reported",
+    "value": 59688000000,
+    "unit": "USD",
+    "quote": " | Net income | $59,688 | $58,321 | $26,422 | 2 | % | 126 | %"
+   },
+   {
+    "id": "c3",
+    "metric": "eps_diluted",
+    "basis": "reported",
+    "value": 2.46,
+    "unit": "USD_per_share",
+    "quote": " | GAAP | $ | 2.46 | $ | 2.39 | $ | 1.08 | $ | 4.85 | $ | 1.84 |"
+   },
+   {
+    "id": "c4",
+    "metric": "operating_income",
+    "basis": "reported",
+    "value": 63734000000,
+    "unit": "USD",
+    "quote": " | Operating income | $63,734 | $53,536 | $28,440 | 19 | % | 124 | %"
+   },
+   {
+    "id": "c5",
+    "metric": "gross_profit",
+    "basis": "reported",
+    "value": 72142000000,
+    "unit": "USD",
+    "quote": " | Gross profit | 72,142 | 33,853 | 133,299 | 60,521 |"
+   },
+   {
+    "id": "c6",
+    "metric": "gross_margin_pct",
+    "basis": "reported",
+    "value": 75.0,
+    "unit": "percent",
+    "quote": " | Gross margin | 75.0 | % | 74.9 | % | 72.4 | % | 0.1 pts | 2.6 pts"
+   },
+   {
+    "id": "c7",
+    "metric": "guidance_revenue_mid",
+    "basis": "guidance",
+    "value": 108000000000,
+    "unit": "USD",
+    "quote": "Revenue is expected to be $108.0 billion, plus or minus 2%."
+   },
+   {
+    "id": "c8",
+    "metric": "guidance_tolerance_pct",
+    "basis": "guidance",
+    "value": 2,
+    "unit": "percent",
+    "quote": "Revenue is expected to be $108.0 billion, plus or minus 2%."
+   },
+   {
+    "id": "c9",
+    "metric": "guidance_gross_margin_pct",
+    "basis": "guidance",
+    "value": 74.0,
+    "unit": "percent",
+    "quote": "GAAP and non-GAAP gross margins are expected to be 74.0%, plus or minus 50 basis points."
+   }
+  ]
+ }
+}

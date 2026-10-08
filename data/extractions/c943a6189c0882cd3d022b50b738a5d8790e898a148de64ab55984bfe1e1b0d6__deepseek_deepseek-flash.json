@@ -1,0 +1,71 @@
+{
+ "label": "deepseek:deepseek-flash",
+ "prompt_version": "v1",
+ "created_at": "2026-10-08T22:25:10.432009+00:00",
+ "usage": {
+  "prompt_tokens": 4056,
+  "completion_tokens": 4397,
+  "total_tokens": 8453,
+  "prompt_tokens_details": {
+   "cached_tokens": 256
+  },
+  "completion_tokens_details": {
+   "reasoning_tokens": 4053
+  },
+  "prompt_cache_hit_tokens": 256,
+  "prompt_cache_miss_tokens": 3800
+ },
+ "extraction": {
+  "period_label": "fiscal 2026 third quarter ended June 27, 2026",
+  "claims": [
+   {
+    "id": "c1",
+    "metric": "revenue",
+    "basis": "reported",
+    "value": 109417000000,
+    "unit": "USD",
+    "quote": "Total net sales (1)\n | 109,417 | 94,036 | 364,357 | 313,695 |"
+   },
+   {
+    "id": "c2",
+    "metric": "net_income",
+    "basis": "reported",
+    "value": 29789000000,
+    "unit": "USD",
+    "quote": "Net income\n | $ | 29,789 | $ | 23,434 | $ | 101,464 | $ | 84,544 |"
+   },
+   {
+    "id": "c3",
+    "metric": "eps_diluted",
+    "basis": "reported",
+    "value": 2.02,
+    "unit": "USD_per_share",
+    "quote": "Diluted earnings per share was $2.02"
+   },
+   {
+    "id": "c4",
+    "metric": "operating_income",
+    "basis": "reported",
+    "value": 35695000000,
+    "unit": "USD",
+    "quote": "Operating income\n | 35,695 | 28,202 | 122,432 | 100,623 |"
+   },
+   {
+    "id": "c5",
+    "metric": "gross_profit",
+    "basis": "reported",
+    "value": 54770000000,
+    "unit": "USD",
+    "quote": "Gross margin | 54,770 | 43,718 | 178,782 | 146,860 |"
+   },
+   {
+    "id": "c6",
+    "metric": "gross_margin_pct",
+    "basis": "reported",
+    "value": 50.1,
+    "unit": "percent",
+    "quote": "Company gross margin was 50.1 percent"
+   }
+  ]
+ }
+}

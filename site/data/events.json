@@ -1,34 +1,5756 @@
 {
- "generated_at_utc": "2026-10-08T18:22:18.059421+00:00",
- "n_events": 0,
+ "generated_at_utc": "2026-10-08T22:37:27.855944+00:00",
+ "n_events": 19,
  "events_without_extraction": 0,
- "extraction_models": [],
+ "extraction_models": [
+  "deepseek:deepseek-flash"
+ ],
  "analogs": {
-  "n_events": 0,
-  "n_valid": 0,
-  "n_with_ratio": 0,
-  "median_priced_in": null,
-  "sign_agreement": null,
-  "n_sign": 0,
-  "median_abs_residual": null,
-  "median_abs_cash_gap": null,
-  "median_abs_rt_move": null
+  "n_events": 19,
+  "n_valid": 9,
+  "n_with_ratio": 9,
+  "median_priced_in": 0.9068092545341591,
+  "sign_agreement": 1.0,
+  "n_sign": 9,
+  "median_abs_residual": 0.007727896630258341,
+  "median_abs_cash_gap": 0.08974430264221185,
+  "median_abs_rt_move": 0.08369074663330044
  },
  "accuracy_total": {
-  "xbrl_checked": 0,
-  "xbrl_match": 0,
+  "xbrl_checked": 66,
+  "xbrl_match": 66,
   "xbrl_mismatch": 0,
-  "quote_rejected": 0,
-  "total_claims": 0
+  "quote_rejected": 3,
+  "total_claims": 99
  },
  "fetch": {
-  "fetched_at_utc": null,
-  "errors": [],
-  "notes": []
+  "fetched_at_utc": "2026-10-08T22:34:44.254913+00:00",
+  "errors": [
+   "mcp guide: empty SSE response"
+  ],
+  "notes": [
+   "extraction provider: deepseek:deepseek-flash",
+   "extraction: called=13 cache_hit=6 skipped_no_key=0",
+   "mcp: tools/list captured"
+  ]
  },
  "price_data": {
   "source": "github.com/Megacollins/rift24 fixtures (MIT) - rToken 15m candles from Bitget and daily cash bars",
   "fetched_at_utc": "2026-09-21T21:31:52.338010+00:00"
  },
- "events": []
+ "events": [
+  {
+   "id": "TSLA-0001628280-26-064366",
+   "ticker": "TSLA",
+   "company": "Tesla, Inc.",
+   "pub_utc": "2026-10-02T13:04:26+00:00",
+   "pub_et": "2026-10-02 09:04 ET",
+   "filing_date": "2026-10-02",
+   "accession": "0001628280-26-064366",
+   "url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026064366/exhibit991111111.htm",
+   "sha256_raw": "10ab2ad22195d7ce296a071ccd86cf8a5871d38bb53ad6e2dc80f4b2fa3ec3bc",
+   "period_label": "Q3 2026",
+   "extraction": {
+    "cache": "hit",
+    "key": "23619bf43af6c54aaeb901bdb67cf0a38011241fbf00f998df388f4842038207",
+    "model": "deepseek:deepseek-flash"
+   },
+   "claims": [],
+   "accuracy": {
+    "xbrl_checked": 0,
+    "xbrl_match": 0,
+    "xbrl_mismatch": 0,
+    "quote_rejected": 0,
+    "total_claims": 0
+   },
+   "xbrl_period_end": null,
+   "yoy_revenue_pct": null,
+   "gap": {
+    "available": false,
+    "reason": "revenue figure not extracted/verified for this release"
+   },
+   "reaction": {
+    "ok": false,
+    "reason": "no cash data after the release yet",
+    "base_day": null,
+    "target_day": null,
+    "rt_close": null,
+    "rt_pub": null,
+    "rt_preopen": null,
+    "cash_close": null,
+    "cash_open": null,
+    "rt_move": null,
+    "rt_pre_pub": null,
+    "rt_post_pub": null,
+    "cash_gap": null,
+    "residual": null,
+    "priced_in": null,
+    "sign_agrees": null,
+    "pub_minute": null,
+    "preopen_minute": null,
+    "open_minute": null,
+    "path": []
+   }
+  },
+  {
+   "id": "NVDA-0001045810-26-000073",
+   "ticker": "NVDA",
+   "company": "NVIDIA CORP",
+   "pub_utc": "2026-08-26T20:21:19+00:00",
+   "pub_et": "2026-08-26 16:21 ET",
+   "filing_date": "2026-08-26",
+   "accession": "0001045810-26-000073",
+   "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000073/q2fy27pr.htm",
+   "sha256_raw": "f78a17389f0adfcf2d062871b1e8dab50cd3bfe9a2f9e59f690ef6280d93fecf",
+   "period_label": "Second Quarter Fiscal 2027",
+   "extraction": {
+    "cache": "hit",
+    "key": "e84d85eb96a8633750e2944925553f9e85ffc3cc796a3399cc598016633954f2",
+    "model": "deepseek:deepseek-flash"
+   },
+   "claims": [
+    {
+     "id": "c1",
+     "metric": "revenue",
+     "basis": "reported",
+     "value": 96221000000,
+     "unit": "USD",
+     "quote": " | Revenue | $96,221 | $81,615 | $46,743 | 18 | % | 106 | %",
+     "xbrl": {
+      "value": 96221000000.0,
+      "end": "2026-07-26",
+      "start": "2026-04-27",
+      "form": "10-Q",
+      "filed": "2026-08-26",
+      "accn": "0001045810-26-000075",
+      "tag": "Revenues",
+      "yoy_prior": 46743000000.0
+     },
+     "status": "verified",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true,
+      "xbrl": "match"
+     }
+    },
+    {
+     "id": "c2",
+     "metric": "net_income",
+     "basis": "reported",
+     "value": 59688000000,
+     "unit": "USD",
+     "quote": " | Net income | $59,688 | $58,321 | $26,422 | 2 | % | 126 | %",
+     "xbrl": {
+      "value": 59688000000.0,
+      "end": "2026-07-26",
+      "start": "2026-04-27",
+      "form": "10-Q",
+      "filed": "2026-08-26",
+      "accn": "0001045810-26-000075",
+      "tag": "NetIncomeLoss",
+      "yoy_prior": 26422000000.0
+     },
+     "status": "verified",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true,
+      "xbrl": "match"
+     }
+    },
+    {
+     "id": "c3",
+     "metric": "eps_diluted",
+     "basis": "reported",
+     "value": 2.46,
+     "unit": "USD_per_share",
+     "quote": " | GAAP | $ | 2.46 | $ | 2.39 | $ | 1.08 | $ | 4.85 | $ | 1.84 |",
+     "xbrl": {
+      "value": 2.46,
+      "end": "2026-07-26",
+      "start": "2026-04-27",
+      "form": "10-Q",
+      "filed": "2026-08-26",
+      "accn": "0001045810-26-000075",
+      "tag": "EarningsPerShareDiluted",
+      "yoy_prior": 1.08
+     },
+     "status": "verified",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true,
+      "xbrl": "match"
+     }
+    },
+    {
+     "id": "c4",
+     "metric": "operating_income",
+     "basis": "reported",
+     "value": 63734000000,
+     "unit": "USD",
+     "quote": " | Operating income | $63,734 | $53,536 | $28,440 | 19 | % | 124 | %",
+     "xbrl": {
+      "value": 63734000000.0,
+      "end": "2026-07-26",
+      "start": "2026-04-27",
+      "form": "10-Q",
+      "filed": "2026-08-26",
+      "accn": "0001045810-26-000075",
+      "tag": "OperatingIncomeLoss",
+      "yoy_prior": 28440000000.0
+     },
+     "status": "verified",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true,
+      "xbrl": "match"
+     }
+    },
+    {
+     "id": "c5",
+     "metric": "gross_profit",
+     "basis": "reported",
+     "value": 72142000000,
+     "unit": "USD",
+     "quote": " | Gross profit | 72,142 | 33,853 | 133,299 | 60,521 |",
+     "xbrl": {
+      "value": 72142000000.0,
+      "end": "2026-07-26",
+      "start": "2026-04-27",
+      "form": "10-Q",
+      "filed": "2026-08-26",
+      "accn": "0001045810-26-000075",
+      "tag": "GrossProfit",
+      "yoy_prior": 33853000000.0
+     },
+     "status": "verified",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true,
+      "xbrl": "match"
+     }
+    },
+    {
+     "id": "c6",
+     "metric": "gross_margin_pct",
+     "basis": "reported",
+     "value": 75.0,
+     "unit": "percent",
+     "quote": " | Gross margin | 75.0 | % | 74.9 | % | 72.4 | % | 0.1 pts | 2.6 pts",
+     "status": "quote_only",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true
+     }
+    },
+    {
+     "id": "c7",
+     "metric": "guidance_revenue_mid",
+     "basis": "guidance",
+     "value": 108000000000,
+     "unit": "USD",
+     "quote": "Revenue is expected to be $108.0 billion, plus or minus 2%.",
+     "status": "quote_only",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true
+     }
+    },
+    {
+     "id": "c8",
+     "metric": "guidance_tolerance_pct",
+     "basis": "guidance",
+     "value": 2,
+     "unit": "percent",
+     "quote": "Revenue is expected to be $108.0 billion, plus or minus 2%.",
+     "status": "quote_only",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true
+     }
+    },
+    {
+     "id": "c9",
+     "metric": "guidance_gross_margin_pct",
+     "basis": "guidance",
+     "value": 74.0,
+     "unit": "percent",
+     "quote": "GAAP and non-GAAP gross margins are expected to be 74.0%, plus or minus 50 basis points.",
+     "status": "quote_only",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true
+     }
+    }
+   ],
+   "accuracy": {
+    "xbrl_checked": 5,
+    "xbrl_match": 5,
+    "xbrl_mismatch": 0,
+    "quote_rejected": 0,
+    "total_claims": 9
+   },
+   "xbrl_period_end": "2026-07-26",
+   "yoy_revenue_pct": 105.85114348672526,
+   "gap": {
+    "available": true,
+    "basis": "prior-quarter company guidance (NOT analyst consensus)",
+    "actual": 96221000000,
+    "actual_claim": "c1",
+    "guide_low": 89180000000.0,
+    "guide_high": 92820000000.0,
+    "guide_mid": 91000000000,
+    "guide_claims": [
+     "c7",
+     "c8"
+    ],
+    "guide_from_event": "NVDA-0001045810-26-000051",
+    "vs_mid_pct": 5.737362637362642,
+    "position": "above range",
+    "actual_status": "verified"
+   },
+   "reaction": {
+    "ok": true,
+    "reason": null,
+    "base_day": "2026-08-26",
+    "target_day": "2026-08-27",
+    "rt_close": 209.77,
+    "rt_pub": 210.41,
+    "rt_preopen": 223.29,
+    "cash_close": 209.66000366210935,
+    "cash_open": 222.8600006103516,
+    "rt_move": 0.062459682629230726,
+    "rt_pre_pub": 0.0030463158405226723,
+    "rt_post_pub": 0.05941336678870822,
+    "cash_gap": 0.06105658586630782,
+    "residual": -0.0019276006822990918,
+    "priced_in": 1.0229802689261922,
+    "sign_agrees": true,
+    "pub_minute": 21.316666666666666,
+    "preopen_minute": 1045.0,
+    "open_minute": 1050.0,
+    "path": [
+     [
+      0.0,
+      0.0
+     ],
+     [
+      15.0,
+      0.305
+     ],
+     [
+      30.0,
+      -1.32
+     ],
+     [
+      45.0,
+      -1.196
+     ],
+     [
+      60.0,
+      0.253
+     ],
+     [
+      75.0,
+      4.5
+     ],
+     [
+      90.0,
+      3.633
+     ],
+     [
+      105.0,
+      4.529
+     ],
+     [
+      120.0,
+      4.411
+     ],
+     [
+      135.0,
+      4.081
+     ],
+     [
+      150.0,
+      3.928
+     ],
+     [
+      165.0,
+      4.238
+     ],
+     [
+      180.0,
+      4.166
+     ],
+     [
+      195.0,
+      4.042
+     ],
+     [
+      210.0,
+      4.0
+     ],
+     [
+      225.0,
+      4.062
+     ],
+     [
+      240.0,
+      4.672
+     ],
+     [
+      255.0,
+      4.281
+     ],
+     [
+      270.0,
+      4.667
+     ],
+     [
+      285.0,
+      4.4
+     ],
+     [
+      300.0,
+      4.319
+     ],
+     [
+      315.0,
+      4.452
+     ],
+     [
+      330.0,
+      4.8
+     ],
+     [
+      345.0,
+      5.158
+     ],
+     [
+      360.0,
+      5.663
+     ],
+     [
+      375.0,
+      5.625
+     ],
+     [
+      390.0,
+      5.454
+     ],
+     [
+      405.0,
+      5.249
+     ],
+     [
+      420.0,
+      5.349
+     ],
+     [
+      435.0,
+      5.33
+     ],
+     [
+      450.0,
+      5.606
+     ],
+     [
+      465.0,
+      5.373
+     ],
+     [
+      480.0,
+      5.578
+     ],
+     [
+      495.0,
+      5.525
+     ],
+     [
+      510.0,
+      5.477
+     ],
+     [
+      525.0,
+      5.411
+     ],
+     [
+      540.0,
+      5.425
+     ],
+     [
+      555.0,
+      5.353
+     ],
+     [
+      570.0,
+      5.33
+     ],
+     [
+      585.0,
+      5.091
+     ],
+     [
+      600.0,
+      5.435
+     ],
+     [
+      615.0,
+      4.934
+     ],
+     [
+      630.0,
+      4.615
+     ],
+     [
+      645.0,
+      4.834
+     ],
+     [
+      660.0,
+      5.225
+     ],
+     [
+      675.0,
+      5.601
+     ],
+     [
+      690.0,
+      5.868
+     ],
+     [
+      705.0,
+      5.62
+     ],
+     [
+      720.0,
+      5.906
+     ],
+     [
+      735.0,
+      6.836
+     ],
+     [
+      750.0,
+      7.651
+     ],
+     [
+      765.0,
+      7.425
+     ],
+     [
+      780.0,
+      7.975
+     ],
+     [
+      795.0,
+      7.265
+     ],
+     [
+      810.0,
+      7.135
+     ],
+     [
+      825.0,
+      7.284
+     ],
+     [
+      840.0,
+      7.065
+     ],
+     [
+      855.0,
+      7.07
+     ],
+     [
+      870.0,
+      6.788
+     ],
+     [
+      885.0,
+      7.098
+     ],
+     [
+      900.0,
+      6.664
+     ],
+     [
+      915.0,
+      6.493
+     ],
+     [
+      930.0,
+      5.997
+     ],
+     [
+      945.0,
+      5.977
+     ],
+     [
+      960.0,
+      6.035
+     ],
+     [
+      975.0,
+      5.968
+     ],
+     [
+      990.0,
+      6.426
+     ],
+     [
+      1005.0,
+      6.097
+     ],
+     [
+      1020.0,
+      5.904
+     ],
+     [
+      1035.0,
+      6.445
+     ]
+    ]
+   }
+  },
+  {
+   "id": "AMD-0000002488-26-000121",
+   "ticker": "AMD",
+   "company": "ADVANCED MICRO DEVICES INC",
+   "pub_utc": "2026-08-04T20:16:24+00:00",
+   "pub_et": "2026-08-04 16:16 ET",
+   "filing_date": "2026-08-04",
+   "accession": "0000002488-26-000121",
+   "url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000121/q22026991.htm",
+   "sha256_raw": "23b50c6e492d957b4c2f7008a8c6918ba010383eeb4a3280c3cac7ffae71739d",
+   "period_label": "Second Quarter 2026",
+   "extraction": {
+    "cache": "hit",
+    "key": "12960f4c27a672702c5cbd5050786bb7b9833e20e33858749414ef06ad7553c7",
+    "model": "deepseek:deepseek-flash"
+   },
+   "claims": [
+    {
+     "id": "c1",
+     "metric": "revenue",
+     "basis": "reported",
+     "value": 11536000000,
+     "unit": "USD",
+     "quote": "Revenue ($M) | $11,536 | $7,685 | Up 50% | $10,253 | Up 13%",
+     "xbrl": {
+      "value": 11536000000.0,
+      "end": "2026-06-27",
+      "start": "2026-03-29",
+      "form": "10-Q",
+      "filed": "2026-08-05",
+      "accn": "0000002488-26-000123",
+      "tag": "RevenueFromContractWithCustomerExcludingAssessedTax",
+      "yoy_prior": 7685000000.0
+     },
+     "status": "verified",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true,
+      "xbrl": "match"
+     }
+    },
+    {
+     "id": "c2",
+     "metric": "net_income",
+     "basis": "reported",
+     "value": 2297000000,
+     "unit": "USD",
+     "quote": "Net income ($M) | $2,297 | $872 | Up 163% | $1,383 | Up 66%",
+     "xbrl": {
+      "value": 2297000000.0,
+      "end": "2026-06-27",
+      "start": "2026-03-29",
+      "form": "10-Q",
+      "filed": "2026-08-05",
+      "accn": "0000002488-26-000123",
+      "tag": "NetIncomeLoss",
+      "yoy_prior": 872000000.0
+     },
+     "status": "verified",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true,
+      "xbrl": "match"
+     }
+    },
+    {
+     "id": "c3",
+     "metric": "eps_diluted",
+     "basis": "reported",
+     "value": 1.38,
+     "unit": "USD_per_share",
+     "quote": "Diluted earnings per share | $1.38 | $0.54 | Up 156% | $0.84 | Up 64%",
+     "xbrl": {
+      "value": 1.38,
+      "end": "2026-06-27",
+      "start": "2026-03-29",
+      "form": "10-Q",
+      "filed": "2026-08-05",
+      "accn": "0000002488-26-000123",
+      "tag": "EarningsPerShareDiluted",
+      "yoy_prior": 0.54
+     },
+     "status": "verified",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true,
+      "xbrl": "match"
+     }
+    },
+    {
+     "id": "c4",
+     "metric": "operating_income",
+     "basis": "reported",
+     "value": 1990000000,
+     "unit": "USD",
+     "quote": "Operating income ($M) | $1,990 | $(134) | Up 1585% | $1,476 | Up 35%",
+     "xbrl": {
+      "value": 1990000000.0,
+      "end": "2026-06-27",
+      "start": "2026-03-29",
+      "form": "10-Q",
+      "filed": "2026-08-05",
+      "accn": "0000002488-26-000123",
+      "tag": "OperatingIncomeLoss",
+      "yoy_prior": -134000000.0
+     },
+     "status": "verified",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true,
+      "xbrl": "match"
+     }
+    },
+    {
+     "id": "c5",
+     "metric": "gross_profit",
+     "basis": "reported",
+     "value": 6203000000,
+     "unit": "USD",
+     "quote": "Gross profit ($M) | $6,203 | $3,059 | Up 103% | $5,416 | Up 15%",
+     "xbrl": {
+      "value": 6203000000.0,
+      "end": "2026-06-27",
+      "start": "2026-03-29",
+      "form": "10-Q",
+      "filed": "2026-08-05",
+      "accn": "0000002488-26-000123",
+      "tag": "GrossProfit",
+      "yoy_prior": 3059000000.0
+     },
+     "status": "verified",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true,
+      "xbrl": "match"
+     }
+    },
+    {
+     "id": "c6",
+     "metric": "gross_margin_pct",
+     "basis": "reported",
+     "value": 54,
+     "unit": "percent",
+     "quote": "Gross margin | 54% | 40% | Up 14 ppts | 53% | Up 1 ppt",
+     "status": "quote_only",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true
+     }
+    },
+    {
+     "id": "c7",
+     "metric": "guidance_revenue_mid",
+     "basis": "guidance",
+     "value": 13000000000,
+     "unit": "USD",
+     "quote": "For the third quarter of 2026, AMD expects revenue to be approximately $13 billion, plus or minus $300 million.",
+     "status": "quote_only",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true
+     }
+    },
+    {
+     "id": "c8",
+     "metric": "guidance_gross_margin_pct",
+     "basis": "guidance",
+     "value": 56,
+     "unit": "percent",
+     "quote": "Non-GAAP gross margin is expected to be approximately 56%.",
+     "status": "quote_only",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true
+     }
+    }
+   ],
+   "accuracy": {
+    "xbrl_checked": 5,
+    "xbrl_match": 5,
+    "xbrl_mismatch": 0,
+    "quote_rejected": 0,
+    "total_claims": 8
+   },
+   "xbrl_period_end": "2026-06-27",
+   "yoy_revenue_pct": 50.11060507482108,
+   "gap": {
+    "available": false,
+    "reason": "no usable prior-quarter revenue guidance on file"
+   },
+   "reaction": {
+    "ok": true,
+    "reason": null,
+    "base_day": "2026-08-04",
+    "target_day": "2026-08-05",
+    "rt_close": 525.97,
+    "rt_pub": 524.803,
+    "rt_preopen": 478.686,
+    "cash_close": 518.5800170898438,
+    "cash_open": 484.5,
+    "rt_move": -0.09419932679411294,
+    "rt_pre_pub": -0.0022212228137096094,
+    "rt_post_pub": -0.0919781039804033,
+    "cash_gap": -0.06797690861685718,
+    "residual": 0.01207258123426924,
+    "priced_in": 1.3857547910137389,
+    "sign_agrees": true,
+    "pub_minute": 16.4,
+    "preopen_minute": 1045.0,
+    "open_minute": 1050.0,
+    "path": [
+     [
+      0.0,
+      0.0
+     ],
+     [
+      15.0,
+      -0.222
+     ],
+     [
+      30.0,
+      -7.985
+     ],
+     [
+      45.0,
+      -8.691
+     ],
+     [
+      60.0,
+      -8.824
+     ],
+     [
+      75.0,
+      -10.204
+     ],
+     [
+      90.0,
+      -9.729
+     ],
+     [
+      105.0,
+      -9.691
+     ],
+     [
+      120.0,
+      -10.261
+     ],
+     [
+      135.0,
+      -9.879
+     ],
+     [
+      150.0,
+      -9.881
+     ],
+     [
+      165.0,
+      -10.206
+     ],
+     [
+      180.0,
+      -10.451
+     ],
+     [
+      195.0,
+      -10.594
+     ],
+     [
+      210.0,
+      -10.476
+     ],
+     [
+      225.0,
+      -10.354
+     ],
+     [
+      240.0,
+      -10.073
+     ],
+     [
+      255.0,
+      -9.035
+     ],
+     [
+      270.0,
+      -9.137
+     ],
+     [
+      285.0,
+      -9.542
+     ],
+     [
+      300.0,
+      -9.442
+     ],
+     [
+      315.0,
+      -9.923
+     ],
+     [
+      330.0,
+      -9.818
+     ],
+     [
+      345.0,
+      -9.879
+     ],
+     [
+      360.0,
+      -9.573
+     ],
+     [
+      375.0,
+      -9.784
+     ],
+     [
+      390.0,
+      -9.921
+     ],
+     [
+      405.0,
+      -9.839
+     ],
+     [
+      420.0,
+      -9.848
+     ],
+     [
+      435.0,
+      -9.679
+     ],
+     [
+      450.0,
+      -9.501
+     ],
+     [
+      465.0,
+      -9.149
+     ],
+     [
+      480.0,
+      -9.246
+     ],
+     [
+      495.0,
+      -9.248
+     ],
+     [
+      510.0,
+      -9.345
+     ],
+     [
+      525.0,
+      -9.065
+     ],
+     [
+      540.0,
+      -8.993
+     ],
+     [
+      555.0,
+      -8.402
+     ],
+     [
+      570.0,
+      -7.622
+     ],
+     [
+      585.0,
+      -7.826
+     ],
+     [
+      600.0,
+      -7.923
+     ],
+     [
+      615.0,
+      -8.358
+     ],
+     [
+      630.0,
+      -8.643
+     ],
+     [
+      645.0,
+      -8.734
+     ],
+     [
+      660.0,
+      -8.634
+     ],
+     [
+      675.0,
+      -8.738
+     ],
+     [
+      690.0,
+      -9.227
+     ],
+     [
+      705.0,
+      -9.35
+     ],
+     [
+      720.0,
+      -9.029
+     ],
+     [
+      735.0,
+      -8.643
+     ],
+     [
+      750.0,
+      -9.428
+     ],
+     [
+      765.0,
+      -9.449
+     ],
+     [
+      780.0,
+      -9.381
+     ],
+     [
+      795.0,
+      -9.706
+     ],
+     [
+      810.0,
+      -9.974
+     ],
+     [
+      825.0,
+      -9.691
+     ],
+     [
+      840.0,
+      -9.693
+     ],
+     [
+      855.0,
+      -10.023
+     ],
+     [
+      870.0,
+      -10.092
+     ],
+     [
+      885.0,
+      -9.976
+     ],
+     [
+      900.0,
+      -10.453
+     ],
+     [
+      915.0,
+      -9.788
+     ],
+     [
+      930.0,
+      -9.687
+     ],
+     [
+      945.0,
+      -9.172
+     ],
+     [
+      960.0,
+      -9.947
+     ],
+     [
+      975.0,
+      -10.084
+     ],
+     [
+      990.0,
+      -9.637
+     ],
+     [
+      1005.0,
+      -9.073
+     ],
+     [
+      1020.0,
+      -8.986
+     ],
+     [
+      1035.0,
+      -8.99
+     ]
+    ]
+   }
+  },
+  {
+   "id": "AAPL-0000320193-26-000018",
+   "ticker": "AAPL",
+   "company": "Apple Inc.",
+   "pub_utc": "2026-07-31T00:30:28+00:00",
+   "pub_et": "2026-07-30 20:30 ET",
+   "filing_date": "2026-07-30",
+   "accession": "0000320193-26-000018",
+   "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000018/a8-kex991q3202606272026.htm",
+   "sha256_raw": "db07bad190d2812c65ff25c4a1fecd31114e4b692ceb6f33122a19bf5ead1db0",
+   "period_label": "fiscal 2026 third quarter ended June 27, 2026",
+   "extraction": {
+    "cache": "hit",
+    "key": "c943a6189c0882cd3d022b50b738a5d8790e898a148de64ab55984bfe1e1b0d6",
+    "model": "deepseek:deepseek-flash"
+   },
+   "claims": [
+    {
+     "id": "c1",
+     "metric": "revenue",
+     "basis": "reported",
+     "value": 109417000000,
+     "unit": "USD",
+     "quote": "Total net sales (1)\n | 109,417 | 94,036 | 364,357 | 313,695 |",
+     "xbrl": {
+      "value": 109417000000.0,
+      "end": "2026-06-27",
+      "start": "2026-03-29",
+      "form": "10-Q",
+      "filed": "2026-07-31",
+      "accn": "0000320193-26-000020",
+      "tag": "RevenueFromContractWithCustomerExcludingAssessedTax",
+      "yoy_prior": 94036000000.0
+     },
+     "status": "verified",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true,
+      "xbrl": "match"
+     }
+    },
+    {
+     "id": "c2",
+     "metric": "net_income",
+     "basis": "reported",
+     "value": 29789000000,
+     "unit": "USD",
+     "quote": "Net income\n | $ | 29,789 | $ | 23,434 | $ | 101,464 | $ | 84,544 |",
+     "xbrl": {
+      "value": 29789000000.0,
+      "end": "2026-06-27",
+      "start": "2026-03-29",
+      "form": "10-Q",
+      "filed": "2026-07-31",
+      "accn": "0000320193-26-000020",
+      "tag": "NetIncomeLoss",
+      "yoy_prior": 23434000000.0
+     },
+     "status": "verified",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true,
+      "xbrl": "match"
+     }
+    },
+    {
+     "id": "c3",
+     "metric": "eps_diluted",
+     "basis": "reported",
+     "value": 2.02,
+     "unit": "USD_per_share",
+     "quote": "Diluted earnings per share was $2.02",
+     "xbrl": {
+      "value": 2.02,
+      "end": "2026-06-27",
+      "start": "2026-03-29",
+      "form": "10-Q",
+      "filed": "2026-07-31",
+      "accn": "0000320193-26-000020",
+      "tag": "EarningsPerShareDiluted",
+      "yoy_prior": 1.57
+     },
+     "status": "verified",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true,
+      "xbrl": "match"
+     }
+    },
+    {
+     "id": "c4",
+     "metric": "operating_income",
+     "basis": "reported",
+     "value": 35695000000,
+     "unit": "USD",
+     "quote": "Operating income\n | 35,695 | 28,202 | 122,432 | 100,623 |",
+     "xbrl": {
+      "value": 35695000000.0,
+      "end": "2026-06-27",
+      "start": "2026-03-29",
+      "form": "10-Q",
+      "filed": "2026-07-31",
+      "accn": "0000320193-26-000020",
+      "tag": "OperatingIncomeLoss",
+      "yoy_prior": 28202000000.0
+     },
+     "status": "verified",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true,
+      "xbrl": "match"
+     }
+    },
+    {
+     "id": "c5",
+     "metric": "gross_profit",
+     "basis": "reported",
+     "value": 54770000000,
+     "unit": "USD",
+     "quote": "Gross margin | 54,770 | 43,718 | 178,782 | 146,860 |",
+     "xbrl": {
+      "value": 54770000000.0,
+      "end": "2026-06-27",
+      "start": "2026-03-29",
+      "form": "10-Q",
+      "filed": "2026-07-31",
+      "accn": "0000320193-26-000020",
+      "tag": "GrossProfit",
+      "yoy_prior": 43718000000.0
+     },
+     "status": "verified",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true,
+      "xbrl": "match"
+     }
+    },
+    {
+     "id": "c6",
+     "metric": "gross_margin_pct",
+     "basis": "reported",
+     "value": 50.1,
+     "unit": "percent",
+     "quote": "Company gross margin was 50.1 percent",
+     "status": "quote_only",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true
+     }
+    }
+   ],
+   "accuracy": {
+    "xbrl_checked": 5,
+    "xbrl_match": 5,
+    "xbrl_mismatch": 0,
+    "quote_rejected": 0,
+    "total_claims": 6
+   },
+   "xbrl_period_end": "2026-06-27",
+   "yoy_revenue_pct": 16.356501765281383,
+   "gap": {
+    "available": false,
+    "reason": "no usable prior-quarter revenue guidance on file"
+   },
+   "reaction": {
+    "ok": true,
+    "reason": null,
+    "base_day": "2026-07-30",
+    "target_day": "2026-07-31",
+    "rt_close": 333.08,
+    "rt_pub": 313.84,
+    "rt_preopen": 307.1,
+    "cash_close": 333.42999267578125,
+    "cash_open": 304.8099975585937,
+    "rt_move": -0.08120927392084179,
+    "rt_pre_pub": -0.059499399466321524,
+    "rt_post_pub": -0.02170987445452029,
+    "cash_gap": -0.08974430264221185,
+    "residual": -0.0074848037831196515,
+    "priced_in": 0.9048961497266619,
+    "sign_agrees": true,
+    "pub_minute": 270.46666666666664,
+    "preopen_minute": 1045.0,
+    "open_minute": 1050.0,
+    "path": [
+     [
+      0.0,
+      0.0
+     ],
+     [
+      15.0,
+      0.42
+     ],
+     [
+      30.0,
+      0.685
+     ],
+     [
+      45.0,
+      -3.858
+     ],
+     [
+      60.0,
+      -4.47
+     ],
+     [
+      75.0,
+      -4.224
+     ],
+     [
+      90.0,
+      -7.73
+     ],
+     [
+      105.0,
+      -6.932
+     ],
+     [
+      120.0,
+      -6.473
+     ],
+     [
+      135.0,
+      -6.626
+     ],
+     [
+      150.0,
+      -6.41
+     ],
+     [
+      165.0,
+      -5.796
+     ],
+     [
+      180.0,
+      -5.96
+     ],
+     [
+      195.0,
+      -5.785
+     ],
+     [
+      210.0,
+      -5.581
+     ],
+     [
+      225.0,
+      -6.269
+     ],
+     [
+      240.0,
+      -6.209
+     ],
+     [
+      255.0,
+      -5.911
+     ],
+     [
+      270.0,
+      -5.776
+     ],
+     [
+      285.0,
+      -5.698
+     ],
+     [
+      300.0,
+      -5.905
+     ],
+     [
+      315.0,
+      -6.005
+     ],
+     [
+      330.0,
+      -5.761
+     ],
+     [
+      345.0,
+      -5.578
+     ],
+     [
+      360.0,
+      -5.56
+     ],
+     [
+      375.0,
+      -5.404
+     ],
+     [
+      390.0,
+      -5.638
+     ],
+     [
+      405.0,
+      -5.881
+     ],
+     [
+      420.0,
+      -5.779
+     ],
+     [
+      435.0,
+      -5.809
+     ],
+     [
+      450.0,
+      -5.719
+     ],
+     [
+      465.0,
+      -5.734
+     ],
+     [
+      480.0,
+      -5.734
+     ],
+     [
+      495.0,
+      -5.815
+     ],
+     [
+      510.0,
+      -5.945
+     ],
+     [
+      525.0,
+      -6.02
+     ],
+     [
+      540.0,
+      -5.908
+     ],
+     [
+      555.0,
+      -5.996
+     ],
+     [
+      570.0,
+      -6.239
+     ],
+     [
+      585.0,
+      -6.227
+     ],
+     [
+      600.0,
+      -6.326
+     ],
+     [
+      615.0,
+      -6.212
+     ],
+     [
+      630.0,
+      -6.344
+     ],
+     [
+      645.0,
+      -6.146
+     ],
+     [
+      660.0,
+      -6.26
+     ],
+     [
+      675.0,
+      -6.38
+     ],
+     [
+      690.0,
+      -6.713
+     ],
+     [
+      705.0,
+      -6.53
+     ],
+     [
+      720.0,
+      -6.623
+     ],
+     [
+      735.0,
+      -7.35
+     ],
+     [
+      750.0,
+      -7.38
+     ],
+     [
+      765.0,
+      -6.812
+     ],
+     [
+      780.0,
+      -7.079
+     ],
+     [
+      795.0,
+      -6.809
+     ],
+     [
+      810.0,
+      -6.998
+     ],
+     [
+      825.0,
+      -7.007
+     ],
+     [
+      840.0,
+      -7.272
+     ],
+     [
+      855.0,
+      -7.073
+     ],
+     [
+      870.0,
+      -6.968
+     ],
+     [
+      885.0,
+      -7.293
+     ],
+     [
+      900.0,
+      -7.458
+     ],
+     [
+      915.0,
+      -7.827
+     ],
+     [
+      930.0,
+      -7.683
+     ],
+     [
+      945.0,
+      -7.473
+     ],
+     [
+      960.0,
+      -7.506
+     ],
+     [
+      975.0,
+      -7.791
+     ],
+     [
+      990.0,
+      -7.671
+     ],
+     [
+      1005.0,
+      -7.761
+     ],
+     [
+      1020.0,
+      -7.425
+     ],
+     [
+      1035.0,
+      -7.8
+     ]
+    ]
+   }
+  },
+  {
+   "id": "AMZN-0001018724-26-000024",
+   "ticker": "AMZN",
+   "company": "AMAZON COM INC",
+   "pub_utc": "2026-07-31T00:06:23+00:00",
+   "pub_et": "2026-07-30 20:06 ET",
+   "filing_date": "2026-07-30",
+   "accession": "0001018724-26-000024",
+   "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000024/amzn-20260630xex991.htm",
+   "sha256_raw": "4a85cccf2dacf99eeb470edd2bafd7fdf65a630948169520d3dd5586623ca4e6",
+   "period_label": "Second quarter ended June 30, 2026",
+   "extraction": {
+    "cache": "hit",
+    "key": "cf7eef2945dbb43cf9b84cb34e1e8b6c8cd4583cbf5a5497f7a95eecce068ca1",
+    "model": "deepseek:deepseek-flash"
+   },
+   "claims": [
+    {
+     "id": "c1",
+     "metric": "revenue",
+     "basis": "reported",
+     "value": 200606000000,
+     "unit": "USD",
+     "quote": " | Total net sales | 167,702 | 200,606 | 323,369 | 382,125 |",
+     "xbrl": {
+      "value": 200606000000.0,
+      "end": "2026-06-30",
+      "start": "2026-04-01",
+      "form": "10-Q",
+      "filed": "2026-07-31",
+      "accn": "0001018724-26-000026",
+      "tag": "RevenueFromContractWithCustomerExcludingAssessedTax",
+      "yoy_prior": 167702000000.0
+     },
+     "status": "verified",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true,
+      "xbrl": "match"
+     }
+    },
+    {
+     "id": "c2",
+     "metric": "net_income",
+     "basis": "reported",
+     "value": 62647000000,
+     "unit": "USD",
+     "quote": " | Net income | $ | 18,164 | $ | 62,647 | $ | 35,291 | $ | 92,902 |",
+     "xbrl": {
+      "value": 62647000000.0,
+      "end": "2026-06-30",
+      "start": "2026-04-01",
+      "form": "10-Q",
+      "filed": "2026-07-31",
+      "accn": "0001018724-26-000026",
+      "tag": "NetIncomeLoss",
+      "yoy_prior": 18164000000.0
+     },
+     "status": "verified",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true,
+      "xbrl": "match"
+     }
+    },
+    {
+     "id": "c3",
+     "metric": "eps_diluted",
+     "basis": "reported",
+     "value": 5.75,
+     "unit": "USD_per_share",
+     "quote": " | Diluted earnings per share | $ | 1.68 | $ | 5.75 | $ | 3.27 | $ | 8.53 |",
+     "xbrl": {
+      "value": 5.75,
+      "end": "2026-06-30",
+      "start": "2026-04-01",
+      "form": "10-Q",
+      "filed": "2026-07-31",
+      "accn": "0001018724-26-000026",
+      "tag": "EarningsPerShareDiluted",
+      "yoy_prior": 1.68
+     },
+     "status": "verified",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true,
+      "xbrl": "match"
+     }
+    },
+    {
+     "id": "c4",
+     "metric": "operating_income",
+     "basis": "reported",
+     "value": 27461000000,
+     "unit": "USD",
+     "quote": " | Operating income | 19,171 | 27,461 | 37,576 | 51,313 |",
+     "xbrl": {
+      "value": 27461000000.0,
+      "end": "2026-06-30",
+      "start": "2026-04-01",
+      "form": "10-Q",
+      "filed": "2026-07-31",
+      "accn": "0001018724-26-000026",
+      "tag": "OperatingIncomeLoss",
+      "yoy_prior": 19171000000.0
+     },
+     "status": "verified",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true,
+      "xbrl": "match"
+     }
+    },
+    {
+     "id": "c5",
+     "metric": "guidance_revenue_low",
+     "basis": "guidance",
+     "value": 197000000000,
+     "unit": "USD",
+     "quote": "Net sales are expected to be between $197.0 billion and $202.0 billion, or to grow between 9% and 12% compared with third quarter 2025.",
+     "status": "quote_only",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true
+     }
+    },
+    {
+     "id": "c6",
+     "metric": "guidance_revenue_high",
+     "basis": "guidance",
+     "value": 202000000000,
+     "unit": "USD",
+     "quote": "Net sales are expected to be between $197.0 billion and $202.0 billion, or to grow between 9% and 12% compared with third quarter 2025.",
+     "status": "quote_only",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true
+     }
+    }
+   ],
+   "accuracy": {
+    "xbrl_checked": 4,
+    "xbrl_match": 4,
+    "xbrl_mismatch": 0,
+    "quote_rejected": 0,
+    "total_claims": 6
+   },
+   "xbrl_period_end": "2026-06-30",
+   "yoy_revenue_pct": 19.620517346245126,
+   "gap": {
+    "available": true,
+    "basis": "prior-quarter company guidance (NOT analyst consensus)",
+    "actual": 200606000000,
+    "actual_claim": "c1",
+    "guide_low": 194000000000,
+    "guide_high": 199000000000,
+    "guide_mid": 196500000000.0,
+    "guide_claims": [
+     "c5",
+     "c6"
+    ],
+    "guide_from_event": "AMZN-0001018724-26-000012",
+    "vs_mid_pct": 2.0895674300254408,
+    "position": "above range",
+    "actual_status": "verified"
+   },
+   "reaction": {
+    "ok": true,
+    "reason": null,
+    "base_day": "2026-07-30",
+    "target_day": "2026-07-31",
+    "rt_close": 235.77,
+    "rt_pub": 258.07,
+    "rt_preopen": 262.96,
+    "cash_close": 235.5,
+    "cash_open": 265.0,
+    "rt_move": 0.10914517580977053,
+    "rt_pre_pub": 0.09037411240485543,
+    "rt_post_pub": 0.018771063404915276,
+    "cash_gap": 0.11801891252974975,
+    "residual": 0.007727896630258341,
+    "priced_in": 0.9248108923411545,
+    "sign_agrees": true,
+    "pub_minute": 246.38333333333333,
+    "preopen_minute": 1045.0,
+    "open_minute": 1050.0,
+    "path": [
+     [
+      0.0,
+      0.0
+     ],
+     [
+      15.0,
+      6.88
+     ],
+     [
+      30.0,
+      8.368
+     ],
+     [
+      45.0,
+      7.397
+     ],
+     [
+      60.0,
+      7.821
+     ],
+     [
+      75.0,
+      8.691
+     ],
+     [
+      90.0,
+      8.195
+     ],
+     [
+      105.0,
+      9.726
+     ],
+     [
+      120.0,
+      9.026
+     ],
+     [
+      135.0,
+      9.539
+     ],
+     [
+      150.0,
+      9.42
+     ],
+     [
+      165.0,
+      8.824
+     ],
+     [
+      180.0,
+      9.009
+     ],
+     [
+      195.0,
+      8.678
+     ],
+     [
+      210.0,
+      9.085
+     ],
+     [
+      225.0,
+      9.081
+     ],
+     [
+      240.0,
+      9.458
+     ],
+     [
+      255.0,
+      9.234
+     ],
+     [
+      270.0,
+      9.221
+     ],
+     [
+      285.0,
+      9.06
+     ],
+     [
+      300.0,
+      9.051
+     ],
+     [
+      315.0,
+      8.788
+     ],
+     [
+      330.0,
+      8.839
+     ],
+     [
+      345.0,
+      9.119
+     ],
+     [
+      360.0,
+      9.128
+     ],
+     [
+      375.0,
+      9.293
+     ],
+     [
+      390.0,
+      9.314
+     ],
+     [
+      405.0,
+      9.781
+     ],
+     [
+      420.0,
+      10.76
+     ],
+     [
+      435.0,
+      10.315
+     ],
+     [
+      450.0,
+      10.218
+     ],
+     [
+      465.0,
+      10.273
+     ],
+     [
+      480.0,
+      9.84
+     ],
+     [
+      495.0,
+      10.056
+     ],
+     [
+      510.0,
+      10.218
+     ],
+     [
+      525.0,
+      10.107
+     ],
+     [
+      540.0,
+      10.061
+     ],
+     [
+      555.0,
+      10.048
+     ],
+     [
+      570.0,
+      10.022
+     ],
+     [
+      585.0,
+      9.938
+     ],
+     [
+      600.0,
+      10.391
+     ],
+     [
+      615.0,
+      10.196
+     ],
+     [
+      630.0,
+      9.963
+     ],
+     [
+      645.0,
+      9.933
+     ],
+     [
+      660.0,
+      10.022
+     ],
+     [
+      675.0,
+      10.15
+     ],
+     [
+      690.0,
+      10.391
+     ],
+     [
+      705.0,
+      10.328
+     ],
+     [
+      720.0,
+      10.701
+     ],
+     [
+      735.0,
+      11.969
+     ],
+     [
+      750.0,
+      12.05
+     ],
+     [
+      765.0,
+      11.918
+     ],
+     [
+      780.0,
+      11.842
+     ],
+     [
+      795.0,
+      12.012
+     ],
+     [
+      810.0,
+      12.186
+     ],
+     [
+      825.0,
+      11.969
+     ],
+     [
+      840.0,
+      12.152
+     ],
+     [
+      855.0,
+      13.038
+     ],
+     [
+      870.0,
+      12.606
+     ],
+     [
+      885.0,
+      12.826
+     ],
+     [
+      900.0,
+      12.207
+     ],
+     [
+      915.0,
+      11.1
+     ],
+     [
+      930.0,
+      11.354
+     ],
+     [
+      945.0,
+      11.469
+     ],
+     [
+      960.0,
+      11.596
+     ],
+     [
+      975.0,
+      10.71
+     ],
+     [
+      990.0,
+      10.362
+     ],
+     [
+      1005.0,
+      10.277
+     ],
+     [
+      1020.0,
+      10.811
+     ],
+     [
+      1035.0,
+      11.532
+     ]
+    ]
+   }
+  },
+  {
+   "id": "META-0001628280-26-050596",
+   "ticker": "META",
+   "company": "Meta Platforms, Inc.",
+   "pub_utc": "2026-07-30T00:03:23+00:00",
+   "pub_et": "2026-07-29 20:03 ET",
+   "filing_date": "2026-07-29",
+   "accession": "0001628280-26-050596",
+   "url": "https://www.sec.gov/Archives/edgar/data/1326801/000162828026050596/meta-06302026xexhibit991.htm",
+   "sha256_raw": "84a5e15a86692207dac3a65b959ec0af2f13b177db3c3bc8b881584d3c538f0f",
+   "period_label": "Second Quarter 2026",
+   "extraction": {
+    "cache": "hit",
+    "key": "5f8048edc0a8893c26e98bf3ea2fe01973f022adadec4ec4aeb25e095755e7df",
+    "model": "deepseek:deepseek-flash"
+   },
+   "claims": [
+    {
+     "id": "c1",
+     "metric": "revenue",
+     "basis": "reported",
+     "value": 60801000000,
+     "unit": "USD",
+     "quote": "Revenue | $ | 60,801 | $ | 47,516 | 28 | % |",
+     "xbrl": {
+      "value": 60801000000.0,
+      "end": "2026-06-30",
+      "start": "2026-04-01",
+      "form": "10-Q",
+      "filed": "2026-07-30",
+      "accn": "0001628280-26-050705",
+      "tag": "RevenueFromContractWithCustomerExcludingAssessedTax",
+      "yoy_prior": 47516000000.0
+     },
+     "status": "verified",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true,
+      "xbrl": "match"
+     }
+    },
+    {
+     "id": "c2",
+     "metric": "net_income",
+     "basis": "reported",
+     "value": 15848000000,
+     "unit": "USD",
+     "quote": "Net income | $ | 15,848 | $ | 18,337 | (14) | % |",
+     "xbrl": {
+      "value": 15848000000.0,
+      "end": "2026-06-30",
+      "start": "2026-04-01",
+      "form": "10-Q",
+      "filed": "2026-07-30",
+      "accn": "0001628280-26-050705",
+      "tag": "NetIncomeLoss",
+      "yoy_prior": 18337000000.0
+     },
+     "status": "verified",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true,
+      "xbrl": "match"
+     }
+    },
+    {
+     "id": "c3",
+     "metric": "eps_diluted",
+     "basis": "reported",
+     "value": 6.18,
+     "unit": "USD_per_share",
+     "quote": "Diluted earnings per share (EPS) | $ | 6.18 | $ | 7.14 | (13) | % |",
+     "xbrl": {
+      "value": 6.18,
+      "end": "2026-06-30",
+      "start": "2026-04-01",
+      "form": "10-Q",
+      "filed": "2026-07-30",
+      "accn": "0001628280-26-050705",
+      "tag": "EarningsPerShareDiluted",
+      "yoy_prior": 7.14
+     },
+     "status": "verified",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true,
+      "xbrl": "match"
+     }
+    },
+    {
+     "id": "c4",
+     "metric": "operating_income",
+     "basis": "reported",
+     "value": 18775000000,
+     "unit": "USD",
+     "quote": "Income from operations | $ | 18,775 | $ | 20,441 | (8) | % |",
+     "xbrl": {
+      "value": 18775000000.0,
+      "end": "2026-06-30",
+      "start": "2026-04-01",
+      "form": "10-Q",
+      "filed": "2026-07-30",
+      "accn": "0001628280-26-050705",
+      "tag": "OperatingIncomeLoss",
+      "yoy_prior": 20441000000.0
+     },
+     "status": "verified",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true,
+      "xbrl": "match"
+     }
+    },
+    {
+     "id": "c5",
+     "metric": "guidance_revenue_low",
+     "basis": "guidance",
+     "value": 61000000000,
+     "unit": "USD",
+     "quote": "We expect third quarter 2026 total revenue to be in the range of $61-64 billion.",
+     "status": "quote_only",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true
+     }
+    },
+    {
+     "id": "c6",
+     "metric": "guidance_revenue_high",
+     "basis": "guidance",
+     "value": 64000000000,
+     "unit": "USD",
+     "quote": "We expect third quarter 2026 total revenue to be in the range of $61-64 billion.",
+     "status": "quote_only",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true
+     }
+    }
+   ],
+   "accuracy": {
+    "xbrl_checked": 4,
+    "xbrl_match": 4,
+    "xbrl_mismatch": 0,
+    "quote_rejected": 0,
+    "total_claims": 6
+   },
+   "xbrl_period_end": "2026-06-30",
+   "yoy_revenue_pct": 27.959003283104632,
+   "gap": {
+    "available": true,
+    "basis": "prior-quarter company guidance (NOT analyst consensus)",
+    "actual": 60801000000,
+    "actual_claim": "c1",
+    "guide_low": 58000000000,
+    "guide_high": 61000000000,
+    "guide_mid": 59500000000.0,
+    "guide_claims": [
+     "c5",
+     "c6"
+    ],
+    "guide_from_event": "META-0001628280-26-028364",
+    "vs_mid_pct": 2.1865546218487353,
+    "position": "within range",
+    "actual_status": "verified"
+   },
+   "reaction": {
+    "ok": true,
+    "reason": null,
+    "base_day": "2026-07-29",
+    "target_day": "2026-07-30",
+    "rt_close": 587.4,
+    "rt_pub": 542.11,
+    "rt_preopen": 533.83,
+    "cash_close": 585.6099853515625,
+    "cash_open": 526.0,
+    "rt_move": -0.09562858254902425,
+    "rt_pre_pub": -0.0802370858873302,
+    "rt_post_pub": -0.01539149666169397,
+    "cash_gap": -0.10735280125234085,
+    "residual": -0.014776223477785596,
+    "priced_in": 0.8907879574026396,
+    "sign_agrees": true,
+    "pub_minute": 243.38333333333333,
+    "preopen_minute": 1045.0,
+    "open_minute": 1050.0,
+    "path": [
+     [
+      0.0,
+      0.0
+     ],
+     [
+      15.0,
+      -4.326
+     ],
+     [
+      30.0,
+      -6.222
+     ],
+     [
+      45.0,
+      -6.365
+     ],
+     [
+      60.0,
+      -8.739
+     ],
+     [
+      75.0,
+      -10.834
+     ],
+     [
+      90.0,
+      -10.1
+     ],
+     [
+      105.0,
+      -10.1
+     ],
+     [
+      120.0,
+      -10.094
+     ],
+     [
+      135.0,
+      -8.914
+     ],
+     [
+      150.0,
+      -8.578
+     ],
+     [
+      165.0,
+      -7.557
+     ],
+     [
+      180.0,
+      -7.933
+     ],
+     [
+      195.0,
+      -6.931
+     ],
+     [
+      210.0,
+      -6.493
+     ],
+     [
+      225.0,
+      -7.031
+     ],
+     [
+      240.0,
+      -7.71
+     ],
+     [
+      255.0,
+      -6.708
+     ],
+     [
+      270.0,
+      -6.616
+     ],
+     [
+      285.0,
+      -7.116
+     ],
+     [
+      300.0,
+      -6.985
+     ],
+     [
+      315.0,
+      -6.966
+     ],
+     [
+      330.0,
+      -7.009
+     ],
+     [
+      345.0,
+      -7.048
+     ],
+     [
+      360.0,
+      -7.23
+     ],
+     [
+      375.0,
+      -7.511
+     ],
+     [
+      390.0,
+      -7.514
+     ],
+     [
+      405.0,
+      -7.218
+     ],
+     [
+      420.0,
+      -7.412
+     ],
+     [
+      435.0,
+      -7.441
+     ],
+     [
+      450.0,
+      -7.395
+     ],
+     [
+      465.0,
+      -7.339
+     ],
+     [
+      480.0,
+      -7.297
+     ],
+     [
+      495.0,
+      -7.443
+     ],
+     [
+      510.0,
+      -7.424
+     ],
+     [
+      525.0,
+      -7.584
+     ],
+     [
+      540.0,
+      -7.833
+     ],
+     [
+      555.0,
+      -7.877
+     ],
+     [
+      570.0,
+      -7.85
+     ],
+     [
+      585.0,
+      -7.797
+     ],
+     [
+      600.0,
+      -7.846
+     ],
+     [
+      615.0,
+      -7.736
+     ],
+     [
+      630.0,
+      -7.753
+     ],
+     [
+      645.0,
+      -7.852
+     ],
+     [
+      660.0,
+      -7.85
+     ],
+     [
+      675.0,
+      -7.921
+     ],
+     [
+      690.0,
+      -8.327
+     ],
+     [
+      705.0,
+      -8.386
+     ],
+     [
+      720.0,
+      -8.664
+     ],
+     [
+      735.0,
+      -8.429
+     ],
+     [
+      750.0,
+      -8.773
+     ],
+     [
+      765.0,
+      -9.431
+     ],
+     [
+      780.0,
+      -9.53
+     ],
+     [
+      795.0,
+      -9.258
+     ],
+     [
+      810.0,
+      -9.021
+     ],
+     [
+      825.0,
+      -8.929
+     ],
+     [
+      840.0,
+      -8.96
+     ],
+     [
+      855.0,
+      -9.559
+     ],
+     [
+      870.0,
+      -9.721
+     ],
+     [
+      885.0,
+      -9.122
+     ],
+     [
+      900.0,
+      -8.708
+     ],
+     [
+      915.0,
+      -8.327
+     ],
+     [
+      930.0,
+      -8.861
+     ],
+     [
+      945.0,
+      -9.729
+     ],
+     [
+      960.0,
+      -9.944
+     ],
+     [
+      975.0,
+      -10.167
+     ],
+     [
+      990.0,
+      -10.264
+     ],
+     [
+      1005.0,
+      -9.976
+     ],
+     [
+      1020.0,
+      -10.211
+     ],
+     [
+      1035.0,
+      -9.12
+     ]
+    ]
+   }
+  },
+  {
+   "id": "MSFT-0001193125-26-323632",
+   "ticker": "MSFT",
+   "company": "MICROSOFT CORP",
+   "pub_utc": "2026-07-29T20:04:53+00:00",
+   "pub_et": "2026-07-29 16:04 ET",
+   "filing_date": "2026-07-29",
+   "accession": "0001193125-26-323632",
+   "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323632/msft-ex99_1.htm",
+   "sha256_raw": "f64cda258ff40ffadecc26e47707d0e0d0ae4cabfb1945d94e572681cb0edf1a",
+   "period_label": "quarter ended June 30, 2026",
+   "extraction": {
+    "cache": "hit",
+    "key": "eb8c370b532078e72536838f31ead53e75d12f82805d50362670a61cfd44344c",
+    "model": "deepseek:deepseek-flash"
+   },
+   "claims": [
+    {
+     "id": "c1",
+     "metric": "revenue",
+     "basis": "reported",
+     "value": 90007000000,
+     "unit": "USD",
+     "quote": "Total revenue\n | \n | \n90,007\n | \n | \n76,441",
+     "status": "quote_only",
+     "reason": "no XBRL fact for this period yet",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true,
+      "xbrl": "unavailable"
+     }
+    },
+    {
+     "id": "c2",
+     "metric": "operating_income",
+     "basis": "reported",
+     "value": 40603000000,
+     "unit": "USD",
+     "quote": "Operating Income\n | \n$40,603\n | \n-\n | \n | \n$34,323",
+     "status": "quote_only",
+     "reason": "no XBRL fact for this period yet",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true,
+      "xbrl": "unavailable"
+     }
+    },
+    {
+     "id": "c3",
+     "metric": "net_income",
+     "basis": "reported",
+     "value": 35766000000,
+     "unit": "USD",
+     "quote": "Net income\n | \n | \n$35,766\n | \n | \n$27,233",
+     "status": "quote_only",
+     "reason": "no XBRL fact for this period yet",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true,
+      "xbrl": "unavailable"
+     }
+    },
+    {
+     "id": "c4",
+     "metric": "eps_diluted",
+     "basis": "reported",
+     "value": 4.81,
+     "unit": "USD_per_share",
+     "quote": "Diluted Earnings per Share\n | \n$4.81\n | \n$4.74\n | \n | \n$3.65",
+     "status": "quote_only",
+     "reason": "no XBRL fact for this period yet",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true,
+      "xbrl": "unavailable"
+     }
+    },
+    {
+     "id": "c5",
+     "metric": "gross_profit",
+     "basis": "reported",
+     "value": 60482000000,
+     "unit": "USD",
+     "quote": "Gross margin\n | \n | \n60,482\n | \n | \n52,427",
+     "status": "quote_only",
+     "reason": "no XBRL fact for this period yet",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true,
+      "xbrl": "unavailable"
+     }
+    }
+   ],
+   "accuracy": {
+    "xbrl_checked": 0,
+    "xbrl_match": 0,
+    "xbrl_mismatch": 0,
+    "quote_rejected": 0,
+    "total_claims": 5
+   },
+   "xbrl_period_end": null,
+   "yoy_revenue_pct": null,
+   "gap": {
+    "available": false,
+    "reason": "no usable prior-quarter revenue guidance on file"
+   },
+   "reaction": {
+    "ok": true,
+    "reason": null,
+    "base_day": "2026-07-29",
+    "target_day": "2026-07-30",
+    "rt_close": 390.99,
+    "rt_pub": 390.99,
+    "rt_preopen": 427.06,
+    "cash_close": 390.5400085449219,
+    "cash_open": 437.8999938964844,
+    "rt_move": 0.08824253436902975,
+    "rt_pre_pub": 0.0,
+    "rt_post_pub": 0.08824253436902975,
+    "cash_gap": 0.11446014117709136,
+    "residual": 0.025066041289435348,
+    "priced_in": 0.7709455314448893,
+    "sign_agrees": true,
+    "pub_minute": 4.883333333333334,
+    "preopen_minute": 1045.0,
+    "open_minute": 1050.0,
+    "path": [
+     [
+      0.0,
+      0.0
+     ],
+     [
+      15.0,
+      0.269
+     ],
+     [
+      30.0,
+      1.939
+     ],
+     [
+      45.0,
+      2.951
+     ],
+     [
+      60.0,
+      2.854
+     ],
+     [
+      75.0,
+      1.826
+     ],
+     [
+      90.0,
+      2.688
+     ],
+     [
+      105.0,
+      2.611
+     ],
+     [
+      120.0,
+      1.844
+     ],
+     [
+      135.0,
+      8.197
+     ],
+     [
+      150.0,
+      7.678
+     ],
+     [
+      165.0,
+      8.108
+     ],
+     [
+      180.0,
+      7.23
+     ],
+     [
+      195.0,
+      8.688
+     ],
+     [
+      210.0,
+      8.673
+     ],
+     [
+      225.0,
+      8.184
+     ],
+     [
+      240.0,
+      8.801
+     ],
+     [
+      255.0,
+      7.732
+     ],
+     [
+      270.0,
+      7.88
+     ],
+     [
+      285.0,
+      7.164
+     ],
+     [
+      300.0,
+      6.921
+     ],
+     [
+      315.0,
+      6.911
+     ],
+     [
+      330.0,
+      7.159
+     ],
+     [
+      345.0,
+      7.136
+     ],
+     [
+      360.0,
+      7.113
+     ],
+     [
+      375.0,
+      7.363
+     ],
+     [
+      390.0,
+      7.445
+     ],
+     [
+      405.0,
+      7.76
+     ],
+     [
+      420.0,
+      7.9
+     ],
+     [
+      435.0,
+      7.737
+     ],
+     [
+      450.0,
+      7.517
+     ],
+     [
+      465.0,
+      7.463
+     ],
+     [
+      480.0,
+      7.519
+     ],
+     [
+      495.0,
+      7.271
+     ],
+     [
+      510.0,
+      7.496
+     ],
+     [
+      525.0,
+      7.519
+     ],
+     [
+      540.0,
+      7.629
+     ],
+     [
+      555.0,
+      7.678
+     ],
+     [
+      570.0,
+      7.711
+     ],
+     [
+      585.0,
+      7.494
+     ],
+     [
+      600.0,
+      7.358
+     ],
+     [
+      615.0,
+      7.166
+     ],
+     [
+      630.0,
+      7.246
+     ],
+     [
+      645.0,
+      7.21
+     ],
+     [
+      660.0,
+      7.179
+     ],
+     [
+      675.0,
+      7.172
+     ],
+     [
+      690.0,
+      6.78
+     ],
+     [
+      705.0,
+      6.752
+     ],
+     [
+      720.0,
+      7.016
+     ],
+     [
+      735.0,
+      7.509
+     ],
+     [
+      750.0,
+      7.78
+     ],
+     [
+      765.0,
+      8.443
+     ],
+     [
+      780.0,
+      8.151
+     ],
+     [
+      795.0,
+      8.369
+     ],
+     [
+      810.0,
+      8.193
+     ],
+     [
+      825.0,
+      8.126
+     ],
+     [
+      840.0,
+      8.67
+     ],
+     [
+      855.0,
+      8.761
+     ],
+     [
+      870.0,
+      8.967
+     ],
+     [
+      885.0,
+      8.939
+     ],
+     [
+      900.0,
+      9.265
+     ],
+     [
+      915.0,
+      8.957
+     ],
+     [
+      930.0,
+      9.215
+     ],
+     [
+      945.0,
+      9.468
+     ],
+     [
+      960.0,
+      9.698
+     ],
+     [
+      975.0,
+      9.686
+     ],
+     [
+      990.0,
+      9.359
+     ],
+     [
+      1005.0,
+      9.105
+     ],
+     [
+      1020.0,
+      9.169
+     ],
+     [
+      1035.0,
+      9.225
+     ]
+    ]
+   }
+  },
+  {
+   "id": "TSLA-0001628280-26-049213",
+   "ticker": "TSLA",
+   "company": "Tesla, Inc.",
+   "pub_utc": "2026-07-22T20:35:52+00:00",
+   "pub_et": "2026-07-22 16:35 ET",
+   "filing_date": "2026-07-22",
+   "accession": "0001628280-26-049213",
+   "url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026049213/exhibit991.htm",
+   "sha256_raw": "1176c2561933816108336dd5db0fdff8588c2f64a86020e1ba922551b6669bab",
+   "period_label": "Q2-2026",
+   "extraction": {
+    "cache": "hit",
+    "key": "46c91c53c82f2da066656fc8c3f6ac5b46dfbc768cac0e8e013f78988febc5a8",
+    "model": "deepseek:deepseek-flash"
+   },
+   "claims": [
+    {
+     "id": "c1",
+     "metric": "revenue",
+     "basis": "reported",
+     "value": 28236000000,
+     "unit": "USD",
+     "quote": "Total revenues 22,496 28,095 24,901 22,387 28,236 26%",
+     "xbrl": {
+      "value": 28236000000.0,
+      "end": "2026-06-30",
+      "start": "2026-04-01",
+      "form": "10-Q",
+      "filed": "2026-07-23",
+      "accn": "0001628280-26-049270",
+      "tag": "Revenues",
+      "yoy_prior": 22496000000.0
+     },
+     "status": "verified",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true,
+      "xbrl": "match"
+     }
+    },
+    {
+     "id": "c2",
+     "metric": "net_income",
+     "basis": "reported",
+     "value": 1114000000,
+     "unit": "USD",
+     "quote": "Net income attributable to common stockholders (GAAP) 1,172 1,373 840 477 1,114 -5%",
+     "xbrl": {
+      "value": 1114000000.0,
+      "end": "2026-06-30",
+      "start": "2026-04-01",
+      "form": "10-Q",
+      "filed": "2026-07-23",
+      "accn": "0001628280-26-049270",
+      "tag": "NetIncomeLoss",
+      "yoy_prior": 1172000000.0
+     },
+     "status": "verified",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true,
+      "xbrl": "match"
+     }
+    },
+    {
+     "id": "c3",
+     "metric": "eps_diluted",
+     "basis": "reported",
+     "value": 0.32,
+     "unit": "USD_per_share",
+     "quote": "EPS attributable to common stockholders, diluted (GAAP) 0.33 0.39 0.24 0.13 0.32 -3%",
+     "xbrl": {
+      "value": 0.32,
+      "end": "2026-06-30",
+      "start": "2026-04-01",
+      "form": "10-Q",
+      "filed": "2026-07-23",
+      "accn": "0001628280-26-049270",
+      "tag": "EarningsPerShareDiluted",
+      "yoy_prior": 0.33
+     },
+     "status": "verified",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true,
+      "xbrl": "match"
+     }
+    },
+    {
+     "id": "c4",
+     "metric": "operating_income",
+     "basis": "reported",
+     "value": 398000000,
+     "unit": "USD",
+     "quote": "Income from operations 923 1,624 1,409 941 398 -57%",
+     "xbrl": {
+      "value": 398000000.0,
+      "end": "2026-06-30",
+      "start": "2026-04-01",
+      "form": "10-Q",
+      "filed": "2026-07-23",
+      "accn": "0001628280-26-049270",
+      "tag": "OperatingIncomeLoss",
+      "yoy_prior": 923000000.0
+     },
+     "status": "verified",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true,
+      "xbrl": "match"
+     }
+    },
+    {
+     "id": "c5",
+     "metric": "gross_profit",
+     "basis": "reported",
+     "value": 4751000000,
+     "unit": "USD",
+     "quote": "Total gross profit 3,878 5,054 5,009 4,720 4,751 23%",
+     "xbrl": {
+      "value": 4751000000.0,
+      "end": "2026-06-30",
+      "start": "2026-04-01",
+      "form": "10-Q",
+      "filed": "2026-07-23",
+      "accn": "0001628280-26-049270",
+      "tag": "GrossProfit",
+      "yoy_prior": 3878000000.0
+     },
+     "status": "verified",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true,
+      "xbrl": "match"
+     }
+    },
+    {
+     "id": "c6",
+     "metric": "gross_margin_pct",
+     "basis": "reported",
+     "value": 16.8,
+     "unit": "percent",
+     "quote": "Total GAAP gross margin 17.2% 18.0% 20.1% 21.1% 16.8% -41 bp",
+     "status": "quote_only",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true
+     }
+    }
+   ],
+   "accuracy": {
+    "xbrl_checked": 5,
+    "xbrl_match": 5,
+    "xbrl_mismatch": 0,
+    "quote_rejected": 0,
+    "total_claims": 6
+   },
+   "xbrl_period_end": "2026-06-30",
+   "yoy_revenue_pct": 25.51564722617354,
+   "gap": {
+    "available": false,
+    "reason": "no usable prior-quarter revenue guidance on file"
+   },
+   "reaction": {
+    "ok": true,
+    "reason": null,
+    "base_day": "2026-07-22",
+    "target_day": "2026-07-23",
+    "rt_close": 374.17,
+    "rt_pub": 365.7,
+    "rt_preopen": 344.13,
+    "cash_close": 374.010009765625,
+    "cash_open": 341.0,
+    "rt_move": -0.08369074663330044,
+    "rt_pre_pub": -0.022896914439250963,
+    "rt_post_pub": -0.06079383219404951,
+    "cash_gap": -0.09240008385207477,
+    "residual": -0.009137015677769146,
+    "priced_in": 0.9057431892300305,
+    "sign_agrees": true,
+    "pub_minute": 35.86666666666667,
+    "preopen_minute": 1045.0,
+    "open_minute": 1050.0,
+    "path": [
+     [
+      0.0,
+      0.0
+     ],
+     [
+      15.0,
+      -2.709
+     ],
+     [
+      30.0,
+      -2.264
+     ],
+     [
+      45.0,
+      -2.531
+     ],
+     [
+      60.0,
+      -2.536
+     ],
+     [
+      75.0,
+      -3.063
+     ],
+     [
+      90.0,
+      -3.057
+     ],
+     [
+      105.0,
+      -4.958
+     ],
+     [
+      120.0,
+      -4.204
+     ],
+     [
+      135.0,
+      -4.078
+     ],
+     [
+      150.0,
+      -4.242
+     ],
+     [
+      165.0,
+      -4.189
+     ],
+     [
+      180.0,
+      -4.03
+     ],
+     [
+      195.0,
+      -4.164
+     ],
+     [
+      210.0,
+      -4.273
+     ],
+     [
+      225.0,
+      -4.151
+     ],
+     [
+      240.0,
+      -4.185
+     ],
+     [
+      255.0,
+      -3.838
+     ],
+     [
+      270.0,
+      -3.466
+     ],
+     [
+      285.0,
+      -3.49
+     ],
+     [
+      300.0,
+      -3.937
+     ],
+     [
+      315.0,
+      -3.712
+     ],
+     [
+      330.0,
+      -3.857
+     ],
+     [
+      345.0,
+      -3.894
+     ],
+     [
+      360.0,
+      -3.905
+     ],
+     [
+      375.0,
+      -3.982
+     ],
+     [
+      390.0,
+      -4.236
+     ],
+     [
+      405.0,
+      -4.292
+     ],
+     [
+      420.0,
+      -4.185
+     ],
+     [
+      435.0,
+      -4.509
+     ],
+     [
+      450.0,
+      -4.412
+     ],
+     [
+      465.0,
+      -4.351
+     ],
+     [
+      480.0,
+      -4.442
+     ],
+     [
+      495.0,
+      -4.495
+     ],
+     [
+      510.0,
+      -4.351
+     ],
+     [
+      525.0,
+      -4.372
+     ],
+     [
+      540.0,
+      -4.415
+     ],
+     [
+      555.0,
+      -4.354
+     ],
+     [
+      570.0,
+      -4.164
+     ],
+     [
+      585.0,
+      -4.399
+     ],
+     [
+      600.0,
+      -4.434
+     ],
+     [
+      615.0,
+      -4.236
+     ],
+     [
+      630.0,
+      -4.247
+     ],
+     [
+      645.0,
+      -4.271
+     ],
+     [
+      660.0,
+      -4.303
+     ],
+     [
+      675.0,
+      -4.637
+     ],
+     [
+      690.0,
+      -4.685
+     ],
+     [
+      705.0,
+      -4.709
+     ],
+     [
+      720.0,
+      -4.618
+     ],
+     [
+      735.0,
+      -4.867
+     ],
+     [
+      750.0,
+      -5.596
+     ],
+     [
+      765.0,
+      -5.682
+     ],
+     [
+      780.0,
+      -5.687
+     ],
+     [
+      795.0,
+      -5.594
+     ],
+     [
+      810.0,
+      -5.527
+     ],
+     [
+      825.0,
+      -5.84
+     ],
+     [
+      840.0,
+      -5.845
+     ],
+     [
+      855.0,
+      -6.072
+     ],
+     [
+      870.0,
+      -6.136
+     ],
+     [
+      885.0,
+      -5.749
+     ],
+     [
+      900.0,
+      -5.928
+     ],
+     [
+      915.0,
+      -6.104
+     ],
+     [
+      930.0,
+      -6.542
+     ],
+     [
+      945.0,
+      -6.703
+     ],
+     [
+      960.0,
+      -7.077
+     ],
+     [
+      975.0,
+      -7.328
+     ],
+     [
+      990.0,
+      -7.55
+     ],
+     [
+      1005.0,
+      -7.654
+     ],
+     [
+      1020.0,
+      -7.686
+     ],
+     [
+      1035.0,
+      -8.028
+     ]
+    ]
+   }
+  },
+  {
+   "id": "GOOGL-0001652044-26-000066",
+   "ticker": "GOOGL",
+   "company": "Alphabet Inc.",
+   "pub_utc": "2026-07-22T20:01:36+00:00",
+   "pub_et": "2026-07-22 16:01 ET",
+   "filing_date": "2026-07-22",
+   "accession": "0001652044-26-000066",
+   "url": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000066/googexhibit991q22026.htm",
+   "sha256_raw": "555c0b27caf00d0718bf8bf0385aa460329ff2eeda4712710ed774a33c06cbbf",
+   "period_label": "Second Quarter 2026",
+   "extraction": {
+    "cache": "hit",
+    "key": "5e90ab2732946c3ffecf74cd5d20e13d54cd0b39d4809df6ac858bac466b04da",
+    "model": "deepseek:deepseek-flash"
+   },
+   "claims": [
+    {
+     "id": "c1",
+     "metric": "revenue",
+     "basis": "reported",
+     "value": 119796000000,
+     "unit": "USD",
+     "quote": "Revenues | $ | 96,428 | $ | 119,796 | $ | 186,662 | $ | 229,692 |",
+     "xbrl": {
+      "value": 119796000000.0,
+      "end": "2026-06-30",
+      "start": "2026-04-01",
+      "form": "10-Q",
+      "filed": "2026-07-23",
+      "accn": "0001652044-26-000071",
+      "tag": "Revenues",
+      "yoy_prior": 96428000000.0
+     },
+     "status": "verified",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true,
+      "xbrl": "match"
+     }
+    },
+    {
+     "id": "c2",
+     "metric": "net_income",
+     "basis": "reported",
+     "value": 112193000000,
+     "unit": "USD",
+     "quote": "Net income | $ | 28,196 | $ | 112,193 | $ | 62,736 | $ | 174,771 |",
+     "xbrl": {
+      "value": 112193000000.0,
+      "end": "2026-06-30",
+      "start": "2026-04-01",
+      "form": "10-Q",
+      "filed": "2026-07-23",
+      "accn": "0001652044-26-000071",
+      "tag": "NetIncomeLoss",
+      "yoy_prior": 28196000000.0
+     },
+     "status": "verified",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true,
+      "xbrl": "match"
+     }
+    },
+    {
+     "id": "c3",
+     "metric": "eps_diluted",
+     "basis": "reported",
+     "value": 9.11,
+     "unit": "USD_per_share",
+     "quote": "Diluted net income per common share | $ | 2.31 | $ | 9.11 |",
+     "xbrl": {
+      "value": 9.11,
+      "end": "2026-06-30",
+      "start": "2026-04-01",
+      "form": "10-Q",
+      "filed": "2026-07-23",
+      "accn": "0001652044-26-000071",
+      "tag": "EarningsPerShareDiluted",
+      "yoy_prior": 2.31
+     },
+     "status": "verified",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true,
+      "xbrl": "match"
+     }
+    },
+    {
+     "id": "c4",
+     "metric": "operating_income",
+     "basis": "reported",
+     "value": 40770000000,
+     "unit": "USD",
+     "quote": "Operating income | $ | 31,271 | $ | 40,770 |",
+     "xbrl": {
+      "value": 40770000000.0,
+      "end": "2026-06-30",
+      "start": "2026-04-01",
+      "form": "10-Q",
+      "filed": "2026-07-23",
+      "accn": "0001652044-26-000071",
+      "tag": "OperatingIncomeLoss",
+      "yoy_prior": 31271000000.0
+     },
+     "status": "verified",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true,
+      "xbrl": "match"
+     }
+    }
+   ],
+   "accuracy": {
+    "xbrl_checked": 4,
+    "xbrl_match": 4,
+    "xbrl_mismatch": 0,
+    "quote_rejected": 0,
+    "total_claims": 4
+   },
+   "xbrl_period_end": "2026-06-30",
+   "yoy_revenue_pct": 24.23362508814868,
+   "gap": {
+    "available": false,
+    "reason": "no usable prior-quarter revenue guidance on file"
+   },
+   "reaction": {
+    "ok": true,
+    "reason": null,
+    "base_day": "2026-07-22",
+    "target_day": "2026-07-23",
+    "rt_close": 342.05,
+    "rt_pub": 342.05,
+    "rt_preopen": 322.99,
+    "cash_close": 342.0899963378906,
+    "cash_open": 321.1300048828125,
+    "rt_move": -0.057335562215935484,
+    "rt_pre_pub": 0.0,
+    "rt_post_pub": -0.057335562215935484,
+    "cash_gap": -0.06322780885754148,
+    "residual": -0.005775322216341369,
+    "priced_in": 0.9068092545341591,
+    "sign_agrees": true,
+    "pub_minute": 1.6,
+    "preopen_minute": 1045.0,
+    "open_minute": 1050.0,
+    "path": [
+     [
+      0.0,
+      0.0
+     ],
+     [
+      15.0,
+      2.321
+     ],
+     [
+      30.0,
+      0.083
+     ],
+     [
+      45.0,
+      -0.172
+     ],
+     [
+      60.0,
+      -4.195
+     ],
+     [
+      75.0,
+      -4.587
+     ],
+     [
+      90.0,
+      -4.169
+     ],
+     [
+      105.0,
+      -4.838
+     ],
+     [
+      120.0,
+      -3.76
+     ],
+     [
+      135.0,
+      -3.739
+     ],
+     [
+      150.0,
+      -3.038
+     ],
+     [
+      165.0,
+      -3.218
+     ],
+     [
+      180.0,
+      -2.97
+     ],
+     [
+      195.0,
+      -3.423
+     ],
+     [
+      210.0,
+      -3.242
+     ],
+     [
+      225.0,
+      -3.266
+     ],
+     [
+      240.0,
+      -3.228
+     ],
+     [
+      255.0,
+      -2.389
+     ],
+     [
+      270.0,
+      -1.865
+     ],
+     [
+      285.0,
+      -2.152
+     ],
+     [
+      300.0,
+      -2.263
+     ],
+     [
+      315.0,
+      -2.403
+     ],
+     [
+      330.0,
+      -2.622
+     ],
+     [
+      345.0,
+      -2.377
+     ],
+     [
+      360.0,
+      -2.245
+     ],
+     [
+      375.0,
+      -2.356
+     ],
+     [
+      390.0,
+      -2.555
+     ],
+     [
+      405.0,
+      -2.687
+     ],
+     [
+      420.0,
+      -2.494
+     ],
+     [
+      435.0,
+      -2.596
+     ],
+     [
+      450.0,
+      -2.552
+     ],
+     [
+      465.0,
+      -2.546
+     ],
+     [
+      480.0,
+      -2.432
+     ],
+     [
+      495.0,
+      -2.409
+     ],
+     [
+      510.0,
+      -2.386
+     ],
+     [
+      525.0,
+      -2.517
+     ],
+     [
+      540.0,
+      -2.593
+     ],
+     [
+      555.0,
+      -2.81
+     ],
+     [
+      570.0,
+      -2.593
+     ],
+     [
+      585.0,
+      -2.818
+     ],
+     [
+      600.0,
+      -2.97
+     ],
+     [
+      615.0,
+      -2.772
+     ],
+     [
+      630.0,
+      -2.584
+     ],
+     [
+      645.0,
+      -2.663
+     ],
+     [
+      660.0,
+      -2.719
+     ],
+     [
+      675.0,
+      -2.941
+     ],
+     [
+      690.0,
+      -3.236
+     ],
+     [
+      705.0,
+      -3.286
+     ],
+     [
+      720.0,
+      -3.207
+     ],
+     [
+      735.0,
+      -3.4
+     ],
+     [
+      750.0,
+      -3.783
+     ],
+     [
+      765.0,
+      -3.771
+     ],
+     [
+      780.0,
+      -3.73
+     ],
+     [
+      795.0,
+      -3.818
+     ],
+     [
+      810.0,
+      -3.874
+     ],
+     [
+      825.0,
+      -3.84
+     ],
+     [
+      840.0,
+      -4.111
+     ],
+     [
+      855.0,
+      -4.172
+     ],
+     [
+      870.0,
+      -4.286
+     ],
+     [
+      885.0,
+      -3.818
+     ],
+     [
+      900.0,
+      -4.341
+     ],
+     [
+      915.0,
+      -4.397
+     ],
+     [
+      930.0,
+      -4.695
+     ],
+     [
+      945.0,
+      -4.979
+     ],
+     [
+      960.0,
+      -4.988
+     ],
+     [
+      975.0,
+      -4.917
+     ],
+     [
+      990.0,
+      -4.92
+     ],
+     [
+      1005.0,
+      -5.181
+     ],
+     [
+      1020.0,
+      -5.058
+     ],
+     [
+      1035.0,
+      -5.572
+     ]
+    ]
+   }
+  },
+  {
+   "id": "TSLA-0001628280-26-046717",
+   "ticker": "TSLA",
+   "company": "Tesla, Inc.",
+   "pub_utc": "2026-07-02T13:01:26+00:00",
+   "pub_et": "2026-07-02 09:01 ET",
+   "filing_date": "2026-07-02",
+   "accession": "0001628280-26-046717",
+   "url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026046717/exhibit99111111.htm",
+   "sha256_raw": "2696a7b1818a458ab717e1c4c481b134574a4bd865deba1af399b0947a143bc5",
+   "period_label": "Q2 2026",
+   "extraction": {
+    "cache": "hit",
+    "key": "40af8905dc36ba65ea0934781dcebb2132a04d027fe067fb95b0f921dd17976e",
+    "model": "deepseek:deepseek-flash"
+   },
+   "claims": [],
+   "accuracy": {
+    "xbrl_checked": 0,
+    "xbrl_match": 0,
+    "xbrl_mismatch": 0,
+    "quote_rejected": 0,
+    "total_claims": 0
+   },
+   "xbrl_period_end": "2026-06-30",
+   "yoy_revenue_pct": 25.51564722617354,
+   "gap": {
+    "available": false,
+    "reason": "revenue figure not extracted/verified for this release"
+   },
+   "reaction": {
+    "ok": true,
+    "reason": null,
+    "base_day": "2026-07-01",
+    "target_day": "2026-07-02",
+    "rt_close": 425.35,
+    "rt_pub": 429.3,
+    "rt_preopen": 430.09,
+    "cash_close": 425.2999877929688,
+    "cash_open": 428.010009765625,
+    "rt_move": 0.011082129690620095,
+    "rt_pre_pub": 0.009243615808621465,
+    "rt_post_pub": 0.0018385138819985512,
+    "cash_gap": 0.006351809053758782,
+    "residual": -0.004847906501333351,
+    "priced_in": 1.7447202201492615,
+    "sign_agrees": true,
+    "pub_minute": 1021.4333333333333,
+    "preopen_minute": 1045.0,
+    "open_minute": 1050.0,
+    "path": [
+     [
+      0.0,
+      0.0
+     ],
+     [
+      15.0,
+      -0.247
+     ],
+     [
+      30.0,
+      -0.128
+     ],
+     [
+      45.0,
+      -0.167
+     ],
+     [
+      60.0,
+      -0.12
+     ],
+     [
+      75.0,
+      -0.089
+     ],
+     [
+      90.0,
+      -0.085
+     ],
+     [
+      105.0,
+      -0.148
+     ],
+     [
+      120.0,
+      -0.2
+     ],
+     [
+      135.0,
+      -0.32
+     ],
+     [
+      150.0,
+      -0.407
+     ],
+     [
+      165.0,
+      -0.541
+     ],
+     [
+      180.0,
+      -0.409
+     ],
+     [
+      195.0,
+      -0.487
+     ],
+     [
+      210.0,
+      -0.6
+     ],
+     [
+      225.0,
+      -0.538
+     ],
+     [
+      240.0,
+      -0.468
+     ],
+     [
+      255.0,
+      -0.729
+     ],
+     [
+      270.0,
+      -0.783
+     ],
+     [
+      285.0,
+      -0.973
+     ],
+     [
+      300.0,
+      -0.745
+     ],
+     [
+      315.0,
+      -0.583
+     ],
+     [
+      330.0,
+      -0.665
+     ],
+     [
+      345.0,
+      -0.63
+     ],
+     [
+      360.0,
+      -0.694
+     ],
+     [
+      375.0,
+      -0.522
+     ],
+     [
+      390.0,
+      -0.602
+     ],
+     [
+      405.0,
+      -0.576
+     ],
+     [
+      420.0,
+      -0.545
+     ],
+     [
+      435.0,
+      -0.576
+     ],
+     [
+      450.0,
+      -0.534
+     ],
+     [
+      465.0,
+      -0.578
+     ],
+     [
+      480.0,
+      -0.496
+     ],
+     [
+      495.0,
+      -0.602
+     ],
+     [
+      510.0,
+      -0.482
+     ],
+     [
+      525.0,
+      -0.602
+     ],
+     [
+      540.0,
+      -0.36
+     ],
+     [
+      555.0,
+      -0.237
+     ],
+     [
+      570.0,
+      -0.348
+     ],
+     [
+      585.0,
+      -0.383
+     ],
+     [
+      600.0,
+      -0.339
+     ],
+     [
+      615.0,
+      -0.508
+     ],
+     [
+      630.0,
+      -0.524
+     ],
+     [
+      645.0,
+      -0.534
+     ],
+     [
+      660.0,
+      -0.736
+     ],
+     [
+      675.0,
+      -0.886
+     ],
+     [
+      690.0,
+      -0.781
+     ],
+     [
+      705.0,
+      -0.458
+     ],
+     [
+      720.0,
+      -0.447
+     ],
+     [
+      735.0,
+      -0.55
+     ],
+     [
+      750.0,
+      -0.621
+     ],
+     [
+      765.0,
+      -0.537
+     ],
+     [
+      780.0,
+      -0.442
+     ],
+     [
+      795.0,
+      -0.341
+     ],
+     [
+      810.0,
+      0.484
+     ],
+     [
+      825.0,
+      0.858
+     ],
+     [
+      840.0,
+      1.093
+     ],
+     [
+      855.0,
+      0.505
+     ],
+     [
+      870.0,
+      0.505
+     ],
+     [
+      885.0,
+      0.748
+     ],
+     [
+      900.0,
+      0.793
+     ],
+     [
+      915.0,
+      0.597
+     ],
+     [
+      930.0,
+      0.508
+     ],
+     [
+      945.0,
+      0.386
+     ],
+     [
+      960.0,
+      0.381
+     ],
+     [
+      975.0,
+      0.701
+     ],
+     [
+      990.0,
+      0.931
+     ],
+     [
+      1005.0,
+      1.211
+     ],
+     [
+      1020.0,
+      0.929
+     ],
+     [
+      1035.0,
+      1.114
+     ]
+    ]
+   }
+  },
+  {
+   "id": "NVDA-0001045810-26-000051",
+   "ticker": "NVDA",
+   "company": "NVIDIA CORP",
+   "pub_utc": "2026-05-20T20:21:19+00:00",
+   "pub_et": "2026-05-20 16:21 ET",
+   "filing_date": "2026-05-20",
+   "accession": "0001045810-26-000051",
+   "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000051/q1fy27pr.htm",
+   "sha256_raw": "68cefbb30d9f6491a9dc9688572445bc8d995d9b5e0d6b6f56de26849b5ad2a8",
+   "period_label": "First Quarter Fiscal 2027",
+   "extraction": {
+    "cache": "hit",
+    "key": "18640b5e201fbd85e81eefc40f7efcbbe78d3ea7992a2b2bb35a9b925d57569c",
+    "model": "deepseek:deepseek-flash"
+   },
+   "claims": [
+    {
+     "id": "c1",
+     "metric": "revenue",
+     "basis": "reported",
+     "value": 81615000000,
+     "unit": "USD",
+     "quote": "Revenue | $81,615 | $68,127 | $44,062 | 20 | % | 85 | %",
+     "xbrl": {
+      "value": 81615000000.0,
+      "end": "2026-04-26",
+      "start": "2026-01-26",
+      "form": "10-Q",
+      "filed": "2026-05-20",
+      "accn": "0001045810-26-000052",
+      "tag": "Revenues",
+      "yoy_prior": 44062000000.0
+     },
+     "status": "verified",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true,
+      "xbrl": "match"
+     }
+    },
+    {
+     "id": "c2",
+     "metric": "net_income",
+     "basis": "reported",
+     "value": 58321000000,
+     "unit": "USD",
+     "quote": "Net income | $58,321 | $42,960 | $18,775 | 36 | % | 211 | %",
+     "xbrl": {
+      "value": 58321000000.0,
+      "end": "2026-04-26",
+      "start": "2026-01-26",
+      "form": "10-Q",
+      "filed": "2026-05-20",
+      "accn": "0001045810-26-000052",
+      "tag": "NetIncomeLoss",
+      "yoy_prior": 18775000000.0
+     },
+     "status": "verified",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true,
+      "xbrl": "match"
+     }
+    },
+    {
+     "id": "c3",
+     "metric": "eps_diluted",
+     "basis": "reported",
+     "value": 2.39,
+     "unit": "USD_per_share",
+     "quote": "Diluted | $ | 2.39 | $ | 0.76",
+     "xbrl": {
+      "value": 2.39,
+      "end": "2026-04-26",
+      "start": "2026-01-26",
+      "form": "10-Q",
+      "filed": "2026-05-20",
+      "accn": "0001045810-26-000052",
+      "tag": "EarningsPerShareDiluted",
+      "yoy_prior": 0.76
+     },
+     "status": "verified",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true,
+      "xbrl": "match"
+     }
+    },
+    {
+     "id": "c4",
+     "metric": "operating_income",
+     "basis": "reported",
+     "value": 53536000000,
+     "unit": "USD",
+     "quote": "Operating income | $53,536 | $44,299 | $21,638 | 21 | % | 147 | %",
+     "xbrl": {
+      "value": 53536000000.0,
+      "end": "2026-04-26",
+      "start": "2026-01-26",
+      "form": "10-Q",
+      "filed": "2026-05-20",
+      "accn": "0001045810-26-000052",
+      "tag": "OperatingIncomeLoss",
+      "yoy_prior": 21638000000.0
+     },
+     "status": "verified",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true,
+      "xbrl": "match"
+     }
+    },
+    {
+     "id": "c5",
+     "metric": "gross_profit",
+     "basis": "reported",
+     "value": 61157000000,
+     "unit": "USD",
+     "quote": "GAAP gross profit | $ | 61,157 | $ | 51,093 | $ | 26,668",
+     "xbrl": {
+      "value": 61157000000.0,
+      "end": "2026-04-26",
+      "start": "2026-01-26",
+      "form": "10-Q",
+      "filed": "2026-05-20",
+      "accn": "0001045810-26-000052",
+      "tag": "GrossProfit",
+      "yoy_prior": 26668000000.0
+     },
+     "status": "verified",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true,
+      "xbrl": "match"
+     }
+    },
+    {
+     "id": "c6",
+     "metric": "gross_margin_pct",
+     "basis": "reported",
+     "value": 74.9,
+     "unit": "percent",
+     "quote": "For the quarter, GAAP and non-GAAP gross margins were 74.9% and 75.0%, respectively.",
+     "status": "quote_only",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true
+     }
+    },
+    {
+     "id": "c7",
+     "metric": "guidance_revenue_mid",
+     "basis": "guidance",
+     "value": 91000000000,
+     "unit": "USD",
+     "quote": "Revenue is expected to be $91.0 billion, plus or minus 2%.",
+     "status": "quote_only",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true
+     }
+    },
+    {
+     "id": "c8",
+     "metric": "guidance_tolerance_pct",
+     "basis": "guidance",
+     "value": 2,
+     "unit": "percent",
+     "quote": "Revenue is expected to be $91.0 billion, plus or minus 2%.",
+     "status": "quote_only",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true
+     }
+    },
+    {
+     "id": "c9",
+     "metric": "guidance_gross_margin_pct",
+     "basis": "guidance",
+     "value": 74.9,
+     "unit": "percent",
+     "quote": "GAAP and non-GAAP gross margins are expected to be 74.9% and 75.0%, respectively, plus or minus 50 basis points.",
+     "status": "quote_only",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true
+     }
+    }
+   ],
+   "accuracy": {
+    "xbrl_checked": 5,
+    "xbrl_match": 5,
+    "xbrl_mismatch": 0,
+    "quote_rejected": 0,
+    "total_claims": 9
+   },
+   "xbrl_period_end": "2026-04-26",
+   "yoy_revenue_pct": 85.22763378875223,
+   "gap": {
+    "available": false,
+    "reason": "no usable prior-quarter revenue guidance on file"
+   },
+   "reaction": {
+    "ok": false,
+    "reason": "no prior trading day in cash data",
+    "base_day": null,
+    "target_day": null,
+    "rt_close": null,
+    "rt_pub": null,
+    "rt_preopen": null,
+    "cash_close": null,
+    "cash_open": null,
+    "rt_move": null,
+    "rt_pre_pub": null,
+    "rt_post_pub": null,
+    "cash_gap": null,
+    "residual": null,
+    "priced_in": null,
+    "sign_agrees": null,
+    "pub_minute": null,
+    "preopen_minute": null,
+    "open_minute": null,
+    "path": []
+   }
+  },
+  {
+   "id": "AMD-0000002488-26-000072",
+   "ticker": "AMD",
+   "company": "ADVANCED MICRO DEVICES INC",
+   "pub_utc": "2026-05-05T20:16:06+00:00",
+   "pub_et": "2026-05-05 16:16 ET",
+   "filing_date": "2026-05-05",
+   "accession": "0000002488-26-000072",
+   "url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000072/q12026991.htm",
+   "sha256_raw": "a5cbd0ec8ea661729b68564ebd4db46b5f9a589ea5acc6cfa59fb248bb0d76ce",
+   "period_label": "first quarter of 2026",
+   "extraction": {
+    "cache": "hit",
+    "key": "394fe7e4a9823c4c58cb8170311fdbc9c5d325735a0e36896687429300eed451",
+    "model": "deepseek:deepseek-flash"
+   },
+   "claims": [
+    {
+     "id": "c1",
+     "metric": "revenue",
+     "basis": "reported",
+     "value": 10253000000,
+     "unit": "USD",
+     "quote": " | Revenue ($M) | $10,253 | $7,438 | Up 38% | $10,270 | Flat",
+     "xbrl": {
+      "value": 10253000000.0,
+      "end": "2026-03-28",
+      "start": "2025-12-28",
+      "form": "10-Q",
+      "filed": "2026-05-06",
+      "accn": "0000002488-26-000076",
+      "tag": "RevenueFromContractWithCustomerExcludingAssessedTax",
+      "yoy_prior": 7438000000.0
+     },
+     "status": "verified",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true,
+      "xbrl": "match"
+     }
+    },
+    {
+     "id": "c2",
+     "metric": "gross_profit",
+     "basis": "reported",
+     "value": 5416000000,
+     "unit": "USD",
+     "quote": " | Gross profit ($M) | $5,416 | $3,736 | Up 45% | $5,577 | Down 3%",
+     "xbrl": {
+      "value": 5416000000.0,
+      "end": "2026-03-28",
+      "start": "2025-12-28",
+      "form": "10-Q",
+      "filed": "2026-05-06",
+      "accn": "0000002488-26-000076",
+      "tag": "GrossProfit",
+      "yoy_prior": 3736000000.0
+     },
+     "status": "verified",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true,
+      "xbrl": "match"
+     }
+    },
+    {
+     "id": "c3",
+     "metric": "gross_margin_pct",
+     "basis": "reported",
+     "value": 53,
+     "unit": "percent",
+     "quote": " | Gross margin | 53% | 50% | Up 3 ppts | 54% | Down 1 ppt",
+     "status": "quote_only",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true
+     }
+    },
+    {
+     "id": "c4",
+     "metric": "operating_income",
+     "basis": "reported",
+     "value": 1476000000,
+     "unit": "USD",
+     "quote": " | Operating income ($M) | $1,476 | $806 | Up 83% | $1,752 | Down 16%",
+     "xbrl": {
+      "value": 1476000000.0,
+      "end": "2026-03-28",
+      "start": "2025-12-28",
+      "form": "10-Q",
+      "filed": "2026-05-06",
+      "accn": "0000002488-26-000076",
+      "tag": "OperatingIncomeLoss",
+      "yoy_prior": 806000000.0
+     },
+     "status": "verified",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true,
+      "xbrl": "match"
+     }
+    },
+    {
+     "id": "c5",
+     "metric": "net_income",
+     "basis": "reported",
+     "value": 1383000000,
+     "unit": "USD",
+     "quote": " | Net income ($M) | $1,383 | $709 | Up 95% | $1,511 | Down 8%",
+     "xbrl": {
+      "value": 1383000000.0,
+      "end": "2026-03-28",
+      "start": "2025-12-28",
+      "form": "10-Q",
+      "filed": "2026-05-06",
+      "accn": "0000002488-26-000076",
+      "tag": "NetIncomeLoss",
+      "yoy_prior": 709000000.0
+     },
+     "status": "verified",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true,
+      "xbrl": "match"
+     }
+    },
+    {
+     "id": "c6",
+     "metric": "eps_diluted",
+     "basis": "reported",
+     "value": 0.84,
+     "unit": "USD_per_share",
+     "quote": " | Diluted earnings per share | $0.84 | $0.44 | Up 91% | $0.92 | Down 9%",
+     "xbrl": {
+      "value": 0.84,
+      "end": "2026-03-28",
+      "start": "2025-12-28",
+      "form": "10-Q",
+      "filed": "2026-05-06",
+      "accn": "0000002488-26-000076",
+      "tag": "EarningsPerShareDiluted",
+      "yoy_prior": 0.44
+     },
+     "status": "verified",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true,
+      "xbrl": "match"
+     }
+    },
+    {
+     "id": "c7",
+     "metric": "guidance_revenue_mid",
+     "basis": "guidance",
+     "value": 11200000000,
+     "unit": "USD",
+     "quote": "For the second quarter of 2026, AMD expects revenue to be approximately $11.2 billion, plus or minus $300 million.",
+     "status": "quote_only",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true
+     }
+    },
+    {
+     "id": "c8",
+     "metric": "guidance_gross_margin_pct",
+     "basis": "guidance",
+     "value": 56,
+     "unit": "percent",
+     "quote": "Non-GAAP gross margin is expected to be approximately 56%.",
+     "status": "quote_only",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true
+     }
+    }
+   ],
+   "accuracy": {
+    "xbrl_checked": 5,
+    "xbrl_match": 5,
+    "xbrl_mismatch": 0,
+    "quote_rejected": 0,
+    "total_claims": 8
+   },
+   "xbrl_period_end": "2026-03-28",
+   "yoy_revenue_pct": 37.84619521376713,
+   "gap": {
+    "available": false,
+    "reason": "no usable prior-quarter revenue guidance on file"
+   },
+   "reaction": {
+    "ok": false,
+    "reason": "no prior trading day in cash data",
+    "base_day": null,
+    "target_day": null,
+    "rt_close": null,
+    "rt_pub": null,
+    "rt_preopen": null,
+    "cash_close": null,
+    "cash_open": null,
+    "rt_move": null,
+    "rt_pre_pub": null,
+    "rt_post_pub": null,
+    "cash_gap": null,
+    "residual": null,
+    "priced_in": null,
+    "sign_agrees": null,
+    "pub_minute": null,
+    "preopen_minute": null,
+    "open_minute": null,
+    "path": []
+   }
+  },
+  {
+   "id": "AAPL-0000320193-26-000011",
+   "ticker": "AAPL",
+   "company": "Apple Inc.",
+   "pub_utc": "2026-05-01T00:30:41+00:00",
+   "pub_et": "2026-04-30 20:30 ET",
+   "filing_date": "2026-04-30",
+   "accession": "0000320193-26-000011",
+   "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000011/a8-kex991q2202603282026.htm",
+   "sha256_raw": "2b87e3336b69cefeea3fca1379e184ba128848df68baf3b46a78a5d9b6f7835d",
+   "period_label": "fiscal 2026 second quarter ended March 28, 2026",
+   "extraction": {
+    "cache": "hit",
+    "key": "9183b4a4edb0e06953792cd5218c63f0e461d01756322ed83ed28fc64079db54",
+    "model": "deepseek:deepseek-flash"
+   },
+   "claims": [
+    {
+     "id": "c1",
+     "metric": "revenue",
+     "basis": "reported",
+     "value": 111184000000,
+     "unit": "USD",
+     "quote": "111,184 | 95,359 | 254,940 | 219,659",
+     "xbrl": {
+      "value": 111184000000.0,
+      "end": "2026-03-28",
+      "start": "2025-12-28",
+      "form": "10-Q",
+      "filed": "2026-05-01",
+      "accn": "0000320193-26-000013",
+      "tag": "RevenueFromContractWithCustomerExcludingAssessedTax",
+      "yoy_prior": 95359000000.0
+     },
+     "status": "verified",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true,
+      "xbrl": "match"
+     }
+    },
+    {
+     "id": "c2",
+     "metric": "net_income",
+     "basis": "reported",
+     "value": 29578000000,
+     "unit": "USD",
+     "quote": "$ | 29,578 | $ | 24,780 | $ | 71,675 | $ | 61,110",
+     "xbrl": {
+      "value": 29578000000.0,
+      "end": "2026-03-28",
+      "start": "2025-12-28",
+      "form": "10-Q",
+      "filed": "2026-05-01",
+      "accn": "0000320193-26-000013",
+      "tag": "NetIncomeLoss",
+      "yoy_prior": 24780000000.0
+     },
+     "status": "verified",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true,
+      "xbrl": "match"
+     }
+    },
+    {
+     "id": "c3",
+     "metric": "eps_diluted",
+     "basis": "reported",
+     "value": 2.01,
+     "unit": "USD_per_share",
+     "quote": "$ | 2.01 | $ | 1.65 | $ | 4.85 | $ | 4.05",
+     "xbrl": {
+      "value": 2.01,
+      "end": "2026-03-28",
+      "start": "2025-12-28",
+      "form": "10-Q",
+      "filed": "2026-05-01",
+      "accn": "0000320193-26-000013",
+      "tag": "EarningsPerShareDiluted",
+      "yoy_prior": 1.65
+     },
+     "status": "verified",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true,
+      "xbrl": "match"
+     }
+    },
+    {
+     "id": "c4",
+     "metric": "operating_income",
+     "basis": "reported",
+     "value": 35885000000,
+     "unit": "USD",
+     "quote": "35,885 | 29,589 | 86,737 | 72,421",
+     "xbrl": {
+      "value": 35885000000.0,
+      "end": "2026-03-28",
+      "start": "2025-12-28",
+      "form": "10-Q",
+      "filed": "2026-05-01",
+      "accn": "0000320193-26-000013",
+      "tag": "OperatingIncomeLoss",
+      "yoy_prior": 29589000000.0
+     },
+     "status": "verified",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true,
+      "xbrl": "match"
+     }
+    },
+    {
+     "id": "c5",
+     "metric": "gross_profit",
+     "basis": "reported",
+     "value": 54781000000,
+     "unit": "USD",
+     "quote": "54,781 | 44,867 | 124,012 | 103,142",
+     "xbrl": {
+      "value": 54781000000.0,
+      "end": "2026-03-28",
+      "start": "2025-12-28",
+      "form": "10-Q",
+      "filed": "2026-05-01",
+      "accn": "0000320193-26-000013",
+      "tag": "GrossProfit",
+      "yoy_prior": 44867000000.0
+     },
+     "status": "verified",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true,
+      "xbrl": "match"
+     }
+    }
+   ],
+   "accuracy": {
+    "xbrl_checked": 5,
+    "xbrl_match": 5,
+    "xbrl_mismatch": 0,
+    "quote_rejected": 0,
+    "total_claims": 5
+   },
+   "xbrl_period_end": "2026-03-28",
+   "yoy_revenue_pct": 16.59518241592299,
+   "gap": {
+    "available": false,
+    "reason": "no usable prior-quarter revenue guidance on file"
+   },
+   "reaction": {
+    "ok": false,
+    "reason": "no prior trading day in cash data",
+    "base_day": null,
+    "target_day": null,
+    "rt_close": null,
+    "rt_pub": null,
+    "rt_preopen": null,
+    "cash_close": null,
+    "cash_open": null,
+    "rt_move": null,
+    "rt_pre_pub": null,
+    "rt_post_pub": null,
+    "cash_gap": null,
+    "residual": null,
+    "priced_in": null,
+    "sign_agrees": null,
+    "pub_minute": null,
+    "preopen_minute": null,
+    "open_minute": null,
+    "path": []
+   }
+  },
+  {
+   "id": "AMZN-0001018724-26-000012",
+   "ticker": "AMZN",
+   "company": "AMAZON COM INC",
+   "pub_utc": "2026-04-30T00:18:55+00:00",
+   "pub_et": "2026-04-29 20:18 ET",
+   "filing_date": "2026-04-29",
+   "accession": "0001018724-26-000012",
+   "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000012/amzn-20260331xex991.htm",
+   "sha256_raw": "35688aa32c3d0795e37a5aeef8d7c1568ded07a9f7bfb74b2dd3a7732941a037",
+   "period_label": "first quarter ended March 31, 2026",
+   "extraction": {
+    "cache": "hit",
+    "key": "8fbef9c5a4fe88663d5f74caf81074475fdeac3be1abd4d1853515e95763d6c9",
+    "model": "deepseek:deepseek-flash"
+   },
+   "claims": [
+    {
+     "id": "c1",
+     "metric": "revenue",
+     "basis": "reported",
+     "value": 181519000000,
+     "unit": "USD",
+     "quote": "Total net sales | 155,667 | 181,519",
+     "xbrl": {
+      "value": 181519000000.0,
+      "end": "2026-03-31",
+      "start": "2026-01-01",
+      "form": "10-Q",
+      "filed": "2026-04-30",
+      "accn": "0001018724-26-000014",
+      "tag": "RevenueFromContractWithCustomerExcludingAssessedTax",
+      "yoy_prior": 155667000000.0
+     },
+     "status": "verified",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true,
+      "xbrl": "match"
+     }
+    },
+    {
+     "id": "c2",
+     "metric": "operating_income",
+     "basis": "reported",
+     "value": 23852000000,
+     "unit": "USD",
+     "quote": "Operating income | 18,405 | 23,852",
+     "xbrl": {
+      "value": 23852000000.0,
+      "end": "2026-03-31",
+      "start": "2026-01-01",
+      "form": "10-Q",
+      "filed": "2026-04-30",
+      "accn": "0001018724-26-000014",
+      "tag": "OperatingIncomeLoss",
+      "yoy_prior": 18405000000.0
+     },
+     "status": "verified",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true,
+      "xbrl": "match"
+     }
+    },
+    {
+     "id": "c3",
+     "metric": "net_income",
+     "basis": "reported",
+     "value": 30255000000,
+     "unit": "USD",
+     "quote": "Net income | $ | 17,127 | $ | 30,255",
+     "xbrl": {
+      "value": 30255000000.0,
+      "end": "2026-03-31",
+      "start": "2026-01-01",
+      "form": "10-Q",
+      "filed": "2026-04-30",
+      "accn": "0001018724-26-000014",
+      "tag": "NetIncomeLoss",
+      "yoy_prior": 17127000000.0
+     },
+     "status": "verified",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true,
+      "xbrl": "match"
+     }
+    },
+    {
+     "id": "c4",
+     "metric": "eps_diluted",
+     "basis": "reported",
+     "value": 2.78,
+     "unit": "USD_per_share",
+     "quote": "Diluted earnings per share | $ | 1.59 | $ | 2.78",
+     "xbrl": {
+      "value": 2.78,
+      "end": "2026-03-31",
+      "start": "2026-01-01",
+      "form": "10-Q",
+      "filed": "2026-04-30",
+      "accn": "0001018724-26-000014",
+      "tag": "EarningsPerShareDiluted",
+      "yoy_prior": 1.59
+     },
+     "status": "verified",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true,
+      "xbrl": "match"
+     }
+    },
+    {
+     "id": "c5",
+     "metric": "guidance_revenue_low",
+     "basis": "guidance",
+     "value": 194000000000,
+     "unit": "USD",
+     "quote": "Net sales are expected to be between $194.0 billion and $199.0 billion, or to grow between 16% and 19% compared with second quarter 2025.",
+     "status": "quote_only",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true
+     }
+    },
+    {
+     "id": "c6",
+     "metric": "guidance_revenue_high",
+     "basis": "guidance",
+     "value": 199000000000,
+     "unit": "USD",
+     "quote": "Net sales are expected to be between $194.0 billion and $199.0 billion, or to grow between 16% and 19% compared with second quarter 2025.",
+     "status": "quote_only",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true
+     }
+    }
+   ],
+   "accuracy": {
+    "xbrl_checked": 4,
+    "xbrl_match": 4,
+    "xbrl_mismatch": 0,
+    "quote_rejected": 0,
+    "total_claims": 6
+   },
+   "xbrl_period_end": "2026-03-31",
+   "yoy_revenue_pct": 16.607244952366273,
+   "gap": {
+    "available": false,
+    "reason": "no usable prior-quarter revenue guidance on file"
+   },
+   "reaction": {
+    "ok": false,
+    "reason": "no prior trading day in cash data",
+    "base_day": null,
+    "target_day": null,
+    "rt_close": null,
+    "rt_pub": null,
+    "rt_preopen": null,
+    "cash_close": null,
+    "cash_open": null,
+    "rt_move": null,
+    "rt_pre_pub": null,
+    "rt_post_pub": null,
+    "cash_gap": null,
+    "residual": null,
+    "priced_in": null,
+    "sign_agrees": null,
+    "pub_minute": null,
+    "preopen_minute": null,
+    "open_minute": null,
+    "path": []
+   }
+  },
+  {
+   "id": "META-0001628280-26-028364",
+   "ticker": "META",
+   "company": "Meta Platforms, Inc.",
+   "pub_utc": "2026-04-30T00:05:41+00:00",
+   "pub_et": "2026-04-29 20:05 ET",
+   "filing_date": "2026-04-29",
+   "accession": "0001628280-26-028364",
+   "url": "https://www.sec.gov/Archives/edgar/data/1326801/000162828026028364/meta-03312026xexhibit991.htm",
+   "sha256_raw": "cbda9be32d5cd96fbed126862b0a00ba8cb2123c180abcfb7b125f361ed01d9c",
+   "period_label": "First Quarter 2026",
+   "extraction": {
+    "cache": "hit",
+    "key": "12501b6cf889369d2664e7d675e80ba948b6722456bcf9455bde6e887d3027ec",
+    "model": "deepseek:deepseek-flash"
+   },
+   "claims": [
+    {
+     "id": "c1",
+     "metric": "revenue",
+     "basis": "reported",
+     "value": 56311000000,
+     "unit": "USD",
+     "quote": "Revenue | $ | 56,311 | $ | 42,314 | 33 | %",
+     "xbrl": {
+      "value": 56311000000.0,
+      "end": "2026-03-31",
+      "start": "2026-01-01",
+      "form": "10-Q",
+      "filed": "2026-04-30",
+      "accn": "0001628280-26-028526",
+      "tag": "RevenueFromContractWithCustomerExcludingAssessedTax",
+      "yoy_prior": 42314000000.0
+     },
+     "status": "verified",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true,
+      "xbrl": "match"
+     }
+    },
+    {
+     "id": "c2",
+     "metric": "net_income",
+     "basis": "reported",
+     "value": 26773000000,
+     "unit": "USD",
+     "quote": "Net income | $ | 26,773 | $ | 16,644 | 61 | %",
+     "xbrl": {
+      "value": 26773000000.0,
+      "end": "2026-03-31",
+      "start": "2026-01-01",
+      "form": "10-Q",
+      "filed": "2026-04-30",
+      "accn": "0001628280-26-028526",
+      "tag": "NetIncomeLoss",
+      "yoy_prior": 16644000000.0
+     },
+     "status": "verified",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true,
+      "xbrl": "match"
+     }
+    },
+    {
+     "id": "c3",
+     "metric": "eps_diluted",
+     "basis": "reported",
+     "value": 10.44,
+     "unit": "USD_per_share",
+     "quote": "Diluted earnings per share (EPS) (1) | $ | 10.44 | $ | 6.43 | 62 | %",
+     "xbrl": {
+      "value": 10.44,
+      "end": "2026-03-31",
+      "start": "2026-01-01",
+      "form": "10-Q",
+      "filed": "2026-04-30",
+      "accn": "0001628280-26-028526",
+      "tag": "EarningsPerShareDiluted",
+      "yoy_prior": 6.43
+     },
+     "status": "verified",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true,
+      "xbrl": "match"
+     }
+    },
+    {
+     "id": "c4",
+     "metric": "operating_income",
+     "basis": "reported",
+     "value": 22872000000,
+     "unit": "USD",
+     "quote": "Income from operations | $ | 22,872 | $ | 17,555 | 30 | %",
+     "xbrl": {
+      "value": 22872000000.0,
+      "end": "2026-03-31",
+      "start": "2026-01-01",
+      "form": "10-Q",
+      "filed": "2026-04-30",
+      "accn": "0001628280-26-028526",
+      "tag": "OperatingIncomeLoss",
+      "yoy_prior": 17555000000.0
+     },
+     "status": "verified",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true,
+      "xbrl": "match"
+     }
+    },
+    {
+     "id": "c5",
+     "metric": "guidance_revenue_low",
+     "basis": "guidance",
+     "value": 58000000000,
+     "unit": "USD",
+     "quote": "We expect second quarter 2026 total revenue to be in the range of $58-61 billion.",
+     "status": "quote_only",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true
+     }
+    },
+    {
+     "id": "c6",
+     "metric": "guidance_revenue_high",
+     "basis": "guidance",
+     "value": 61000000000,
+     "unit": "USD",
+     "quote": "We expect second quarter 2026 total revenue to be in the range of $58-61 billion.",
+     "status": "quote_only",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true
+     }
+    }
+   ],
+   "accuracy": {
+    "xbrl_checked": 4,
+    "xbrl_match": 4,
+    "xbrl_mismatch": 0,
+    "quote_rejected": 0,
+    "total_claims": 6
+   },
+   "xbrl_period_end": "2026-03-31",
+   "yoy_revenue_pct": 33.07888642057002,
+   "gap": {
+    "available": false,
+    "reason": "no usable prior-quarter revenue guidance on file"
+   },
+   "reaction": {
+    "ok": false,
+    "reason": "no prior trading day in cash data",
+    "base_day": null,
+    "target_day": null,
+    "rt_close": null,
+    "rt_pub": null,
+    "rt_preopen": null,
+    "cash_close": null,
+    "cash_open": null,
+    "rt_move": null,
+    "rt_pre_pub": null,
+    "rt_post_pub": null,
+    "cash_gap": null,
+    "residual": null,
+    "priced_in": null,
+    "sign_agrees": null,
+    "pub_minute": null,
+    "preopen_minute": null,
+    "open_minute": null,
+    "path": []
+   }
+  },
+  {
+   "id": "MSFT-0001193125-26-191457",
+   "ticker": "MSFT",
+   "company": "MICROSOFT CORP",
+   "pub_utc": "2026-04-29T20:03:31+00:00",
+   "pub_et": "2026-04-29 16:03 ET",
+   "filing_date": "2026-04-29",
+   "accession": "0001193125-26-191457",
+   "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526191457/msft-ex99_1.htm",
+   "sha256_raw": "c2975abea06c51aedb05c0b2af4e8e02b9ed7c78ff99e525cbe434e5ce256f2a",
+   "period_label": "Three Months Ended March 31, 2026",
+   "extraction": {
+    "cache": "hit",
+    "key": "376576d9f328c08449870bfb82d0db473894e09f28e2e5d121235ab3066f1a82",
+    "model": "deepseek:deepseek-flash"
+   },
+   "claims": [
+    {
+     "id": "c1",
+     "metric": "revenue",
+     "basis": "reported",
+     "value": 82886000000,
+     "unit": "USD",
+     "quote": "$82,886",
+     "xbrl": {
+      "value": 82886000000.0,
+      "end": "2026-03-31",
+      "start": "2026-01-01",
+      "form": "10-Q",
+      "filed": "2026-04-29",
+      "accn": "0001193125-26-191507",
+      "tag": "RevenueFromContractWithCustomerExcludingAssessedTax",
+      "yoy_prior": 70066000000.0
+     },
+     "status": "verified",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true,
+      "xbrl": "match"
+     }
+    },
+    {
+     "id": "c2",
+     "metric": "net_income",
+     "basis": "reported",
+     "value": 31778000000,
+     "unit": "USD",
+     "quote": "Net income\n | \n$31,778",
+     "status": "rejected",
+     "reason": "quote not found in the document",
+     "checks": {
+      "schema": true,
+      "quote_in_document": false
+     }
+    },
+    {
+     "id": "c3",
+     "metric": "eps_diluted",
+     "basis": "reported",
+     "value": 4.27,
+     "unit": "USD_per_share",
+     "quote": "Diluted earnings per share was $4.27",
+     "xbrl": {
+      "value": 4.27,
+      "end": "2026-03-31",
+      "start": "2026-01-01",
+      "form": "10-Q",
+      "filed": "2026-04-29",
+      "accn": "0001193125-26-191507",
+      "tag": "EarningsPerShareDiluted",
+      "yoy_prior": 3.46
+     },
+     "status": "verified",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true,
+      "xbrl": "match"
+     }
+    },
+    {
+     "id": "c4",
+     "metric": "operating_income",
+     "basis": "reported",
+     "value": 38398000000,
+     "unit": "USD",
+     "quote": "Operating income\n | \n38,398",
+     "status": "rejected",
+     "reason": "quote not found in the document",
+     "checks": {
+      "schema": true,
+      "quote_in_document": false
+     }
+    },
+    {
+     "id": "c5",
+     "metric": "gross_profit",
+     "basis": "reported",
+     "value": 56058000000,
+     "unit": "USD",
+     "quote": "Gross margin\n | \n56,058",
+     "status": "rejected",
+     "reason": "quote not found in the document",
+     "checks": {
+      "schema": true,
+      "quote_in_document": false
+     }
+    }
+   ],
+   "accuracy": {
+    "xbrl_checked": 2,
+    "xbrl_match": 2,
+    "xbrl_mismatch": 0,
+    "quote_rejected": 3,
+    "total_claims": 5
+   },
+   "xbrl_period_end": "2026-03-31",
+   "yoy_revenue_pct": 18.2970342248737,
+   "gap": {
+    "available": false,
+    "reason": "no usable prior-quarter revenue guidance on file"
+   },
+   "reaction": {
+    "ok": false,
+    "reason": "no prior trading day in cash data",
+    "base_day": null,
+    "target_day": null,
+    "rt_close": null,
+    "rt_pub": null,
+    "rt_preopen": null,
+    "cash_close": null,
+    "cash_open": null,
+    "rt_move": null,
+    "rt_pre_pub": null,
+    "rt_post_pub": null,
+    "cash_gap": null,
+    "residual": null,
+    "priced_in": null,
+    "sign_agrees": null,
+    "pub_minute": null,
+    "preopen_minute": null,
+    "open_minute": null,
+    "path": []
+   }
+  },
+  {
+   "id": "GOOGL-0001652044-26-000043",
+   "ticker": "GOOGL",
+   "company": "Alphabet Inc.",
+   "pub_utc": "2026-04-29T20:01:35+00:00",
+   "pub_et": "2026-04-29 16:01 ET",
+   "filing_date": "2026-04-29",
+   "accession": "0001652044-26-000043",
+   "url": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000043/googexhibit991q12026.htm",
+   "sha256_raw": "25c9daecb99471039d6082c5670aa59eac94aea2f665874a2aacfaad0752a8a4",
+   "period_label": "First Quarter 2026",
+   "extraction": {
+    "cache": "hit",
+    "key": "4d00f9480c0bc95bc60c557e74dae0ad5f5e1708242122dae244ea6270b91ba9",
+    "model": "deepseek:deepseek-flash"
+   },
+   "claims": [
+    {
+     "id": "c1",
+     "metric": "revenue",
+     "basis": "reported",
+     "value": 109896000000,
+     "unit": "USD",
+     "quote": "Revenues | $ | 90,234 | $ | 109,896 |",
+     "xbrl": {
+      "value": 109896000000.0,
+      "end": "2026-03-31",
+      "start": "2026-01-01",
+      "form": "10-Q",
+      "filed": "2026-04-30",
+      "accn": "0001652044-26-000048",
+      "tag": "Revenues",
+      "yoy_prior": 90234000000.0
+     },
+     "status": "verified",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true,
+      "xbrl": "match"
+     }
+    },
+    {
+     "id": "c2",
+     "metric": "net_income",
+     "basis": "reported",
+     "value": 62578000000,
+     "unit": "USD",
+     "quote": "Net income | $ | 34,540 | $ | 62,578 |",
+     "xbrl": {
+      "value": 62578000000.0,
+      "end": "2026-03-31",
+      "start": "2026-01-01",
+      "form": "10-Q",
+      "filed": "2026-04-30",
+      "accn": "0001652044-26-000048",
+      "tag": "NetIncomeLoss",
+      "yoy_prior": 34540000000.0
+     },
+     "status": "verified",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true,
+      "xbrl": "match"
+     }
+    },
+    {
+     "id": "c3",
+     "metric": "eps_diluted",
+     "basis": "reported",
+     "value": 5.11,
+     "unit": "USD_per_share",
+     "quote": "Diluted net income per share | $ | 2.81 | $ | 5.11 |",
+     "xbrl": {
+      "value": 5.11,
+      "end": "2026-03-31",
+      "start": "2026-01-01",
+      "form": "10-Q",
+      "filed": "2026-04-30",
+      "accn": "0001652044-26-000048",
+      "tag": "EarningsPerShareDiluted",
+      "yoy_prior": 2.81
+     },
+     "status": "verified",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true,
+      "xbrl": "match"
+     }
+    },
+    {
+     "id": "c4",
+     "metric": "operating_income",
+     "basis": "reported",
+     "value": 39696000000,
+     "unit": "USD",
+     "quote": "Income from operations | 30,606 | 39,696 |",
+     "xbrl": {
+      "value": 39696000000.0,
+      "end": "2026-03-31",
+      "start": "2026-01-01",
+      "form": "10-Q",
+      "filed": "2026-04-30",
+      "accn": "0001652044-26-000048",
+      "tag": "OperatingIncomeLoss",
+      "yoy_prior": 30606000000.0
+     },
+     "status": "verified",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true,
+      "xbrl": "match"
+     }
+    }
+   ],
+   "accuracy": {
+    "xbrl_checked": 4,
+    "xbrl_match": 4,
+    "xbrl_mismatch": 0,
+    "quote_rejected": 0,
+    "total_claims": 4
+   },
+   "xbrl_period_end": "2026-03-31",
+   "yoy_revenue_pct": 21.790012633818744,
+   "gap": {
+    "available": false,
+    "reason": "no usable prior-quarter revenue guidance on file"
+   },
+   "reaction": {
+    "ok": false,
+    "reason": "no prior trading day in cash data",
+    "base_day": null,
+    "target_day": null,
+    "rt_close": null,
+    "rt_pub": null,
+    "rt_preopen": null,
+    "cash_close": null,
+    "cash_open": null,
+    "rt_move": null,
+    "rt_pre_pub": null,
+    "rt_post_pub": null,
+    "cash_gap": null,
+    "residual": null,
+    "priced_in": null,
+    "sign_agrees": null,
+    "pub_minute": null,
+    "preopen_minute": null,
+    "open_minute": null,
+    "path": []
+   }
+  },
+  {
+   "id": "TSLA-0001628280-26-026551",
+   "ticker": "TSLA",
+   "company": "Tesla, Inc.",
+   "pub_utc": "2026-04-22T20:10:44+00:00",
+   "pub_et": "2026-04-22 16:10 ET",
+   "filing_date": "2026-04-22",
+   "accession": "0001628280-26-026551",
+   "url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026026551/exhibit991.htm",
+   "sha256_raw": "c4302e0ccb0522e40f0d25d0e8ef27fa4faa7d544b4b98219817e5745d560a9a",
+   "period_label": "Q1 2026",
+   "extraction": {
+    "cache": "hit",
+    "key": "b557c291e19cd86f20611a5807e02806351dacd8767598c43d3d604c0a30b6b0",
+    "model": "deepseek:deepseek-flash"
+   },
+   "claims": [
+    {
+     "id": "c1",
+     "metric": "revenue",
+     "basis": "reported",
+     "value": 22387000000,
+     "unit": "USD",
+     "quote": "Total revenues 19,335 22,496 28,095 24,901 22,387 16%",
+     "xbrl": {
+      "value": 22387000000.0,
+      "end": "2026-03-31",
+      "start": "2026-01-01",
+      "form": "10-Q",
+      "filed": "2026-04-23",
+      "accn": "0001628280-26-026673",
+      "tag": "Revenues",
+      "yoy_prior": 19335000000.0
+     },
+     "status": "verified",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true,
+      "xbrl": "match"
+     }
+    },
+    {
+     "id": "c2",
+     "metric": "net_income",
+     "basis": "reported",
+     "value": 477000000,
+     "unit": "USD",
+     "quote": "Net income attributable to common stockholders (GAAP) 409 1,172 1,373 840 477 17%",
+     "xbrl": {
+      "value": 477000000.0,
+      "end": "2026-03-31",
+      "start": "2026-01-01",
+      "form": "10-Q",
+      "filed": "2026-04-23",
+      "accn": "0001628280-26-026673",
+      "tag": "NetIncomeLoss",
+      "yoy_prior": 409000000.0
+     },
+     "status": "verified",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true,
+      "xbrl": "match"
+     }
+    },
+    {
+     "id": "c3",
+     "metric": "eps_diluted",
+     "basis": "reported",
+     "value": 0.13,
+     "unit": "USD_per_share",
+     "quote": "EPS attributable to common stockholders, diluted (GAAP) 0.12 0.33 0.39 0.24 0.13 8%",
+     "xbrl": {
+      "value": 0.13,
+      "end": "2026-03-31",
+      "start": "2026-01-01",
+      "form": "10-Q",
+      "filed": "2026-04-23",
+      "accn": "0001628280-26-026673",
+      "tag": "EarningsPerShareDiluted",
+      "yoy_prior": 0.12
+     },
+     "status": "verified",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true,
+      "xbrl": "match"
+     }
+    },
+    {
+     "id": "c4",
+     "metric": "operating_income",
+     "basis": "reported",
+     "value": 941000000,
+     "unit": "USD",
+     "quote": "Income from operations 399 923 1,624 1,409 941 136%",
+     "xbrl": {
+      "value": 941000000.0,
+      "end": "2026-03-31",
+      "start": "2026-01-01",
+      "form": "10-Q",
+      "filed": "2026-04-23",
+      "accn": "0001628280-26-026673",
+      "tag": "OperatingIncomeLoss",
+      "yoy_prior": 399000000.0
+     },
+     "status": "verified",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true,
+      "xbrl": "match"
+     }
+    },
+    {
+     "id": "c5",
+     "metric": "gross_profit",
+     "basis": "reported",
+     "value": 4720000000,
+     "unit": "USD",
+     "quote": "Total gross profit 3,153 3,878 5,054 5,009 4,720 50%",
+     "xbrl": {
+      "value": 4720000000.0,
+      "end": "2026-03-31",
+      "start": "2026-01-01",
+      "form": "10-Q",
+      "filed": "2026-04-23",
+      "accn": "0001628280-26-026673",
+      "tag": "GrossProfit",
+      "yoy_prior": 3153000000.0
+     },
+     "status": "verified",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true,
+      "xbrl": "match"
+     }
+    },
+    {
+     "id": "c6",
+     "metric": "gross_margin_pct",
+     "basis": "reported",
+     "value": 21.1,
+     "unit": "percent",
+     "quote": "Total GAAP gross margin 16.3% 17.2% 18.0% 20.1% 21.1% 478 bp",
+     "status": "quote_only",
+     "checks": {
+      "schema": true,
+      "quote_in_document": true,
+      "number_in_quote": true
+     }
+    }
+   ],
+   "accuracy": {
+    "xbrl_checked": 5,
+    "xbrl_match": 5,
+    "xbrl_mismatch": 0,
+    "quote_rejected": 0,
+    "total_claims": 6
+   },
+   "xbrl_period_end": "2026-03-31",
+   "yoy_revenue_pct": 15.784846133953966,
+   "gap": {
+    "available": false,
+    "reason": "no usable prior-quarter revenue guidance on file"
+   },
+   "reaction": {
+    "ok": false,
+    "reason": "no prior trading day in cash data",
+    "base_day": null,
+    "target_day": null,
+    "rt_close": null,
+    "rt_pub": null,
+    "rt_preopen": null,
+    "cash_close": null,
+    "cash_open": null,
+    "rt_move": null,
+    "rt_pre_pub": null,
+    "rt_post_pub": null,
+    "cash_gap": null,
+    "residual": null,
+    "priced_in": null,
+    "sign_agrees": null,
+    "pub_minute": null,
+    "preopen_minute": null,
+    "open_minute": null,
+    "path": []
+   }
+  },
+  {
+   "id": "TSLA-0001628280-26-022956",
+   "ticker": "TSLA",
+   "company": "Tesla, Inc.",
+   "pub_utc": "2026-04-02T13:07:13+00:00",
+   "pub_et": "2026-04-02 09:07 ET",
+   "filing_date": "2026-04-02",
+   "accession": "0001628280-26-022956",
+   "url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026022956/exhibit9911111.htm",
+   "sha256_raw": "bda4254664bd939549f5b47ec7d29201c2d42e9832c841706ed2fa0a8da1434f",
+   "period_label": "Q1 2026",
+   "extraction": {
+    "cache": "hit",
+    "key": "d8fc5d8061d1fa0e65270e4b58244f28c5b1c1a30f013f0cf1adc3c86b63c0bb",
+    "model": "deepseek:deepseek-flash"
+   },
+   "claims": [],
+   "accuracy": {
+    "xbrl_checked": 0,
+    "xbrl_match": 0,
+    "xbrl_mismatch": 0,
+    "quote_rejected": 0,
+    "total_claims": 0
+   },
+   "xbrl_period_end": "2026-03-31",
+   "yoy_revenue_pct": 15.784846133953966,
+   "gap": {
+    "available": false,
+    "reason": "revenue figure not extracted/verified for this release"
+   },
+   "reaction": {
+    "ok": false,
+    "reason": "no prior trading day in cash data",
+    "base_day": null,
+    "target_day": null,
+    "rt_close": null,
+    "rt_pub": null,
+    "rt_preopen": null,
+    "cash_close": null,
+    "cash_open": null,
+    "rt_move": null,
+    "rt_pre_pub": null,
+    "rt_post_pub": null,
+    "cash_gap": null,
+    "residual": null,
+    "priced_in": null,
+    "sign_agrees": null,
+    "pub_minute": null,
+    "preopen_minute": null,
+    "open_minute": null,
+    "path": []
+   }
+  }
+ ]
 }

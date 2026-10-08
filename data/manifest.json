@@ -1,0 +1,42 @@
+{
+ "fetched_at_utc": "2026-10-08T22:34:44.254913+00:00",
+ "since": "2026-03-01",
+ "files": {
+  "data\\edgar\\NVDA\\0001045810-26-000051.json": "2744d50c086fad4835183278141fd2f869ba34ed9315e40b2ca159ae26bd77cb",
+  "data\\edgar\\NVDA\\0001045810-26-000073.json": "e6a1484e17eb1625f6162f75d9016ff06d8fad7b844ab411f3fb5cae2045d2c7",
+  "data\\xbrl\\NVDA.json": "1bb31e8f40418c045bd4de2bfef0c7fa2453c22f40f7f102ccaf46305e89451f",
+  "data\\edgar\\TSLA\\0001628280-26-022956.json": "0a55834ce24772db47efee474b8b5e5813d386f459eee9c03d4fc794263476be",
+  "data\\edgar\\TSLA\\0001628280-26-026551.json": "5dbe2d6d2f7694b5ce0dc641515f72b894175e0cb1c10c099bede01a4c11ca22",
+  "data\\edgar\\TSLA\\0001628280-26-046717.json": "0b4c6828d420686d07df270667465416bed6584c1c1e47e105ca49cbb62a221c",
+  "data\\edgar\\TSLA\\0001628280-26-049213.json": "11ed613d31d224d119004ec427fd8f193ef3d50e2e39bb9034d6115dc4634b1e",
+  "data\\edgar\\TSLA\\0001628280-26-064366.json": "d160857c5f82e494082cb663f0dc00ccea46a558e1ec4e2e6e4572c0e927dc37",
+  "data\\xbrl\\TSLA.json": "6f37d6ea484d5de6c2d2efe7de46fd441f5cc1d3b007e3ebe4a766c45b26122e",
+  "data\\edgar\\AAPL\\0000320193-26-000011.json": "1e4b337d89adfc8b2a68a584f022d56e1ab69f3869f2c2cdac77597dcaa28cb3",
+  "data\\edgar\\AAPL\\0000320193-26-000018.json": "07098dd4d62066d9e2d36e25e11d556e8980e842655809302945ca49dc27b7d7",
+  "data\\xbrl\\AAPL.json": "43e595998129e3e1e201282570c6257dcdd785a1c5e79fe54ea48a4675082bd9",
+  "data\\edgar\\META\\0001628280-26-028364.json": "818d4a954d07178406d1f432123d5c197978a68c3e42adc9d59a408311d4395a",
+  "data\\edgar\\META\\0001628280-26-050596.json": "ec63a454ded0bd60de221e6e9c2330b39f646b7ecc554960be9c5ed8b671bf2a",
+  "data\\xbrl\\META.json": "f2ac19d21c002dae657d992c1f47ef186635206653b58aa9e3e516c6de91581d",
+  "data\\edgar\\AMZN\\0001018724-26-000012.json": "83f61293135fb9e1d7f4ec14cbd442bab084eec6f14d8335cc89094d5c7f0202",
+  "data\\edgar\\AMZN\\0001018724-26-000024.json": "407a7652dade665100292a9a521a293a15ba9a627a066d1eab5b99c525d6dec5",
+  "data\\xbrl\\AMZN.json": "06e29b8d11edc35631c4a4c74633a9fd0abe3acce2a0ba2315a4d45b112e3098",
+  "data\\edgar\\MSFT\\0001193125-26-191457.json": "723ac3bf0b781e2e383711c9eb630ae0dc401bbdf1323cb1dd91729272fb3fef",
+  "data\\edgar\\MSFT\\0001193125-26-323632.json": "93e33635580c7a396dcdb45434eefafeb5879b76c4b54537fe65dfbd873b1291",
+  "data\\xbrl\\MSFT.json": "c7c873473b150a8fb7d4b6f17e86a09748e98e960f19e2e76ce9efabb5b42e49",
+  "data\\edgar\\GOOGL\\0001652044-26-000043.json": "648907f18f4f10e1748282b992d804d58caf5f6189e14a97cfdf60919f3fd385",
+  "data\\edgar\\GOOGL\\0001652044-26-000066.json": "2ffa2375bc89c5e7a3d86e8c5a38fbaaf52929f85bedc8c17a3a4358aaf83d5c",
+  "data\\xbrl\\GOOGL.json": "e7855151c96ba2a743069518f93677c6f960f879b94ad2ab9e330259e24c67fe",
+  "data\\edgar\\AMD\\0000002488-26-000072.json": "4a9c36f641fc1a7ed756cf9aceea6295b124b6c2febaaa90975d364aca4c0f0b",
+  "data\\edgar\\AMD\\0000002488-26-000121.json": "f731e7f02bce3971aabaa3d70fd325e7f2272b98aa29d533e8cfb7f3e49f8852",
+  "data\\xbrl\\AMD.json": "f4b6b6a6bbc796d2c92788dfcc6e331f844f59790947d2affafd16e4f0697cd8",
+  "data\\mcp\\tools.json": "7763d03518970bad23224a352c11a3501906ec1a8770bc56fc6b7aca5003ef90"
+ },
+ "errors": [
+  "mcp guide: empty SSE response"
+ ],
+ "notes": [
+  "extraction provider: deepseek:deepseek-flash",
+  "extraction: called=13 cache_hit=6 skipped_no_key=0",
+  "mcp: tools/list captured"
+ ]
+}

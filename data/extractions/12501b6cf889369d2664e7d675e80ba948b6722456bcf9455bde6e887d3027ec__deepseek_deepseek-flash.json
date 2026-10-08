@@ -1,0 +1,71 @@
+{
+ "label": "deepseek:deepseek-flash",
+ "prompt_version": "v1",
+ "created_at": "2026-10-08T22:36:05.649226+00:00",
+ "usage": {
+  "prompt_tokens": 5199,
+  "completion_tokens": 3345,
+  "total_tokens": 8544,
+  "prompt_tokens_details": {
+   "cached_tokens": 256
+  },
+  "completion_tokens_details": {
+   "reasoning_tokens": 3001
+  },
+  "prompt_cache_hit_tokens": 256,
+  "prompt_cache_miss_tokens": 4943
+ },
+ "extraction": {
+  "period_label": "First Quarter 2026",
+  "claims": [
+   {
+    "id": "c1",
+    "metric": "revenue",
+    "basis": "reported",
+    "value": 56311000000,
+    "unit": "USD",
+    "quote": "Revenue | $ | 56,311 | $ | 42,314 | 33 | %"
+   },
+   {
+    "id": "c2",
+    "metric": "net_income",
+    "basis": "reported",
+    "value": 26773000000,
+    "unit": "USD",
+    "quote": "Net income | $ | 26,773 | $ | 16,644 | 61 | %"
+   },
+   {
+    "id": "c3",
+    "metric": "eps_diluted",
+    "basis": "reported",
+    "value": 10.44,
+    "unit": "USD_per_share",
+    "quote": "Diluted earnings per share (EPS) (1) | $ | 10.44 | $ | 6.43 | 62 | %"
+   },
+   {
+    "id": "c4",
+    "metric": "operating_income",
+    "basis": "reported",
+    "value": 22872000000,
+    "unit": "USD",
+    "quote": "Income from operations | $ | 22,872 | $ | 17,555 | 30 | %"
+   },
+   {
+    "id": "c5",
+    "metric": "guidance_revenue_low",
+    "basis": "guidance",
+    "value": 58000000000,
+    "unit": "USD",
+    "quote": "We expect second quarter 2026 total revenue to be in the range of $58-61 billion."
+   },
+   {
+    "id": "c6",
+    "metric": "guidance_revenue_high",
+    "basis": "guidance",
+    "value": 61000000000,
+    "unit": "USD",
+    "quote": "We expect second quarter 2026 total revenue to be in the range of $58-61 billion."
+   }
+  ]
+ }
+}

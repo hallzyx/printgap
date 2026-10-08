@@ -1,0 +1,55 @@
+{
+ "label": "deepseek:deepseek-flash",
+ "prompt_version": "v1",
+ "created_at": "2026-10-08T22:35:39.872868+00:00",
+ "usage": {
+  "prompt_tokens": 7124,
+  "completion_tokens": 929,
+  "total_tokens": 8053,
+  "prompt_tokens_details": {
+   "cached_tokens": 256
+  },
+  "completion_tokens_details": {
+   "reasoning_tokens": 670
+  },
+  "prompt_cache_hit_tokens": 256,
+  "prompt_cache_miss_tokens": 6868
+ },
+ "extraction": {
+  "period_label": "First Quarter 2026",
+  "claims": [
+   {
+    "id": "c1",
+    "metric": "revenue",
+    "basis": "reported",
+    "value": 109896000000,
+    "unit": "USD",
+    "quote": "Revenues | $ | 90,234 | $ | 109,896 |"
+   },
+   {
+    "id": "c2",
+    "metric": "net_income",
+    "basis": "reported",
+    "value": 62578000000,
+    "unit": "USD",
+    "quote": "Net income | $ | 34,540 | $ | 62,578 |"
+   },
+   {
+    "id": "c3",
+    "metric": "eps_diluted",
+    "basis": "reported",
+    "value": 5.11,
+    "unit": "USD_per_share",
+    "quote": "Diluted net income per share | $ | 2.81 | $ | 5.11 |"
+   },
+   {
+    "id": "c4",
+    "metric": "operating_income",
+    "basis": "reported",
+    "value": 39696000000,
+    "unit": "USD",
+    "quote": "Income from operations | 30,606 | 39,696 |"
+   }
+  ]
+ }
+}
