@@ -40,12 +40,18 @@ The same extraction prompt runs on several providers. Pick one by setting its ke
 | Provider | Key variable | Default model |
 |---|---|---|
 | Anthropic | `ANTHROPIC_API_KEY` | `claude-sonnet-5-5` |
-| OpenAI | `OPENAI_API_KEY` | `gpt-4.1` |
-| DeepSeek | `DEEPSEEK_API_KEY` | `deepseek-chat` |
+| OpenAI | `OPENAI_API_KEY` | `gpt-6.1-sol` |
+| DeepSeek | `DEEPSEEK_API_KEY` | `deepseek-flash` |
 | Any OpenAI-compatible endpoint (for example the Qwen endpoint the hackathon provides) | `LLM_API_KEY` + `PRINTGAP_BASE_URL` + `PRINTGAP_MODEL` | none, you set it |
 
 - If several keys are present, the order above decides; `PRINTGAP_PROVIDER=openai` (or `anthropic`, `deepseek`, `compatible`) forces one.
 - `PRINTGAP_MODEL` overrides the default model of whichever provider is chosen. Model names change, so check the provider's current list if a default is rejected.
+- Defaults were checked against the providers' own pages on 2026-10-08:
+  - OpenAI ([models](https://developers.openai.com/api/docs/models)): the current flagships are `gpt-6-astra` (most capable, priciest), `gpt-6.1-sol` (near-Astra at a fifth of the price, our default) and `gpt-6-luna` (cheapest). `gpt-4.1` is still listed as active, as a non-reasoning option.
+  - DeepSeek ([change log](https://api-docs.deepseek.com/updates/)): `deepseek-flash` (V4.1 Flash, 2026-09-10) and `deepseek-v4-pro`. The older `deepseek-chat` and `deepseek-reasoner` were announced for discontinuation on 2026-07-24, so do not rely on them.
+  - Anthropic: `claude-sonnet-5-5` (default), `claude-opus-5-5`, `claude-haiku-5-5`.
+- These are reasoning models, which spend output tokens thinking before they answer. The code gives them a large output budget and reports a clear error if an answer is still cut off.
+- Hackathon Qwen credits go through the generic mode. The handbook gives the endpoint `https://hackathon.bitgetops.com/v1` and the model `qwen3.8-max`, so set `LLM_API_KEY`, `PRINTGAP_BASE_URL=https://hackathon.bitgetops.com/v1` and `PRINTGAP_MODEL=qwen3.8-max`. Re-check the handbook first, because it may change.
 - Each stored extraction records which provider and model made it, and `site/method.html` lists them. Verification is identical whichever model answered: a quote that is not in the document, or a number that contradicts SEC XBRL, is discarded.
 - The question box on the page has the same choices (Anthropic, OpenAI, DeepSeek, other endpoint). The key is typed into the page, stays in that tab and goes only to the provider you pick. Some providers do not allow calls straight from a web page (CORS); if one fails that way, the page says so, and the memo and the Python pipeline are unaffected.
 
