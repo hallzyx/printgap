@@ -11,12 +11,11 @@ from __future__ import annotations
 
 import hashlib
 import json
-import os
 import re
+from datetime import datetime, timezone
 from pathlib import Path
 
 PROMPT_VERSION = "v1"
-DEFAULT_MODEL = os.environ.get("PRINTGAP_MODEL", "claude-sonnet-5-5")
 
 METRICS = [
     "revenue",
@@ -181,13 +180,20 @@ def accuracy(verified: list[dict]) -> dict:
 
 
 # ----------------------------- LLM call + cache --------------------------------
+# The cache is keyed by the DOCUMENT (and prompt), not by the model, so the site can be
+# rebuilt offline whichever provider produced the extraction. Each file records who made it;
+# one document can hold several, one per provider:model, and the newest one is used.
 
-def cache_key(doc_text: str, model: str = DEFAULT_MODEL) -> str:
+def doc_key(doc_text: str) -> str:
     h = hashlib.sha256()
-    h.update(f"{model}|{PROMPT_VERSION}|".encode())
+    h.update(f"{PROMPT_VERSION}|".encode())
     h.update(SYSTEM.encode())
     h.update(doc_text.encode())
     return h.hexdigest()
+
+
+def _safe(label: str) -> str:
+    return re.sub(r"[^A-Za-z0-9._-]+", "_", label)
 
 
 def parse_json(text: str) -> dict:
@@ -199,44 +205,58 @@ def parse_json(text: str) -> dict:
     return json.loads(text[i : j + 1])
 
 
-def call_anthropic(doc_text: str, model: str, api_key: str, max_chars: int = 120_000) -> dict:
-    import requests  # imported lazily so the offline build needs no network libs
-
-    r = requests.post(
-        "https://api.anthropic.com/v1/messages",
-        headers={"x-api-key": api_key, "anthropic-version": "2023-06-01", "content-type": "application/json"},
-        json={
-            "model": model,
-            "max_tokens": 4096,
-            "temperature": 0,
-            "system": SYSTEM,
-            "messages": [{"role": "user", "content": "DOCUMENT:\n" + doc_text[:max_chars]}],
-        },
-        timeout=180,
-    )
-    r.raise_for_status()
-    body = r.json()
-    text = "".join(b.get("text", "") for b in body.get("content", []) if b.get("type") == "text")
-    return {"raw_text": text, "usage": body.get("usage"), "stop_reason": body.get("stop_reason")}
+def user_message(doc_text: str, max_chars: int = 120_000) -> str:
+    return "DOCUMENT:\n" + doc_text[:max_chars]
 
 
-def extract_cached(doc_text: str, cache_dir: Path, api_key: str | None, model: str = DEFAULT_MODEL):
-    """Return (extraction_dict | None, meta). Never calls the API if a cache entry exists."""
+def cache_store(cache_dir: Path, doc_text: str, extraction: dict, label: str, usage=None) -> Path:
     cache_dir.mkdir(parents=True, exist_ok=True)
-    key = cache_key(doc_text, model)
-    p = cache_dir / f"{key}.json"
-    if p.exists():
-        d = json.loads(p.read_text())
-        return d["extraction"], {"cache": "hit", "key": key, "model": d.get("model")}
-    if not api_key:
-        return None, {"cache": "miss-no-key", "key": key}
-    resp = call_anthropic(doc_text, model, api_key)
-    extraction = parse_json(resp["raw_text"])
+    p = cache_dir / f"{doc_key(doc_text)}__{_safe(label)}.json"
     p.write_text(
         json.dumps(
-            {"model": model, "prompt_version": PROMPT_VERSION, "usage": resp.get("usage"), "extraction": extraction},
+            {
+                "label": label,
+                "prompt_version": PROMPT_VERSION,
+                "created_at": datetime.now(timezone.utc).isoformat(),
+                "usage": usage,
+                "extraction": extraction,
+            },
             ensure_ascii=False,
             indent=1,
         )
     )
-    return extraction, {"cache": "miss-called", "key": key, "model": model}
+    return p
+
+
+def cache_lookup(cache_dir: Path, doc_text: str, label: str | None = None):
+    """(extraction, meta) for this document, or (None, None). Without a label: the newest one."""
+    key = doc_key(doc_text)
+    if label:
+        files = [cache_dir / f"{key}__{_safe(label)}.json"]
+    else:
+        files = sorted(cache_dir.glob(f"{key}__*.json")) if cache_dir.exists() else []
+    found = []
+    for f in files:
+        if f.exists():
+            d = json.loads(f.read_text())
+            found.append((d.get("created_at", ""), f.name, d))
+    if not found:
+        return None, None
+    _, _, d = max(found)
+    return d["extraction"], {"cache": "hit", "key": key, "model": d.get("label")}
+
+
+def extract_cached(doc_text: str, cache_dir: Path, provider=None):
+    """Return (extraction | None, meta). Calls the provider only if this exact provider:model has
+    not already answered for this document. With no provider, only the cache is used."""
+    from . import llm
+
+    ex, meta = cache_lookup(cache_dir, doc_text, provider.label if provider else None)
+    if ex is not None:
+        return ex, meta
+    if provider is None:
+        return None, {"cache": "miss-no-key", "key": doc_key(doc_text)}
+    resp = llm.complete(provider, SYSTEM, user_message(doc_text))
+    extraction = parse_json(resp["raw_text"])
+    cache_store(cache_dir, doc_text, extraction, provider.label, resp.get("usage"))
+    return extraction, {"cache": "miss-called", "key": doc_key(doc_text), "model": provider.label}

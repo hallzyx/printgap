@@ -99,8 +99,33 @@ class VerifierTests(unittest.TestCase):
         acc = X.accuracy(res["claims"])
         self.assertEqual((acc["xbrl_checked"], acc["xbrl_match"], acc["total_claims"]), (2, 2, 3))
 
-    def test_cache_key_changes_with_doc(self):
-        self.assertNotEqual(X.cache_key("a"), X.cache_key("b"))
+    def test_doc_key_changes_with_doc_but_not_with_model(self):
+        self.assertNotEqual(X.doc_key("a"), X.doc_key("b"))
+        self.assertEqual(X.doc_key("a"), X.doc_key("a"))
+
+
+class CacheTests(unittest.TestCase):
+    def test_lookup_without_label_uses_the_newest_provider(self):
+        import tempfile
+        from pathlib import Path
+        with tempfile.TemporaryDirectory() as t:
+            d = Path(t)
+            X.cache_store(d, "doc", {"claims": [], "period_label": "old"}, "openai:gpt-4.1")
+            X.cache_store(d, "doc", {"claims": [], "period_label": "new"}, "deepseek:deepseek-chat")
+            ex, meta = X.cache_lookup(d, "doc")
+            self.assertEqual((ex["period_label"], meta["model"]), ("new", "deepseek:deepseek-chat"))
+            ex, meta = X.cache_lookup(d, "doc", "openai:gpt-4.1")
+            self.assertEqual(ex["period_label"], "old")
+            self.assertEqual(X.cache_lookup(d, "doc", "anthropic:x"), (None, None))
+            self.assertEqual(X.cache_lookup(d, "other doc"), (None, None))
+
+    def test_extract_cached_without_provider_never_calls_out(self):
+        import tempfile
+        from pathlib import Path
+        with tempfile.TemporaryDirectory() as t:
+            ex, meta = X.extract_cached("never seen", Path(t), None)
+            self.assertIsNone(ex)
+            self.assertEqual(meta["cache"], "miss-no-key")
 
 
 if __name__ == "__main__":

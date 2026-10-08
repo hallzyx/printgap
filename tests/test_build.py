@@ -18,10 +18,7 @@ def write_event(d, t, acc, filing_date, accept, doc, claims):
     rec = {"ticker": t, "cik": 1, "company": "NVIDIA CORP", "accession": acc, "filing_date": filing_date,
            "acceptance_utc": accept, "items": "2.02,9.01", "url": "https://example.test/x", "sha256_raw": "0" * 64, "text": doc}
     (d / "edgar" / t / f"{acc}.json").write_text(json.dumps(rec))
-    (d / "extractions").mkdir(exist_ok=True)
-    (d / "extractions" / f"{extract.cache_key(doc)}.json").write_text(
-        json.dumps({"model": "test", "extraction": {"period_label": "test", "claims": claims}})
-    )
+    extract.cache_store(d / "extractions", doc, {"period_label": "test", "claims": claims}, "test:fixture")
 
 
 class BuildE2E(unittest.TestCase):
@@ -68,6 +65,7 @@ class BuildE2E(unittest.TestCase):
             self.assertFalse(prior["reaction"]["ok"])  # before the price data starts: reported, not invented
             self.assertFalse(prior["gap"]["available"])
             self.assertEqual(res["analogs"]["n_valid"], 1)
+            self.assertEqual(res["extraction_models"], ["test:fixture"])
 
     def test_missing_extraction_is_visible_not_silent(self):
         with tempfile.TemporaryDirectory() as tmp:

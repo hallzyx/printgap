@@ -69,6 +69,7 @@ def build(out: Path | None = None, data: Path | None = None, fx: Path | None = N
     events, reactions = [], []
     acc_tot = {"xbrl_checked": 0, "xbrl_match": 0, "xbrl_mismatch": 0, "quote_rejected": 0, "total_claims": 0}
     not_extracted = 0
+    models = set()
 
     for t, (_cik, _label) in edgar.TICKERS.items():
         docs = [json.loads(p.read_text()) for p in sorted((DATA / "edgar" / t).glob("*.json"))] if (DATA / "edgar" / t).exists() else []
@@ -83,6 +84,8 @@ def build(out: Path | None = None, data: Path | None = None, fx: Path | None = N
             pub = datetime.fromisoformat(d["acceptance_utc"]).astimezone(UTC)
             xb = edgar.xbrl_for_release(trimmed, d["filing_date"])
             ex, meta = extract.extract_cached(d["text"], DATA / "extractions", None)
+            if meta.get("model"):
+                models.add(meta["model"])
             if ex is None:
                 not_extracted += 1
                 ver = {"period_label": None, "claims": []}
@@ -132,6 +135,7 @@ def build(out: Path | None = None, data: Path | None = None, fx: Path | None = N
         "generated_at_utc": datetime.now(UTC).isoformat(),
         "n_events": len(events),
         "events_without_extraction": not_extracted,
+        "extraction_models": sorted(models),
         "analogs": engine.summarize(reactions),
         "accuracy_total": acc_tot,
         "fetch": {
