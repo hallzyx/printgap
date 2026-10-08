@@ -1,0 +1,33 @@
+{
+ "generated_at_utc": "2026-10-08T16:55:21.004553+00:00",
+ "n_events": 0,
+ "events_without_extraction": 0,
+ "analogs": {
+  "n_events": 0,
+  "n_valid": 0,
+  "n_with_ratio": 0,
+  "median_priced_in": null,
+  "sign_agreement": null,
+  "n_sign": 0,
+  "median_abs_residual": null,
+  "median_abs_cash_gap": null,
+  "median_abs_rt_move": null
+ },
+ "accuracy_total": {
+  "xbrl_checked": 0,
+  "xbrl_match": 0,
+  "xbrl_mismatch": 0,
+  "quote_rejected": 0,
+  "total_claims": 0
+ },
+ "fetch": {
+  "fetched_at_utc": null,
+  "errors": [],
+  "notes": []
+ },
+ "price_data": {
+  "source": "github.com/Megacollins/rift24 fixtures (MIT) - rToken 15m candles from Bitget and daily cash bars",
+  "fetched_at_utc": "2026-09-21T21:31:52.338010+00:00"
+ },
+ "events": []
+}
