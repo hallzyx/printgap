@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PrintGap</title>
+<meta name="description" content="Reads a company's earnings release, checks every figure against SEC filings, and shows how much of the surprise the tokenized stock already priced in.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <div class="wrap top-row">
+    <h1 class="mark">PrintGap</h1>
+    <p class="tag">What the earnings release said, checked against the SEC, and how much of it your rToken already priced in while Wall Street slept.</p>
+  </div>
+</header>
+
+<main class="wrap">
+  <nav id="events" class="events" aria-label="Earnings releases"></nav>
+
+  <div id="empty" class="empty" hidden></div>
+
+  <div id="view" hidden>
+    <section class="hero" aria-labelledby="hero-h">
+      <h2 id="hero-h" class="headline"></h2>
+      <p id="hero-sub" class="sub"></p>
+      <figure class="chart">
+        <svg id="timeline" viewBox="0 0 960 330" role="img" preserveAspectRatio="xMidYMid meet"></svg>
+        <figcaption id="chart-cap"></figcaption>
+      </figure>
+    </section>
+
+    <div class="cols">
+      <section id="claims" class="block" aria-labelledby="claims-h">
+        <h2 id="claims-h">What the release said</h2>
+        <p class="note">Serif text is copied from the company's release. Sans-serif numbers are computed by code, not by the language model.</p>
+        <div id="claims-list"></div>
+        <details id="rejected" class="rejected" hidden>
+          <summary></summary>
+          <div id="rejected-list"></div>
+        </details>
+      </section>
+
+      <div class="side">
+        <section id="gap" class="block" aria-labelledby="gap-h">
+          <h2 id="gap-h">Against the company's own guidance</h2>
+          <div id="gap-body"></div>
+        </section>
+        <section id="analogs" class="block" aria-labelledby="an-h">
+          <h2 id="an-h">Other releases in this dataset</h2>
+          <div id="analogs-body"></div>
+        </section>
+      </div>
+    </div>
+
+    <section id="ask" class="block wide" aria-labelledby="ask-h">
+      <h2 id="ask-h">Ask about this release</h2>
+      <p class="note">Answers can only use the numbered evidence below. If the evidence does not cover a question, the answer says so.</p>
+      <ol id="evidence" class="evidence"></ol>
+      <form id="ask-form" class="ask-form">
+        <label for="q">Your question</label>
+        <input id="q" type="text" autocomplete="off" placeholder="What would have to be true for the move to be an overreaction?">
+        <label for="key">Anthropic API key (stays in this tab, never saved or sent anywhere else)</label>
+        <input id="key" type="password" autocomplete="off" placeholder="sk-ant-...">
+        <button type="submit">Ask</button>
+      </form>
+      <div id="answer" class="answer" aria-live="polite"></div>
+    </section>
+
+    <section id="memo" class="block wide" aria-labelledby="memo-h">
+      <h2 id="memo-h">Research memo</h2>
+      <p class="note">Built from the same numbered evidence. No language model is involved in this step.</p>
+      <div class="actions">
+        <button id="memo-build" type="button">Build memo</button>
+        <button id="memo-copy" type="button" hidden>Copy</button>
+        <button id="memo-dl" type="button" hidden>Download .md</button>
+      </div>
+      <pre id="memo-out" class="memo" hidden></pre>
+    </section>
+  </div>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <p>PrintGap shows information. It does not place orders or recommend trades, and the decision is always yours. Overnight rToken liquidity is thin, so a price on screen is not a fill you can count on.</p>
+    <p><a href="method.html">How the numbers are made, and what is missing</a></p>
+  </div>
+</footer>
+
+<script src="lib.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
