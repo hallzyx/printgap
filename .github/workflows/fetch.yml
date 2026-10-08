@@ -24,8 +24,16 @@ jobs:
           # Repository variable (Settings > Secrets and variables > Actions > Variables):
           # EDGAR_UA = "PrintGap yourname@yourmail.com"  (the SEC requires real contact info)
           EDGAR_UA: ${{ vars.EDGAR_UA }}
-          # Repository secret. Optional: without it, only already-cached extractions are used.
+          # Optional model keys (repository secrets). Set ONE; without any, cached extractions are used.
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
+          # Optional repository variables: PRINTGAP_PROVIDER (anthropic|openai|deepseek|compatible),
+          # PRINTGAP_MODEL, PRINTGAP_BASE_URL (compatible only, e.g. the hackathon's Qwen endpoint)
+          PRINTGAP_PROVIDER: ${{ vars.PRINTGAP_PROVIDER }}
+          PRINTGAP_MODEL: ${{ vars.PRINTGAP_MODEL }}
+          PRINTGAP_BASE_URL: ${{ vars.PRINTGAP_BASE_URL }}
         run: python scripts/fetch_all.py
       - name: Test
         run: python -m unittest discover -s tests

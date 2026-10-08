@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Download everything PrintGap needs. Runs in GitHub Actions (open internet).
 
-Env: EDGAR_UA (required, 'Name contact@email'), ANTHROPIC_API_KEY (optional; without it
-the extraction step is skipped and previously cached extractions are used).
+Env: EDGAR_UA (required, 'Name contact@email').
+Model key (optional): ANTHROPIC_API_KEY, OPENAI_API_KEY, DEEPSEEK_API_KEY, or LLM_API_KEY with
+PRINTGAP_BASE_URL and PRINTGAP_MODEL. See pg/llm.py. Without a key, only cached extractions are used.
 Every file written is listed in data/manifest.json with its fetch time and sha256.
 """
 from __future__ import annotations
@@ -18,7 +19,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
-from pg import edgar, extract, mcp  # noqa: E402
+from pg import edgar, extract, llm, mcp  # noqa: E402
 
 DATA = ROOT / "data"
 SINCE = date.fromisoformat(os.environ.get("PRINTGAP_SINCE", "2026-03-01"))  # includes the PRIOR quarter's release (for guidance)
@@ -35,8 +36,12 @@ def sha(p: Path) -> str:
 def main() -> int:
     manifest = {"fetched_at_utc": now(), "since": str(SINCE), "files": {}, "errors": [], "notes": []}
     s = edgar._session()
-    api_key = os.environ.get("ANTHROPIC_API_KEY")
-    model = extract.DEFAULT_MODEL
+    try:
+        provider = llm.resolve(os.environ)
+    except ValueError as e:
+        print(f"LLM configuration problem: {e}", file=sys.stderr)
+        return 2
+    manifest["notes"].append(f"extraction provider: {provider.label if provider else 'none (cached extractions only)'}")
 
     for t, (cik, label) in edgar.TICKERS.items():
         try:
@@ -71,14 +76,14 @@ def main() -> int:
     for p in sorted((DATA / "edgar").glob("*/*.json")):
         rec = json.loads(p.read_text())
         try:
-            ex, meta = extract.extract_cached(rec["text"], DATA / "extractions", api_key, model)
+            ex, meta = extract.extract_cached(rec["text"], DATA / "extractions", provider)
         except Exception as e:  # noqa: BLE001
             manifest["errors"].append(f"extract {p.name}: {e}")
             continue
         n_called += meta["cache"] == "miss-called"
         n_hit += meta["cache"] == "hit"
         n_skip += meta["cache"] == "miss-no-key"
-    manifest["notes"].append(f"extraction: called={n_called} cache_hit={n_hit} skipped_no_key={n_skip} model={model}")
+    manifest["notes"].append(f"extraction: called={n_called} cache_hit={n_hit} skipped_no_key={n_skip}")
 
     # Bitget MCP: capture the real catalog first, never assume parameters
     try:
