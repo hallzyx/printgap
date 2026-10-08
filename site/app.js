@@ -276,7 +276,7 @@
         E.forEach(function (x) { known["[" + x.id + "]"] = 1; });
         var bogus = cited.filter(function (c) { return !known[c]; });
         var abstain = /evidence does not cover that/i.test(text);
-        if (!text) out.appendChild(h("div", { class: "flag", text: "The provider returned an empty answer." }));
+        if (!text) out.appendChild(h("div", { class: "flag", text: "The provider returned an empty answer. Reasoning models can use their whole budget thinking; try a smaller or non-reasoning model." }));
         else if (bogus.length) out.appendChild(h("div", { class: "flag", text: "This answer cites evidence that does not exist (" + bogus.join(", ") + "). Do not rely on it." }));
         else if (!cited.length && !abstain) out.appendChild(h("div", { class: "flag", text: "This answer cites no evidence. Treat it as unsupported." }));
       })

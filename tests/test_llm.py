@@ -58,7 +58,7 @@ class Requests(unittest.TestCase):
         p = llm.Provider("deepseek", "deepseek-chat", "KEY", "https://api.deepseek.com")
         url, _, b = llm.build_request(p, "SYS", "USER")
         self.assertEqual(url, "https://api.deepseek.com/chat/completions")
-        self.assertEqual((b["temperature"], b["max_tokens"]), (0, 4096))
+        self.assertEqual((b["temperature"], b["max_tokens"]), (0, 8000))
 
     def test_key_is_never_in_the_body(self):
         for name in ("anthropic", "openai", "deepseek"):
@@ -66,7 +66,28 @@ class Requests(unittest.TestCase):
             self.assertNotIn("SECRET-KEY", str(llm.build_request(p, "s", "u")[2]))
 
 
+class Budgets(unittest.TestCase):
+    def test_reasoning_models_get_room_to_think(self):
+        o = llm.Provider("openai", "gpt-6.1-sol", "k", "https://api.openai.com/v1")
+        self.assertEqual(llm.build_request(o, "s", "u")[2]["max_completion_tokens"], 16000)
+        a = llm.Provider("anthropic", "m", "k", "https://api.anthropic.com")
+        self.assertEqual(llm.build_request(a, "s", "u")[2]["max_tokens"], 4096)
+
+    def test_current_defaults(self):
+        self.assertEqual(llm.DEFAULTS["openai"][0], "gpt-6.1-sol")
+        self.assertEqual(llm.DEFAULTS["deepseek"][0], "deepseek-flash")
+
+
 class Parse(unittest.TestCase):
+    def test_truncated_output_is_an_error_not_bad_json(self):
+        o = llm.Provider("openai", "m", "k", "u")
+        with self.assertRaises(ValueError) as cm:
+            llm.parse_response(o, {"choices": [{"finish_reason": "length", "message": {"content": ""}}]})
+        self.assertIn("cut off", str(cm.exception))
+        a = llm.Provider("anthropic", "m", "k", "u")
+        with self.assertRaises(ValueError):
+            llm.parse_response(a, {"stop_reason": "max_tokens", "content": [{"type": "text", "text": "{"}]})
+
     def test_anthropic(self):
         p = llm.Provider("anthropic", "m", "k", "u")
         t, u = llm.parse_response(p, {"content": [{"type": "text", "text": "{}"}], "usage": {"a": 1}})

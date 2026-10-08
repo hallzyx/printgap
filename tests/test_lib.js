@@ -19,7 +19,7 @@ t("openai request: no temperature, completion tokens, bearer", () => {
   assert.strictEqual(r.url, "https://api.openai.com/v1/chat/completions");
   assert.strictEqual(r.headers.authorization, "Bearer KEY");
   assert.ok(!("temperature" in r.body) && !("max_tokens" in r.body));
-  assert.strictEqual(r.body.max_completion_tokens, 500);
+  assert.strictEqual(r.body.max_completion_tokens, 6000);
   assert.deepStrictEqual(r.body.messages.map(m => m.role), ["system", "user"]);
 });
 
@@ -59,6 +59,8 @@ t("response parsing", () => {
 
 t("default models are filled for the three named providers", () => {
   ["anthropic", "openai", "deepseek"].forEach(p => assert.ok(L.PROVIDERS[p].model));
+  assert.strictEqual(L.PROVIDERS.openai.model, "gpt-6.1-sol");
+  assert.strictEqual(L.PROVIDERS.deepseek.model, "deepseek-flash");
   assert.strictEqual(L.PROVIDERS.custom.model, "");
 });
 

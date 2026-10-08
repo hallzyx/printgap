@@ -149,8 +149,8 @@
   /* ---- chat providers (browser side). The key goes only to the endpoint of the provider picked. ---- */
   var PROVIDERS = {
     anthropic: { label: "Anthropic", model: "claude-sonnet-5-5", base: "https://api.anthropic.com", custom: false },
-    openai: { label: "OpenAI", model: "gpt-4.1", base: "https://api.openai.com/v1", custom: false },
-    deepseek: { label: "DeepSeek", model: "deepseek-chat", base: "https://api.deepseek.com", custom: false },
+    openai: { label: "OpenAI", model: "gpt-6.1-sol", base: "https://api.openai.com/v1", custom: false },
+    deepseek: { label: "DeepSeek", model: "deepseek-flash", base: "https://api.deepseek.com", custom: false },
     custom: { label: "Other OpenAI-compatible", model: "", base: "", custom: true },
   };
 
@@ -164,14 +164,14 @@
         url: p.base + "/v1/messages",
         headers: { "content-type": "application/json", "x-api-key": key, "anthropic-version": "2023-06-01",
           "anthropic-dangerous-direct-browser-access": "true" },
-        body: { model: model, max_tokens: 500, temperature: 0, system: system, messages: [{ role: "user", content: question }] },
+        body: { model: model, max_tokens: 600, temperature: 0, system: system, messages: [{ role: "user", content: question }] },
       };
     }
     var root = p.custom ? String(base || "").replace(/\/+$/, "") : p.base;
     if (!/^https:\/\//.test(root)) throw new Error("The endpoint must start with https://");
     var body = { model: model, messages: [{ role: "system", content: system }, { role: "user", content: question }] };
-    if (provider === "openai") body.max_completion_tokens = 500; // newer models reject max_tokens and temperature
-    else { body.max_tokens = 500; body.temperature = 0; }
+    if (provider === "openai") body.max_completion_tokens = 6000; // reasoning models: tokens spent thinking count too; no temperature
+    else { body.max_tokens = 3000; body.temperature = 0; }
     return { url: root + "/chat/completions", headers: { "content-type": "application/json", authorization: "Bearer " + key }, body: body };
   }
 

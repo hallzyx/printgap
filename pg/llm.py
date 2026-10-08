@@ -16,10 +16,13 @@ from dataclasses import dataclass
 DEFAULTS = {
     # name: (default model, base url)
     "anthropic": ("claude-sonnet-5-5", "https://api.anthropic.com"),
-    "openai": ("gpt-4.1", "https://api.openai.com/v1"),
-    "deepseek": ("deepseek-chat", "https://api.deepseek.com"),
+    "openai": ("gpt-6.1-sol", "https://api.openai.com/v1"),
+    "deepseek": ("deepseek-flash", "https://api.deepseek.com"),
     "compatible": (None, None),
 }
+# Output budget per provider. Reasoning models (OpenAI GPT-6, DeepSeek thinking mode) spend part of
+# this on hidden reasoning, so it is generous; an extraction itself is only a couple of thousand tokens.
+MAX_OUT = {"anthropic": 4096, "openai": 16000, "deepseek": 8000, "compatible": 8000}
 KEY_ENV = {
     "anthropic": "ANTHROPIC_API_KEY",
     "openai": "OPENAI_API_KEY",
@@ -68,8 +71,9 @@ def resolve(env=None) -> Provider | None:
     return None
 
 
-def build_request(p: Provider, system: str, user: str, max_tokens: int = 4096):
+def build_request(p: Provider, system: str, user: str, max_tokens: int | None = None):
     """Return (url, headers, json_body). Pure, so it can be tested without a network."""
+    max_tokens = max_tokens or MAX_OUT[p.name]
     if p.name == "anthropic":
         return (
             f"{p.base_url}/v1/messages",
@@ -91,17 +95,23 @@ def build_request(p: Provider, system: str, user: str, max_tokens: int = 4096):
 
 
 def parse_response(p: Provider, body: dict) -> tuple[str, dict | None]:
+    cut = "the answer was cut off at the output limit (the model may have spent it on reasoning); lower the reasoning effort or use a smaller model"
     if p.name == "anthropic":
+        if body.get("stop_reason") == "max_tokens":
+            raise ValueError(f"{p.name}: {cut}")
         text = "".join(b.get("text", "") for b in body.get("content", []) if b.get("type") == "text")
         return text, body.get("usage")
     try:
-        text = body["choices"][0]["message"]["content"] or ""
+        choice = body["choices"][0]
+        text = choice["message"]["content"] or ""
     except (KeyError, IndexError, TypeError) as e:
         raise ValueError(f"unexpected {p.name} response shape") from e
+    if choice.get("finish_reason") == "length":
+        raise ValueError(f"{p.name}: {cut}")
     return text, body.get("usage")
 
 
-def complete(p: Provider, system: str, user: str, max_tokens: int = 4096, timeout: int = 180) -> dict:
+def complete(p: Provider, system: str, user: str, max_tokens: int | None = None, timeout: int = 300) -> dict:
     import requests  # lazy: the offline build needs no network libraries
 
     url, headers, body = build_request(p, system, user, max_tokens)
