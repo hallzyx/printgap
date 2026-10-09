@@ -2,7 +2,7 @@
   "use strict";
   var PG = window.PG;
   var NS = "http://www.w3.org/2000/svg";
-  var DATA = null, CUR = null, KEY_IN_MEMORY = "", FILTER = "all";
+  var DATA = null, CUR = null, FILTER = "all";
   var REDUCED = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   // ---------- tiny DOM helpers (textContent only: documents are untrusted) ----------
@@ -55,10 +55,13 @@
   function shortId(e) { return e.ticker + " " + e.filing_date.slice(5); }
 
   // ---------- load ----------
-  fetch("data/events.json", { cache: "no-cache" })
-    .then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
+  // Served by pg.serve: the live API. Served as plain static files: the committed snapshot.
+  function getJSON(url) {
+    return fetch(url, { cache: "no-cache" }).then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); });
+  }
+  getJSON("api/events").catch(function () { return getJSON("data/events.json"); })
     .then(function (d) { DATA = d; init(); })
-    .catch(function (e) { showEmpty("Could not load the data file", "data/events.json failed to load (" + e.message + "). If you opened this page from disk, serve the folder over HTTP instead, for example: python3 -m http.server in the site folder."); });
+    .catch(function (e) { showEmpty("Could not load the data file", "The data failed to load (" + e.message + "). If you opened this page from disk, run the server instead: python -m pg.serve"); });
 
   function showEmpty(title, body) {
     var box = $("empty");
@@ -195,7 +198,7 @@
     $("empty").hidden = true;
     $("view").hidden = false;
     renderHead(); renderNight(true); renderClaims(); renderGap(); renderAnalogs(); renderEvidence();
-    $("answer").textContent = "";
+    if (window.PGChat) window.PGChat.setEvent(CUR);
     $("memo-out").hidden = $("memo-copy").hidden = $("memo-dl").hidden = true;
     document.title = CUR.ticker + " " + CUR.filing_date + " · PrintGap";
     if (user && window.innerWidth < 900) {
@@ -672,52 +675,18 @@
   function renderEvidence() {
     var ol = $("evidence"); clear(ol);
     PG.evidence(CUR, DATA.analogs).forEach(function (e) {
-      ol.appendChild(h("li", { class: "k-" + e.kind }, h("span", { class: "eid", text: e.id }), h("span", { class: "etx", text: e.text })));
+      ol.appendChild(h("li", { class: "k-" + e.kind, id: "evi-" + e.id, tabindex: "-1" }, h("span", { class: "eid", text: e.id }), h("span", { class: "etx", text: e.text })));
     });
   }
 
-  var modelEdited = false;
-  function syncProvider() {
-    var pv = PG.PROVIDERS[$("prov").value];
-    $("base-row").hidden = !pv.custom;
-    if (!modelEdited) $("model").value = pv.model;
-    $("model").placeholder = pv.custom ? "the model name your endpoint expects" : pv.model;
-  }
-  $("prov").addEventListener("change", function () { modelEdited = false; syncProvider(); });
-  $("model").addEventListener("input", function () { modelEdited = true; });
-  $("key").addEventListener("input", function (e) { KEY_IN_MEMORY = e.target.value.trim(); });
-  syncProvider();
-
-  $("ask-form").addEventListener("submit", function (e) {
-    e.preventDefault();
-    var q = $("q").value.trim(), out = $("answer");
-    if (!q) { out.textContent = "Type a question first."; return; }
-    var provider = $("prov").value, E = PG.evidence(CUR, DATA.analogs), req;
-    try {
-      req = PG.chatRequest(provider, $("model").value.trim(), KEY_IN_MEMORY, $("base").value.trim(), PG.chatSystem(E), q);
-    } catch (err) { out.textContent = err.message + " The memo works without a key."; return; }
-    var btn = e.target.querySelector("button[type=submit]");
-    btn.disabled = true; out.textContent = "Reading the evidence...";
-    fetch(req.url, { method: "POST", headers: req.headers, body: JSON.stringify(req.body) })
-      .then(function (r) { return r.json().then(function (j) { if (!r.ok) throw new Error(PG.chatError(j, r.status)); return j; }); })
-      .then(function (j) {
-        var text = PG.chatText(provider, j);
-        clear(out); out.appendChild(document.createTextNode(text));
-        var cited = (text.match(/\[E\d+\]/g) || []), known = {};
-        E.forEach(function (x) { known["[" + x.id + "]"] = 1; });
-        var bogus = cited.filter(function (c) { return !known[c]; });
-        var abstain = /evidence does not cover that/i.test(text);
-        if (!text) out.appendChild(h("div", { class: "flag", text: "The provider returned an empty answer. Reasoning models can use their whole budget thinking; try a smaller or non-reasoning model." }));
-        else if (bogus.length) out.appendChild(h("div", { class: "flag", text: "This answer cites evidence that does not exist (" + bogus.join(", ") + "). Do not rely on it." }));
-        else if (!cited.length && !abstain) out.appendChild(h("div", { class: "flag", text: "This answer cites no evidence. Treat it as unsupported." }));
-      })
-      .catch(function (err) {
-        out.textContent = err instanceof TypeError
-          ? "The request did not reach the provider. Either the network failed or this provider does not accept calls from a web page (CORS). The memo works without a key, and the Python pipeline can use this provider directly."
-          : "The question failed: " + err.message;
-      })
-      .then(function () { btn.disabled = false; });
-  });
+  // The chat lives in chat.js (the pop-up at the bottom right). It reads the selected release through this bridge.
+  window.PGApp = {
+    current: function () { return CUR; },
+    evidence: function () { return CUR ? PG.evidence(CUR, DATA.analogs) : []; },
+    measured: function (e) { return !!measured(e || CUR); },
+    getJSON: getJSON,
+  };
+  $("desk-ask").addEventListener("click", function () { if (window.PGChat) window.PGChat.open(); });
 
   var MEMO = "";
   $("memo-build").addEventListener("click", function () {

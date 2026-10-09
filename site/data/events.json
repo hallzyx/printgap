@@ -1,5 +1,5 @@
 {
- "generated_at_utc": "2026-10-08T22:37:27.855944+00:00",
+ "generated_at_utc": "2026-10-09T00:03:15.751564+00:00",
  "n_events": 19,
  "events_without_extraction": 0,
  "extraction_models": [
@@ -24,13 +24,13 @@
   "total_claims": 99
  },
  "fetch": {
-  "fetched_at_utc": "2026-10-08T22:34:44.254913+00:00",
+  "fetched_at_utc": "2026-10-09T00:02:19.633569+00:00",
   "errors": [
    "mcp guide: empty SSE response"
   ],
   "notes": [
    "extraction provider: deepseek:deepseek-flash",
-   "extraction: called=13 cache_hit=6 skipped_no_key=0",
+   "extraction: called=0 cache_hit=19 skipped_no_key=0",
    "mcp: tools/list captured"
   ]
  },

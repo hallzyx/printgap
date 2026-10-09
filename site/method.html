@@ -32,6 +32,8 @@
 
   <p>Models that produced the extractions on this page: <span id="models">checking...</span>. The same prompt runs on Anthropic, OpenAI, DeepSeek or any OpenAI-compatible endpoint, and each stored extraction records which one made it.</p>
 
+  <p>The chat ("Ask PrintGap", bottom right of the main page) is the only other place a model writes. It sees the same numbered evidence as the memo and nothing else, must cite an id like [E3] for every figure, and has to say "The evidence does not cover that." when it cannot answer. The page flags any answer that cites an id that does not exist, or cites nothing. Its tables, formulas, charts and diagrams are drawn in your browser from the model's text, after that text is sanitised; a chart can only show numbers the model wrote, so check them against the cited rows.</p>
+
   <h2>How well that worked</h2>
   <div id="acc"><p>Loading...</p></div>
 

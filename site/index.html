@@ -99,43 +99,19 @@
 
       <section id="desk" class="panel desk" aria-labelledby="desk-h">
         <div class="sec-head">
-          <h2 id="desk-h" class="kicker">Evidence desk <span class="kicker-sub">questions and memo, from numbered facts only</span></h2>
+          <h2 id="desk-h" class="kicker">Evidence desk <span class="kicker-sub">numbered facts behind the chat and the memo</span></h2>
         </div>
         <div class="desk-grid">
           <div>
-            <p class="rule-note">These are the only facts the chat and the memo may use. An answer must cite them by id, or say the evidence does not cover the question.</p>
+            <p class="rule-note">These are the only facts the chat and the memo may use. A chat answer must cite them by id, like <span class="voice-mono">[E3]</span>, or say the evidence does not cover the question. Clicking a citation in the chat lights up its row here.</p>
             <ol id="evidence" class="evidence"></ol>
           </div>
           <div class="desk-tools">
-            <form id="ask-form" class="ask-form">
+            <div class="ask-box">
               <h3 class="mini-h">Ask about this release</h3>
-              <label for="q">Your question</label>
-              <input id="q" type="text" autocomplete="off" placeholder="What would have to be true for the move to be an overreaction?">
-              <div class="row2">
-                <div>
-                  <label for="prov">Model provider</label>
-                  <select id="prov">
-                    <option value="anthropic">Anthropic</option>
-                    <option value="openai">OpenAI</option>
-                    <option value="deepseek">DeepSeek</option>
-                    <option value="qwen">Qwen (hackathon endpoint)</option>
-                    <option value="custom">Other OpenAI-compatible endpoint</option>
-                  </select>
-                </div>
-                <div>
-                  <label for="model">Model</label>
-                  <input id="model" type="text" autocomplete="off">
-                </div>
-              </div>
-              <div id="base-row" hidden>
-                <label for="base">Endpoint (must start with https://)</label>
-                <input id="base" type="text" autocomplete="off" placeholder="https://your-endpoint.example/v1">
-              </div>
-              <label for="key">API key <span class="lbl-note">stays in this tab, sent only to the provider you picked</span></label>
-              <input id="key" type="password" autocomplete="off" placeholder="paste your key">
-              <button type="submit" class="btn">Ask</button>
-              <div id="answer" class="answer" aria-live="polite"></div>
-            </form>
+              <p class="rule-note">The chat opens at the bottom right and keeps one thread per release. Answers can carry tables, formulas, charts and diagrams, all drawn from the facts on the left.</p>
+              <button id="desk-ask" type="button" class="btn ghost">Open the chat</button>
+            </div>
 
             <div class="memo-box">
               <h3 class="mini-h">Research memo</h3>
@@ -170,7 +146,89 @@
   <p id="foot-build" class="foot-build"></p>
 </footer>
 
+<button id="chat-launch" class="chat-launch" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="chat">
+  <svg class="cl-ico" viewBox="0 0 22 22" aria-hidden="true"><path class="cl-frame" d="M2.5 3.5h17v11.5h-10l-4 3.6v-3.6h-3z"/><path class="cl-caret" d="M6.5 7.2l2.6 1.9-2.6 1.9"/><rect class="cl-cur" x="10.8" y="10.2" width="4.6" height="1.6"/></svg>
+  <span class="cl-t">Ask PrintGap</span>
+  <span id="chat-launch-ev" class="cl-ev"></span>
+</button>
+
+<section id="chat" class="chat" role="dialog" aria-modal="false" aria-labelledby="chat-h" aria-describedby="chat-ctx" hidden>
+  <header class="chat-head">
+    <div class="ch-top">
+      <h2 id="chat-h" class="kicker"><span class="ch-dot" aria-hidden="true"></span>Ask PrintGap</h2>
+      <div class="ch-actions">
+        <button id="chat-clear" class="ch-btn" type="button" disabled>Clear</button>
+        <button id="chat-close" class="ch-btn ch-x" type="button" aria-label="Close the chat" title="Close (Esc)">
+          <svg viewBox="0 0 14 14" aria-hidden="true"><path d="M2 2l10 10M12 2L2 12"/></svg>
+        </button>
+      </div>
+    </div>
+    <p id="chat-ctx" class="ch-ctx"><span id="chat-ev" class="ch-ev"></span><span id="chat-model" class="ch-model">checking the server</span></p>
+  </header>
+
+  <div id="chat-body" class="chat-body">
+    <div id="chat-intro" class="chat-intro">
+      <p class="ci-lead">Answers come only from the numbered facts in the Evidence desk, each cited like <span class="cite-demo">E3</span>. Click a citation to see its fact.</p>
+      <div class="ci-sugg">
+        <div class="ci-row">
+          <p id="sugg-h" class="ci-k">Try</p>
+          <div class="seg ci-lang" role="group" aria-label="Language of the suggested questions">
+            <button type="button" data-lang="en" aria-pressed="true">EN</button>
+            <button type="button" data-lang="es" aria-pressed="false">ES</button>
+          </div>
+        </div>
+        <ul id="chat-sugg" class="ci-chips" aria-labelledby="sugg-h"></ul>
+        <p class="ci-note">The analyst answers in the language you write in.</p>
+      </div>
+    </div>
+    <ol id="chat-log" class="chat-log" role="log" aria-live="polite" aria-relevant="additions" aria-label="Conversation"></ol>
+    <p id="chat-status" class="chat-status" role="status"></p>
+  </div>
+
+  <details id="byok" class="byok" hidden>
+    <summary><span>Use your own model key</span><span id="byok-state" class="byok-state">no key</span></summary>
+    <div class="byok-in">
+      <p class="byok-note">This copy of PrintGap has no server model. Your key stays in this tab's memory and goes only to the provider you pick.</p>
+      <div class="row2">
+        <div>
+          <label for="prov">Provider</label>
+          <select id="prov">
+            <option value="anthropic">Anthropic</option>
+            <option value="openai">OpenAI</option>
+            <option value="deepseek">DeepSeek</option>
+            <option value="qwen">Qwen (hackathon endpoint)</option>
+            <option value="custom">Other OpenAI-compatible endpoint</option>
+          </select>
+        </div>
+        <div>
+          <label for="model">Model</label>
+          <input id="model" type="text" autocomplete="off" spellcheck="false">
+        </div>
+      </div>
+      <div id="base-row" hidden>
+        <label for="base">Endpoint (must start with https://)</label>
+        <input id="base" type="text" autocomplete="off" spellcheck="false" placeholder="https://your-endpoint.example/v1">
+      </div>
+      <label for="key">API key</label>
+      <input id="key" type="password" autocomplete="off" spellcheck="false" placeholder="paste your key">
+    </div>
+  </details>
+
+  <form id="chat-form" class="chat-form">
+    <label for="q" class="sr">Your question about this release</label>
+    <div class="cf-row">
+      <textarea id="q" rows="1" maxlength="500" autocomplete="off" placeholder="Ask about this release"></textarea>
+      <button id="chat-send" type="submit" class="chat-send" aria-label="Send question">
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 4l4 4-4 4"/></svg>
+      </button>
+    </div>
+    <p class="cf-hint"><span><kbd>Enter</kbd> send <span class="cf-sep">/</span> <kbd>Shift</kbd>+<kbd>Enter</kbd> new line</span><span id="chat-count" class="cf-count">0/500</span></p>
+  </form>
+</section>
+
 <script src="lib.js"></script>
+<script src="richtext.js"></script>
 <script src="app.js"></script>
+<script src="chat.js"></script>
 </body>
 </html>

@@ -18,9 +18,25 @@ The language model never calculates, never sees prices, and never recommends tra
 ```
 python3 -m unittest discover -s tests        # Python tests, standard library only
 node tests/test_lib.js                       # browser-side logic tests, no dependencies
+node tests/test_richtext.js                  # chat renderer: markdown/math/chart splitting, chart JSON, citations
 python3 -m pg.build                          # data/ -> site/data/events.json (offline)
-cd site && python3 -m http.server 8000       # open http://localhost:8000
+python3 -m pg.serve                          # site + API on http://localhost:8000
 ```
+
+`pg.serve` is the app: the site plus a small JSON API, standard library only. A plain static server (`cd site && python3 -m http.server`) still works: the page falls back to the committed `site/data/events.json` and the chat asks for the visitor's own key.
+
+| Endpoint | What it does |
+|---|---|
+| `GET /api/events` | the built dataset |
+| `GET /api/status` | dataset age, whether chat is on, state of the last refresh |
+| `POST /api/ask` | `{event_id, question, history?}`, answered by the server's own model key from the numbered evidence only |
+| `POST /api/refresh` | re-runs SEC fetch, extraction and build in the background. Needs `Authorization: Bearer $PRINTGAP_ADMIN_TOKEN`; off if the token is unset |
+
+The model key stays on the server. The evidence in the prompt is built server-side from the dataset (`pg/evidence.py`, kept identical to `site/lib.js` by a test), so a caller can only pick an event and a question. Questions are capped per client per hour and per day for the whole site (`PRINTGAP_ASK_PER_HOUR`, `PRINTGAP_ASK_PER_DAY`).
+
+The chat is the "Ask PrintGap" pop-up at the bottom right (`site/chat.js`, pure helpers in `site/richtext.js`). Answers are Markdown with tables, KaTeX math, mermaid diagrams and ```` ```chart ```` JSON drawn as SVG; every `[E3]` citation links to its evidence row, and ids that do not exist are flagged. Model output is untrusted: raw HTML is escaped, the result is sanitised with DOMPurify, links are limited to http(s)/mailto, mermaid runs with `securityLevel: "strict"`. The libraries are vendored in `site/vendor/` (versions in `site/vendor/README.txt`, no build step); KaTeX and mermaid load only when an answer needs them.
+
+Refresh by hand: `curl -X POST -H "Authorization: Bearer $PRINTGAP_ADMIN_TOKEN" http://localhost:8000/api/refresh`, or set `PRINTGAP_REFRESH_HOURS=6` to refresh on a timer. A refresh updates SEC filings and extractions; the price candles still come from the fixtures in `data/fixtures`, so a newly filed release shows "no cash data" until those are updated.
 
 ### Refreshing the real data on your own computer
 

@@ -1,5 +1,5 @@
 {
- "fetched_at_utc": "2026-10-08T22:34:44.254913+00:00",
+ "fetched_at_utc": "2026-10-09T00:02:19.633569+00:00",
  "since": "2026-03-01",
  "files": {
   "data\\edgar\\NVDA\\0001045810-26-000051.json": "2744d50c086fad4835183278141fd2f869ba34ed9315e40b2ca159ae26bd77cb",
@@ -36,7 +36,7 @@
  ],
  "notes": [
   "extraction provider: deepseek:deepseek-flash",
-  "extraction: called=13 cache_hit=6 skipped_no_key=0",
+  "extraction: called=0 cache_hit=19 skipped_no_key=0",
   "mcp: tools/list captured"
  ]
 }

@@ -74,7 +74,7 @@ def resolve(env=None) -> Provider | None:
     return None
 
 
-def build_request(p: Provider, system: str, user: str, max_tokens: int | None = None):
+def build_request(p: Provider, system: str, user: str, max_tokens: int | None = None, json_mode: bool = True):
     """Return (url, headers, json_body). Pure, so it can be tested without a network."""
     max_tokens = max_tokens or MAX_OUT[p.name]
     if p.name == "anthropic":
@@ -87,8 +87,9 @@ def build_request(p: Provider, system: str, user: str, max_tokens: int | None = 
     body = {
         "model": p.model,
         "messages": [{"role": "system", "content": system}, {"role": "user", "content": user}],
-        "response_format": {"type": "json_object"},
     }
+    if json_mode:
+        body["response_format"] = {"type": "json_object"}
     if p.name == "openai":
         body["max_completion_tokens"] = max_tokens  # newer models reject max_tokens; they also reject temperature
     else:
@@ -114,10 +115,11 @@ def parse_response(p: Provider, body: dict) -> tuple[str, dict | None]:
     return text, body.get("usage")
 
 
-def complete(p: Provider, system: str, user: str, max_tokens: int | None = None, timeout: int = 300) -> dict:
+def complete(p: Provider, system: str, user: str, max_tokens: int | None = None, timeout: int = 300,
+             json_mode: bool = True) -> dict:
     import requests  # lazy: the offline build needs no network libraries
 
-    url, headers, body = build_request(p, system, user, max_tokens)
+    url, headers, body = build_request(p, system, user, max_tokens, json_mode)
     r = requests.post(url, headers=headers, json=body, timeout=timeout)
     if r.status_code != 200:
         # the response body never contains our key; still cap it
